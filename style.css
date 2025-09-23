@@ -14,7 +14,7 @@
 
     }
     span{
-        color: red;
+        color: rgb(3, 250, 238);
     }
     .wrapper .dynamic-text{
         margin-left: 15px;
@@ -25,8 +25,8 @@
     }
     .dynamic-text li{
         list-style: none;
-        color: rgb(172, 34, 34);
-        font-size: 30px;
+        color: rgb(11, 12, 11);
+        font-size: 60px;
         font-weight: 500;
         top: 0;
         position: relative;
@@ -272,10 +272,41 @@
             vertical-align: middle;
             border-radius: 50%;
             box-sizing: border-box;
+            width: 65%;
+            position: relative;
+            top: -10%;
         }
+ 
+
+
+
+.profile img {
+    border:5px solid #fff;
+    border-radius: 50%;
+    animation: neon 1.5s ease-in-out infinite alternate;
+    box-shadow: 0 0 5px #fff, inset 0 0 5px #fff, 
+                0 0 20px #08f, inset 0 0 20px #08f, 
+                0 0 40px #08f;
+}
+
+@keyframes neon {
+    from {
+        box-shadow: 0 0 5px #fff, inset 0 0 5px #fff, 
+                    0 0 20px #08f, inset 0 0 20px #08f, 
+                    0 0 40px #08f;
+    }
+    to {
+        box-shadow: 0 0 10px #fff, inset 0 0 10px #fff, 
+                    0 0 30px #08f, inset 0 0 30px #08f, 
+                    0 0 60px #08f;
+    }
+}
+
+ 
+
          .profile img:hover{
-            transition: 0.3s;
-            width: 60%;
+            background-position: 10% 10%;
+            /* width: 60%; */
             cursor: pointer;
          }
 
@@ -298,10 +329,25 @@
 
         .about-img {
             flex: 1;
-            border-radius: 10px;
-            overflow: hidden;
+            border-radius: 50px;
+            /* overflow: hidden; */
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
+        .about-img{
+    border: 5px solid ;
+    /* overflow: hidden; */
+    border-radius: 100px;
+    border-image: linear-gradient(45deg, #3b82f6, #10b981, #8b5cf6, #f59e0b) 1;
+    animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+    5% { border-image-source: linear-gradient(45deg, #3b82f6, #10b981, #8b5cf6, #f59e0b); }
+    25% { border-image-source: linear-gradient(135deg, #10b981, #8b5cf6, #f59e0b, #3b82f6); }
+    50% { border-image-source: linear-gradient(225deg, #8b5cf6, #f59e0b, #3b82f6, #10b981); }
+    75% { border-image-source: linear-gradient(315deg, #f59e0b, #3b82f6, #10b981, #8b5cf6); }
+    100% { border-image-source: linear-gradient(45deg, #3b82f6, #10b981, #8b5cf6, #f59e0b); }
+}
 
         .about-text {
             flex: 1;
