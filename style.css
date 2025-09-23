@@ -272,9 +272,6 @@
             vertical-align: middle;
             border-radius: 50%;
             box-sizing: border-box;
-            width: 65%;
-            position: relative;
-            top: -10%;
         }
  
 
@@ -334,9 +331,8 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
         .about-img{
-    border: 5px solid ;
-    /* overflow: hidden; */
-    border-radius: 100px;
+    border: 2px solid ;
+    border-radius: 1px;
     border-image: linear-gradient(45deg, #3b82f6, #10b981, #8b5cf6, #f59e0b) 1;
     animation: gradientShift 3s ease infinite;
 }

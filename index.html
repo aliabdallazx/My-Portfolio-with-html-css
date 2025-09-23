@@ -1,487 +1,1227 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <title>ALZAIM Ali portfolio</title>
-  </head>
-  <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALZAIM Ali Portfolio</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --text-light: #777;
+            --transition: all 0.3s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Header Styles */
+        header {
+            background-color: rgb(208, 234, 240);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            transition: var(--transition);
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 150px 0 100px;
+            display: flex;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .hero-text {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .wrapper {
+            display: flex;
+            margin-bottom: 30px;
+            align-items: center;
+            height: 90px;
+        }
+
+        .wrapper .static-text {
+            color: white;
+            font-size: 60px;
+            font-weight: 400;
+        }
+
+        span {
+            color: rgb(3, 250, 238);
+        }
+
+        .wrapper .dynamic-text {
+            margin-left: 15px;
+            height: 90px;
+            overflow: hidden;
+        }
+
+        .dynamic-text li {
+            list-style: none;
+            color: white;
+            font-size: 60px;
+            font-weight: 500;
+            top: 0;
+            position: relative;
+            animation: slide 12s steps(4) infinite;
+        }
+
+        @keyframes slide {
+            100% {
+                top: -360px;
+            }
+        }
+
+        .dynamic-text li {
+            position: relative;
+        }
+
+        .dynamic-text li::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            border-left: 2px solid green;
+            animation: typing 3s steps(10) infinite;
+        }
+
+        @keyframes typing {
+            40%, 60% {
+                left: calc(100% + 30px);
+            }
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .profile {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .profile img {
+            width: 350px;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid #fff;
+            animation: neon 1.5s ease-in-out infinite alternate;
+            box-shadow: 0 0 5px #fff, inset 0 0 5px #fff, 
+                        0 0 20px #08f, inset 0 0 20px #08f, 
+                        0 0 40px #08f;
+            transition: var(--transition);
+        }
+
+        @keyframes neon {
+            from {
+                box-shadow: 0 0 5px #fff, inset 0 0 5px #fff, 
+                            0 0 20px #08f, inset 0 0 20px #08f, 
+                            0 0 40px #08f;
+            }
+            to {
+                box-shadow: 0 0 10px #fff, inset 0 0 10px #fff, 
+                            0 0 30px #08f, inset 0 0 30px #08f, 
+                            0 0 60px #08f;
+            }
+        }
+
+        .profile img:hover {
+            transform: scale(1.05);
+            cursor: pointer;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--primary-color);
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-img {
+            flex: 1;
+            border-radius: 150px;
+            border: 5px solid ;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: none;
+            border-image: linear-gradient(45deg, #3b82f6, #10b981, #8b5cf6, #f59e0b) 1;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            5% { border-image-source: linear-gradient(45deg, #3b82f6, #10b981, #8b5cf6, #f59e0b); }
+            25% { border-image-source: linear-gradient(135deg, #10b981, #8b5cf6, #f59e0b, #3b82f6); }
+            50% { border-image-source: linear-gradient(225deg, #8b5cf6, #f59e0b, #3b82f6, #10b981); }
+            75% { border-image-source: linear-gradient(315deg, #f59e0b, #3b82f6, #10b981, #8b5cf6); }
+            100% { border-image-source: linear-gradient(45deg, #3b82f6, #10b981, #8b5cf6, #f59e0b); }
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: var(--text-light);
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .skill-card h3 {
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+
+        /* Services Section */
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .service-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-img img {
+            transform: scale(1.1);
+        }
+
+        .service-content {
+            padding: 25px;
+        }
+
+        .service-content h3 {
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+
+        /* Products Section */
+        .products-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-img img {
+            transform: scale(1.1);
+        }
+
+        .product-content {
+            padding: 20px;
+        }
+
+        .product-content h3 {
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+
+        /* Blog Section */
+        .blog-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .blog-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .blog-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .blog-card:hover .blog-img img {
+            transform: scale(1.1);
+        }
+
+        .blog-content {
+            padding: 25px;
+        }
+
+        .blog-content h3 {
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-top: 5px;
+        }
+
+        .contact-form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .footer-col p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .wrapper .static-text,
+            .dynamic-text li {
+                font-size: 50px;
+            }
+            
+            .profile img {
+                width: 300px;
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+           
+            .about-img, .about-text {
+                width: 100%;
+            }
+           
+            .about-img {
+                margin-bottom: 30px;
+            }
+            
+            .wrapper .static-text,
+            .dynamic-text li {
+                font-size: 40px;
+            }
+            
+            .wrapper {
+                height: 70px;
+            }
+            
+            @keyframes slide {
+                100% {
+                    top: -280px;
+                }
+            }
+            
+            .profile img {
+                width: 250px;
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+           
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 50px;
+                transition: var(--transition);
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+           
+            .nav-links.active {
+                left: 0;
+            }
+           
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .hero-content {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+            
+            .hero-text {
+                margin-top: 30px;
+            }
+            
+            .hero-btns {
+                justify-content: center;
+            }
+            
+            .wrapper .static-text,
+            .dynamic-text li {
+                font-size: 35px;
+            }
+            
+            .wrapper {
+                height: 60px;
+                justify-content: center;
+            }
+            
+            @keyframes slide {
+                100% {
+                    top: -240px;
+                }
+            }
+            
+            .profile img {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section {
+                padding: 60px 0;
+            }
+           
+            .hero {
+                padding: 120px 0 80px;
+            }
+           
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .wrapper .static-text,
+            .dynamic-text li {
+                font-size: 28px;
+            }
+            
+            .wrapper {
+                height: 50px;
+            }
+            
+            @keyframes slide {
+                100% {
+                    top: -200px;
+                }
+            }
+            
+            .profile img {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 250px;
+                margin-bottom: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .wrapper .static-text,
+            .dynamic-text li {
+                font-size: 24px;
+            }
+            
+            .wrapper {
+                height: 40px;
+            }
+            
+            @keyframes slide {
+                100% {
+                    top: -160px;
+                }
+            }
+            
+            .profile img {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .skills-container,
+            .services-container,
+            .products-container,
+            .blog-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
     <!-- Header Section -->
     <header>
-      <div class="container">
-        <nav class="navbar">
-          <a href="#" class="logo">ALZAIM Ali</a>
-          <div class="menu-toggle">☰</div>
-          <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#products">Products</a></li>
-            <li><a href="#blog">Blog</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </nav>
-      </div>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">ALZAIM Ali</a>
+                <div class="menu-toggle" id="menuToggle">☰</div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-      <div class="container">
-        <div class="wrapper">
-          <div class="static-text">I,m</div>
-          <ul class="dynamic-text">
-            <li><span>Designer</span></li>
-            <li><span>Developer</span></li>
-            <li><span>entrepreneur</span></li>
-            <li><span>Freelancer</span></li>
-          </ul>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="wrapper">
+                        <div class="static-text">I'm</div>
+                        <ul class="dynamic-text">
+                            <li><span>Designer</span></li>
+                            <li><span>Developer</span></li>
+                            <li><span>Entrepreneur</span></li>
+                            <li><span>Freelancer</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="hero-btns">
+                        <a href="#contact" class="btn">Get In Touch</a>
+                        <a href="#about" class="btn btn-outline">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="profile">
+                    <a href="https://aliabdallazx.github.io/HTML-Css-PROJECT/">
+                        <img src="profiles.jpg" alt="Ali ALZAIM" title="CLICK TO KNOW MORE ABOUT ME">
+                    </a>
+                </div>
+            </div>
         </div>
-
-        <div class="hero-content">
-          <div class="hero-btns">
-            <a href="#contact" class="btn">Get In Touch</a>
-            <a href="#about" class="btn btn-outline">Learn More</a>
-          </div>
-          <div class="profile">
-            <a href="https://aliabdallazx.github.io/HTML-Css-PROJECT/">
-              <img
-                src="profiles.jpg"
-                alt=""
-                title="CLICK TO KNOW MORE ABOUT ME"
-              />
-            </a>
-          </div>
-        </div>
-      </div>
     </section>
 
     <!-- About Section -->
     <section id="about" class="section">
-      <div class="container">
-        <div class="section-title">
-          <h2>About Me</h2>
-          <p>
-            Learn more about my journey and expertise in business and technology
-          </p>
+        <div class="container">
+            <div class="section-title">
+                <h2>About Me</h2>
+                <p>Learn more about my journey and expertise in business and technology</p>
+            </div>
+            <div class="about-content">
+                <div class="about-img">
+                    <img src="profiles.jpg" alt="Ali">
+                </div>
+                <div class="about-text">
+                    <h3>My Journey in Business & Technology</h3>
+                    <p> Hi, my name is Ali Abdalla Ismail Abdalla. I am a UI/UX Designer, Frontend Developer, and business-minded problem solver. I specialize in HTML, CSS, and internet fundamentals, with a strong focus on creating user-friendly, modern, and responsive web designs.
+
+I combine my design skills with technical knowledge to turn ideas into functional, visually appealing websites. My background in business and leadership also gives me the ability to understand clients’ needs and deliver solutions that balance creativity with real-world value.
+
+I’m passionate about design, technology, and innovation—constantly learning and pushing myself to create better user experiences. My goal is to design and develop products that not only look great but also provide meaningful impact.</p>
+                    <a href="#contact" class="btn">Let's Work Together</a>
+                </div>
+            </div>
         </div>
-        <div class="about-content">
-          <div class="about-img">
-            <img src="profiles.jpg" alt="Ali" />
-          </div>
-          <div class="about-text">
-            <h3>My Journey in Business & Technology</h3>
-            <p>
-              Motivated and multi-talented individual with a background in
-              biology, hands-on business management experience, and growing
-              skills in software development. I aim to apply my knowledge,
-              creativity, and discipline to contribute meaningfully to any field
-              I work in — whether in science, technology, or entrepreneurship. I
-              am committed to continuous learning, personal growth, and using my
-              abilities to solve real-world problems and create value in my
-              community.
-            </p>
-            <p>Aspiring software developer with a strong foundation in web technologies and problem-solving. 
-                I aim to contribute to innovative digital projects while expanding my skills in coding and technology.</p>
-                <p>Young entrepreneur with real-world experience in managing small businesses. Seeking to apply leadership, marketing,
-                     and management skills to support business growth and operations.</p>
-                     <p>Passionate science graduate with a strong background in biology and top academic performance. Eager to contribute to research, healthcare, or environmental projects.</p>
-            <a href="#contact" class="btn">Let's Work Together</a>
-          </div>
-        </div>
-      </div>
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="section" style="background-color: #f5f7fa">
-      <div class="container">
-        <div class="section-title">
-          <h2>My Skills</h2>
-          <p>
-            A combination of technical expertise and strategic thinking
-            abilities
-          </p>
+    <section id="skills" class="section" style="background-color: #f5f7fa;">
+        <div class="container">
+            <div class="section-title">
+                <h2>My Skills</h2>
+                <p>A combination of technical expertise and strategic thinking abilities</p>
+            </div>
+            <div class="skills-container">
+                <div class="skill-card">
+                    <div class="skill-icon">💻</div>
+                    <h3>UI/UX Design</h3>
+                    <p>Creating intuitive and engaging user interfaces with a focus on user experience and accessibility.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">⚙️</div>
+                    <h3>Frontend Development</h3>
+                    <p>Building responsive, performant websites and applications using modern web technologies.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">📈</div>
+                    <h3>Business Strategy</h3>
+                    <p>Developing data-driven strategies to help businesses grow and achieve their objectives.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🔍</div>
+                    <h3>Problem Solving</h3>
+                    <p>Analyzing complex challenges and developing innovative solutions that address root causes.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🧠</div>
+                    <h3>Critical Thinking</h3>
+                    <p>Evaluating information objectively to make informed decisions and avoid cognitive biases.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">👥</div>
+                    <h3>Team Leadership</h3>
+                    <p>Guiding and motivating teams to achieve common goals while fostering collaboration.</p>
+                </div>
+            </div>
         </div>
-        <div class="skills-container">
-          <div class="skill-card">
-            <div class="skill-icon">💻</div>
-            <h3>UI/UX Design</h3>
-            <p>
-              Creating intuitive and engaging user interfaces with a focus on
-              user experience and accessibility.
-            </p>
-          </div>
-          <div class="skill-card">
-            <div class="skill-icon">⚙️</div>
-            <h3>Frontend Development</h3>
-            <p>
-              Building responsive, performant websites and applications using
-              modern web technologies.
-            </p>
-          </div>
-          <div class="skill-card">
-            <div class="skill-icon">📈</div>
-            <h3>Business Strategy</h3>
-            <p>
-              Developing data-driven strategies to help businesses grow and
-              achieve their objectives.
-            </p>
-          </div>
-          <div class="skill-card">
-            <div class="skill-icon">🔍</div>
-            <h3>Problem Solving</h3>
-            <p>
-              Analyzing complex challenges and developing innovative solutions
-              that address root causes.
-            </p>
-          </div>
-          <div class="skill-card">
-            <div class="skill-icon">🧠</div>
-            <h3>Critical Thinking</h3>
-            <p>
-              Evaluating information objectively to make informed decisions and
-              avoid cognitive biases.
-            </p>
-          </div>
-          <div class="skill-card">
-            <div class="skill-icon">👥</div>
-            <h3>Team Leadership</h3>
-            <p>
-              Guiding and motivating teams to achieve common goals while
-              fostering collaboration.
-            </p>
-          </div>
-        </div>
-      </div>
     </section>
 
     <!-- Services Section -->
     <section id="services" class="section">
-      <div class="container">
-        <div class="section-title">
-          <h2>My Services</h2>
-          <p>
-            Comprehensive solutions to help your business thrive in the digital
-            age
-          </p>
+        <div class="container">
+            <div class="section-title">
+                <h2>My Services</h2>
+                <p>Comprehensive solutions to help your business thrive in the digital age</p>
+            </div>
+            <div class="services-container">
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1674&q=80" alt="UI/UX Design">
+                    </div>
+                    <div class="service-content">
+                        <h3>UI/UX Design</h3>
+                        <p>Create intuitive and visually appealing interfaces that enhance user experience and drive engagement. From wireframes to prototypes, I design with the end-user in mind.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1627398242454-45a1465c2479?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1674&q=80" alt="Frontend Development">
+                    </div>
+                    <div class="service-content">
+                        <h3>Frontend Development</h3>
+                        <p>Build responsive, high-performance websites and applications using the latest web technologies. Clean code, cross-browser compatibility, and mobile-first approach.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Business Strategy">
+                    </div>
+                    <div class="service-content">
+                        <h3>Business Strategy</h3>
+                        <p>Develop data-driven business strategies to help you achieve growth objectives. Market analysis, competitive positioning, and actionable implementation plans.</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="services-container">
-          <div class="service-card">
-            <div class="service-img">
-              <img
-                src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1674&q=80"
-                alt="UI/UX Design"
-              />
-            </div>
-            <div class="service-content">
-              <h3>UI/UX Design</h3>
-              <p>
-                Create intuitive and visually appealing interfaces that enhance
-                user experience and drive engagement. From wireframes to
-                prototypes, I design with the end-user in mind.
-              </p>
-            </div>
-          </div>
-          <div class="service-card">
-            <div class="service-img">
-              <img
-                src="https://images.unsplash.com/photo-1627398242454-45a1465c2479?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1674&q=80"
-                alt="Frontend Development"
-              />
-            </div>
-            <div class="service-content">
-              <h3>Frontend Development</h3>
-              <p>
-                Build responsive, high-performance websites and applications
-                using the latest web technologies. Clean code, cross-browser
-                compatibility, and mobile-first approach.
-              </p>
-            </div>
-          </div>
-          <div class="service-card">
-            <div class="service-img">
-              <img
-                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80"
-                alt="Business Strategy"
-              />
-            </div>
-            <div class="service-content">
-              <h3>Business Strategy</h3>
-              <p>
-                Develop data-driven business strategies to help you achieve
-                growth objectives. Market analysis, competitive positioning, and
-                actionable implementation plans.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
 
     <!-- Products Section -->
-    <section id="products" class="section" style="background-color: #f5f7fa">
-      <div class="container">
-        <div class="section-title">
-          <h2>My Products</h2>
-          <p>
-            Solutions and tools I've developed to solve common business
-            challenges
-          </p>
+    <section id="products" class="section" style="background-color: #f5f7fa;">
+        <div class="container">
+            <div class="section-title">
+                <h2>My Products</h2>
+                <p>Solutions and tools I've developed to solve common business challenges</p>
+            </div>
+            <div class="products-container">
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Product 1">
+                    </div>
+                    <div class="product-content">
+                        <h3>Business Analytics Dashboard</h3>
+                        <p>A comprehensive dashboard that provides real-time insights into key business metrics and performance indicators.</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1715&q=80" alt="Product 2">
+                    </div>
+                    <div class="product-content">
+                        <h3>E-commerce Optimization Suite</h3>
+                        <p>Tools designed to enhance online store performance, from conversion rate optimization to customer journey mapping.</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Product 3">
+                    </div>
+                    <div class="product-content">
+                        <h3>Project Management Platform</h3>
+                        <p>A streamlined platform for managing projects, teams, and deadlines with intuitive collaboration features.</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="products-container">
-          <div class="product-card">
-            <div class="product-img">
-              <img
-                src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80"
-                alt="Product 1"
-              />
-            </div>
-            <div class="product-content">
-              <h3>Business Analytics Dashboard</h3>
-              <p>
-                A comprehensive dashboard that provides real-time insights into
-                key business metrics and performance indicators.
-              </p>
-            </div>
-          </div>
-          <div class="product-card">
-            <div class="product-img">
-              <img
-                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1715&q=80"
-                alt="Product 2"
-              />
-            </div>
-            <div class="product-content">
-              <h3>E-commerce Optimization Suite</h3>
-              <p>
-                Tools designed to enhance online store performance, from
-                conversion rate optimization to customer journey mapping.
-              </p>
-            </div>
-          </div>
-          <div class="product-card">
-            <div class="product-img">
-              <img
-                src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80"
-                alt="Product 3"
-              />
-            </div>
-            <div class="product-content">
-              <h3>Project Management Platform</h3>
-              <p>
-                A streamlined platform for managing projects, teams, and
-                deadlines with intuitive collaboration features.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
 
     <!-- Blog Section -->
     <section id="blog" class="section">
-      <div class="container">
-        <div class="section-title">
-          <h2>Latest Blog Posts</h2>
-          <p>Insights on design, development, and business strategy</p>
+        <div class="container">
+            <div class="section-title">
+                <h2>Latest Blog Posts</h2>
+                <p>Insights on design, development, and business strategy</p>
+            </div>
+            <div class="blog-container">
+                <div class="blog-card">
+                    <div class="blog-img">
+                        <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1664&q=80" alt="Blog Post 1">
+                    </div>
+                    <div class="blog-content">
+                        <h3>The Future of UI/UX Design in 2025</h3>
+                        <p>Exploring emerging trends and technologies that are shaping the future of user interface and experience design.</p>
+                        <div class="blog-meta">
+                            <span>June 15, 2025</span>
+                            <span>5 min read</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-img">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Blog Post 2">
+                    </div>
+                    <div class="blog-content">
+                        <h3>Business Strategy for Startups</h3>
+                        <p>Key considerations for developing a solid business strategy that can help startups navigate early challenges.</p>
+                        <div class="blog-meta">
+                            <span>Sep 28, 2025</span>
+                            <span>7 min read</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-img">
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Blog Post 3">
+                    </div>
+                    <div class="blog-content">
+                        <h3>Responsive Design Best Practices</h3>
+                        <p>A comprehensive guide to creating websites that provide optimal viewing experiences across all devices.</p>
+                        <div class="blog-meta">
+                            <span>Sep 12, 2025</span>
+                            <span>6 min read</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="blog-container">
-          <div class="blog-card">
-            <div class="blog-img">
-              <img
-                src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1664&q=80"
-                alt="Blog Post 1"
-              />
-            </div>
-            <div class="blog-content">
-              <h3>The Future of UI/UX Design in 2025</h3>
-              <p>
-                Exploring emerging trends and technologies that are shaping the
-                future of user interface and experience design.
-              </p>
-              <div class="blog-meta">
-                <span>June 15, 2025</span>
-                <span>5 min read</span>
-              </div>
-            </div>
-          </div>
-          <div class="blog-card">
-            <div class="blog-img">
-              <img
-                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80"
-                alt="Blog Post 2"
-              />
-            </div>
-            <div class="blog-content">
-              <h3>Business Strategy for Startups</h3>
-              <p>
-                Key considerations for developing a solid business strategy that
-                can help startups navigate early challenges.
-              </p>
-              <div class="blog-meta">
-                <span>sep 28, 2025</span>
-                <span>7 min read</span>
-              </div>
-            </div>
-          </div>
-          <div class="blog-card">
-            <div class="blog-img">
-              <img
-                src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80"
-                alt="Blog Post 3"
-              />
-            </div>
-            <div class="blog-content">
-              <h3>Responsive Design Best Practices</h3>
-              <p>
-                A comprehensive guide to creating websites that provide optimal
-                viewing experiences across all devices.
-              </p>
-              <div class="blog-meta">
-                <span>Sep 12, 2025</span>
-                <span>6 min read</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="section" style="background-color: #f5f7fa">
-      <div class="container">
-        <div class="section-title">
-          <h2>Get In Touch</h2>
-          <p>Ready to start a project or have questions? Let's connect!</p>
+    <section id="contact" class="section" style="background-color: #f5f7fa;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get In Touch</h2>
+                <p>Ready to start a project or have questions? Let's connect!</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <h3>Location</h3>
+                            <p>Rwanda, Kigali</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div>
+                            <h3>Email</h3>
+                            <p>aliabdalla09zx@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📱</div>
+                        <div>
+                            <h3>Phone</h3>
+                            <p>+1 (555) 123-4567</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">💼</div>
+                        <div>
+                            <h3>Freelance Availability</h3>
+                            <p>Available for select projects</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="Ali" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" class="form-control" placeholder="john@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" class="form-control" placeholder="Tell me about your project..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="contact-container">
-          <div class="contact-info">
-            <div class="contact-item">
-              <div class="contact-icon">📍</div>
-              <div>
-                <h3>Location</h3>
-                <p>Rwanda , kigali</p>
-              </div>
-            </div>
-            <div class="contact-item">
-              <div class="contact-icon">📧</div>
-              <div>
-                <h3>Email</h3>
-                <p>aliabdalla09zx@gmail.com</p>
-              </div>
-            </div>
-            <div class="contact-item">
-              <div class="contact-icon">📱</div>
-              <div>
-                <h3>Phone</h3>
-                <p>+1 (555) 123-4567</p>
-              </div>
-            </div>
-            <div class="contact-item">
-              <div class="contact-icon">💼</div>
-              <div>
-                <h3>Freelance Availability</h3>
-                <p>Available for select projects</p>
-              </div>
-            </div>
-          </div>
-          <div class="contact-form">
-            <form>
-              <div class="form-group">
-                <label for="name">Your Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  class="form-control"
-                  placeholder="Ali"
-                  required
-                />
-              </div>
-              <div class="form-group">
-                <label for="email">Your Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  class="form-control"
-                  placeholder="john@example.com"
-                  required
-                />
-              </div>
-              <div class="form-group">
-                <label for="message">Your Message</label>
-                <textarea
-                  id="message"
-                  class="form-control"
-                  placeholder="Tell me about your project..."
-                  required
-                ></textarea>
-              </div>
-              <button type="submit" class="btn">Send Message</button>
-            </form>
-          </div>
-        </div>
-      </div>
     </section>
 
     <!-- Footer -->
     <footer>
-      <div class="container">
-        <div class="footer-content">
-          <div class="footer-col">
-            <h3>Ali Abdalla</h3>
-            <p>
-              UI/UX Designer, Frontend Developer, and Business Strategist with a
-              passion for creating digital solutions that drive results.
-            </p>
-            <div class="social-links">
-              <a href="#"><span>📘</span></a>
-              <a href="#"><span>🐦</span></a>
-              <a href="#"><span>📷</span></a>
-              <a href="#"><span>💼</span></a>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Ali Abdalla</h3>
+                    <p>UI/UX Designer, Frontend Developer, and Business Strategist with a passion for creating digital solutions that drive results.</p>
+                    <div class="social-links">
+                        <a href="#"><span>📘</span></a>
+                        <a href="#"><span>🐦</span></a>
+                        <a href="#"><span>📷</span></a>
+                        <a href="#"><span>💼</span></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#products">Products</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">UI/UX Design</a></li>
+                        <li><a href="#">Frontend Development</a></li>
+                        <li><a href="#">Business Strategy</a></li>
+                        <li><a href="#">Consultation</a></li>
+                        <li><a href="#">Training</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to my newsletter for the latest updates and insights.</p>
+                    <form>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Your Email">
+                        </div>
+                        <button type="submit" class="btn">Subscribe</button>
+                    </form>
+                </div>
             </div>
-          </div>
-          <div class="footer-col">
-            <h3>Quick Links</h3>
-            <ul class="footer-links">
-              <li><a href="#home">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#skills">Skills</a></li>
-              <li><a href="#services">Services</a></li>
-              <li><a href="#products">Products</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h3>Services</h3>
-            <ul class="footer-links">
-              <li><a href="#">UI/UX Design</a></li>
-              <li><a href="#">Frontend Development</a></li>
-              <li><a href="#">Business Strategy</a></li>
-              <li><a href="#">Consultation</a></li>
-              <li><a href="#">Training</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h3>Newsletter</h3>
-            <p>
-              Subscribe to my newsletter for the latest updates and insights.
-            </p>
-            <form>
-              <div class="form-group">
-                <input
-                  type="email"
-                  class="form-control"
-                  placeholder="Your Email"
-                />
-              </div>
-              <button type="submit" class="btn">Subscribe</button>
-            </form>
-          </div>
+            <div class="copyright">
+                <p>&copy; 2023 Ali Abdalla. All Rights Reserved.</p>
+            </div>
         </div>
-        <div class="copyright">
-          <p>&copy; 2023 Ali Abdalla. All Rights Reserved.</p>
-        </div>
-      </div>
     </footer>
-  </body>
+
+    <script>
+        // Mobile Navigation Toggle
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navLinks = document.getElementById('navLinks');
+            const menuToggle = document.getElementById('menuToggle');
+            
+            if (!navLinks.contains(event.target) && !menuToggle.contains(event.target)) {
+                navLinks.classList.remove('active');
+            }
+        });
+    </script>
+</body>
 </html>
