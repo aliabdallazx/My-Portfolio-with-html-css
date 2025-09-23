@@ -274,7 +274,6 @@
             box-sizing: border-box;
         }
          .profile img:hover{
-            transform: scale(1.0);
             transition: 0.3s;
             width: 60%;
             cursor: pointer;
