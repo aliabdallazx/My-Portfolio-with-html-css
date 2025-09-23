@@ -1,5 +1,60 @@
   
+  
+    .wrapper{
+        display: flex;
+        margin-right: 50%;
+        position: relative;
+        bottom: -10%;
+        
+    }
+    .wrapper .static-text{
+        color: rgb(15, 15, 15);
+        font-size: 60px;
+        font-weight: 400;
 
+    }
+    span{
+        color: red;
+    }
+    .wrapper .dynamic-text{
+        margin-left: 15px;
+        line-height: 90px;
+       
+        height: 90px;
+        overflow: hidden;
+    }
+    .dynamic-text li{
+        list-style: none;
+        color: rgb(172, 34, 34);
+        font-size: 30px;
+        font-weight: 500;
+        top: 0;
+        position: relative;
+        animation: slide 12s steps(4) infinite;
+    }
+    @keyframes slide{
+        100%{
+            top: -360px;
+        }
+    }
+    .dynamic-text li{
+        position: relative;
+    }
+    .dynamic-text li::after{
+        content: "";
+        position: absolute;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        /* background-color:  rgb(12, 12, 12); */
+        border-left: 2px solid green;
+        animation: typing 3s steps(10) infinite;
+    }
+    @keyframes typing{
+        40%,60%{
+            left: calc(100% + 30px);
+        }
+    }
 
 
 
@@ -219,7 +274,7 @@
             box-sizing: border-box;
         }
          .profile img:hover{
-            transform: scale(1.2);
+            transform: scale(1.0);
             transition: 0.3s;
             width: 60%;
             cursor: pointer;
