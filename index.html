@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>ALZAIM Ali Portfolio</title>
     <style>
-        /* Reset and Base Styles */
+        /* Reset and Base Styles
         * {
             margin: 0;
             padding: 0;
@@ -168,6 +169,141 @@
             font-size: 1.5rem;
             cursor: pointer;
             z-index: 1001;
+        }
+
+        /* Auth Buttons */
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+            margin-left: 20px;
+        }
+
+        .auth-btn {
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .login-btn {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .login-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .signup-btn {
+            background-color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            color: white;
+        }
+
+        .signup-btn:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 450px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(-50px);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            color: var(--accent-color);
+        }
+
+        .modal-title {
+            text-align: center;
+            margin-bottom: 25px;
+            color: var(--secondary-color);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .form-footer a {
+            color: var(--primary-color);
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
         }
 
         /* Hero Section */
@@ -734,6 +870,11 @@
             .nav-links li {
                 margin: 15px 0;
             }
+
+            .auth-buttons {
+                margin-left: 0;
+                margin-top: 20px;
+            }
             
             .hero-content {
                 flex-direction: column-reverse;
@@ -842,7 +983,7 @@
             .blog-container {
                 grid-template-columns: 1fr;
             }
-        }
+        } */
     </style>
 </head>
 <body>
@@ -858,12 +999,69 @@
                     <li><a href="#skills">Skills</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#products">Products</a></li>
-                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="blog.html">Blog</a></li>
                     <li><a href="#contact">Contact</a></li>
+                    <li class="auth-buttons">
+                       <a href="login.html"> <button class="auth-btn login-btn" id="loginBtn">Login</button></a>
+                       <a href="sign-up.html"> <button class="auth-btn signup-btn" id="signupBtn">Sign Up</button></a>
+                    
+                    </li>
                 </ul>
             </nav>
         </div>
     </header>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeLogin">&times;</span>
+            <h2 class="modal-title">Login to Your Account</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" class="form-control" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" class="form-control" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Login</button>
+                <div class="form-footer">
+                    <p>Don't have an account? <a id="switchToSignup">Sign up</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal -->
+    <div class="modal" id="signupModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeSignup">&times;</span>
+            <h2 class="modal-title">Create an Account</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" class="form-control" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" class="form-control" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" class="form-control" placeholder="Create a password" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupConfirmPassword">Confirm Password</label>
+                    <input type="password" id="signupConfirmPassword" class="form-control" placeholder="Confirm your password" required>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Sign Up</button>
+                <div class="form-footer">
+                    <p>Already have an account? <a id="switchToLogin">Login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
@@ -910,9 +1108,9 @@
                     <h3>My Journey in Business & Technology</h3>
                     <p> Hi, my name is Ali Abdalla Ismail Abdalla. I am a UI/UX Designer, Frontend Developer, and business-minded problem solver. I specialize in HTML, CSS, and internet fundamentals, with a strong focus on creating user-friendly, modern, and responsive web designs.
 
-I combine my design skills with technical knowledge to turn ideas into functional, visually appealing websites. My background in business and leadership also gives me the ability to understand clients’ needs and deliver solutions that balance creativity with real-world value.
+I combine my design skills with technical knowledge to turn ideas into functional, visually appealing websites. My background in business and leadership also gives me the ability to understand clients' needs and deliver solutions that balance creativity with real-world value.
 
-I’m passionate about design, technology, and innovation—constantly learning and pushing myself to create better user experiences. My goal is to design and develop products that not only look great but also provide meaningful impact.</p>
+I'm passionate about design, technology, and innovation—constantly learning and pushing myself to create better user experiences. My goal is to design and develop products that not only look great but also provide meaningful impact.</p>
                     <a href="#contact" class="btn">Let's Work Together</a>
                 </div>
             </div>
@@ -1039,57 +1237,6 @@ I’m passionate about design, technology, and innovation—constantly learning 
         </div>
     </section>
 
-    <!-- Blog Section -->
-    <section id="blog" class="section">
-        <div class="container">
-            <div class="section-title">
-                <h2>Latest Blog Posts</h2>
-                <p>Insights on design, development, and business strategy</p>
-            </div>
-            <div class="blog-container">
-                <div class="blog-card">
-                    <div class="blog-img">
-                        <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1664&q=80" alt="Blog Post 1">
-                    </div>
-                    <div class="blog-content">
-                        <h3>The Future of UI/UX Design in 2025</h3>
-                        <p>Exploring emerging trends and technologies that are shaping the future of user interface and experience design.</p>
-                        <div class="blog-meta">
-                            <span>June 15, 2025</span>
-                            <span>5 min read</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="blog-card">
-                    <div class="blog-img">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Blog Post 2">
-                    </div>
-                    <div class="blog-content">
-                        <h3>Business Strategy for Startups</h3>
-                        <p>Key considerations for developing a solid business strategy that can help startups navigate early challenges.</p>
-                        <div class="blog-meta">
-                            <span>Sep 28, 2025</span>
-                            <span>7 min read</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="blog-card">
-                    <div class="blog-img">
-                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Blog Post 3">
-                    </div>
-                    <div class="blog-content">
-                        <h3>Responsive Design Best Practices</h3>
-                        <p>A comprehensive guide to creating websites that provide optimal viewing experiences across all devices.</p>
-                        <div class="blog-meta">
-                            <span>Sep 12, 2025</span>
-                            <span>6 min read</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Contact Section -->
     <section id="contact" class="section" style="background-color: #f5f7fa;">
         <div class="container">
@@ -1200,28 +1347,6 @@ I’m passionate about design, technology, and innovation—constantly learning 
         </div>
     </footer>
 
-    <script>
-        // Mobile Navigation Toggle
-        document.getElementById('menuToggle').addEventListener('click', function() {
-            document.getElementById('navLinks').classList.toggle('active');
-        });
-
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('navLinks').classList.remove('active');
-            });
-        });
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const navLinks = document.getElementById('navLinks');
-            const menuToggle = document.getElementById('menuToggle');
-            
-            if (!navLinks.contains(event.target) && !menuToggle.contains(event.target)) {
-                navLinks.classList.remove('active');
-            }
-        });
-    </script>
+ 
 </body>
 </html>
