@@ -3,10 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <title>ALZAIM Ali Portfolio</title>
+    
+    <!-- Social Media Meta Tags -->
+    <meta property="og:title" content="ALZAIM Ali - UI/UX Designer & Developer">
+    <meta property="og:description" content="UI/UX Designer, Frontend Developer, and Business Strategist with a passion for creating digital solutions.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1534665482403-a909d0d97c67?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60">
+    <meta property="og:url" content="https://yourportfolio.com">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Reset and Base Styles
+        /* Reset and Base Styles */
         * {
             margin: 0;
             padding: 0;
@@ -48,6 +56,7 @@
         img {
             max-width: 100%;
             height: auto;
+            display: block;
         }
 
         .container {
@@ -68,7 +77,7 @@
         }
 
         .section-title h2 {
-            font-size: 2.5rem;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
             color: var(--secondary-color);
             margin-bottom: 15px;
         }
@@ -77,6 +86,7 @@
             color: var(--text-light);
             max-width: 600px;
             margin: 0 auto;
+            font-size: clamp(0.9rem, 2vw, 1rem);
         }
 
         .section-title::after {
@@ -100,6 +110,8 @@
             cursor: pointer;
             font-weight: 600;
             transition: var(--transition);
+            text-align: center;
+            min-width: 140px;
         }
 
         .btn:hover {
@@ -125,7 +137,7 @@
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: clamp(1.4rem, 4vw, 1.8rem);
             font-weight: 700;
             color: var(--secondary-color);
         }
@@ -143,6 +155,7 @@
             font-weight: 600;
             transition: var(--transition);
             position: relative;
+            font-size: clamp(0.9rem, 2vw, 1rem);
         }
 
         .nav-links a:hover {
@@ -169,6 +182,9 @@
             font-size: 1.5rem;
             cursor: pointer;
             z-index: 1001;
+            background: none;
+            border: none;
+            color: var(--secondary-color);
         }
 
         /* Auth Buttons */
@@ -184,6 +200,8 @@
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+            min-width: 80px;
         }
 
         .login-btn {
@@ -208,104 +226,6 @@
             border-color: var(--secondary-color);
         }
 
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .modal.active {
-            display: flex;
-            opacity: 1;
-        }
-
-        .modal-content {
-            background-color: white;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 450px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            transform: translateY(-50px);
-            transition: transform 0.3s ease;
-            position: relative;
-        }
-
-        .modal.active .modal-content {
-            transform: translateY(0);
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-light);
-            transition: var(--transition);
-        }
-
-        .close-modal:hover {
-            color: var(--accent-color);
-        }
-
-        .modal-title {
-            text-align: center;
-            margin-bottom: 25px;
-            color: var(--secondary-color);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--text-color);
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-
-        .form-control:focus {
-            border-color: var(--primary-color);
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-        }
-
-        .form-footer {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .form-footer a {
-            color: var(--primary-color);
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .form-footer a:hover {
-            text-decoration: underline;
-        }
-
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
@@ -321,40 +241,43 @@
             align-items: center;
             justify-content: space-between;
             width: 100%;
+            flex-wrap: wrap;
         }
 
         .hero-text {
             flex: 1;
-            max-width: 600px;
+            min-width: 300px;
+            padding-right: 20px;
         }
 
         .wrapper {
             display: flex;
             margin-bottom: 30px;
             align-items: center;
-            height: 90px;
+            height: clamp(60px, 15vw, 90px);
+            flex-wrap: wrap;
         }
 
         .wrapper .static-text {
             color: white;
-            font-size: 60px;
+            font-size: clamp(2rem, 8vw, 3.5rem);
             font-weight: 400;
         }
 
         span {
-            color: rgb(3, 250, 238);
+            color: rgb(7, 7, 7);
         }
 
         .wrapper .dynamic-text {
             margin-left: 15px;
-            height: 90px;
+            height: clamp(60px, 15vw, 90px);
             overflow: hidden;
         }
 
         .dynamic-text li {
             list-style: none;
             color: white;
-            font-size: 60px;
+            font-size: clamp(2rem, 8vw, 3.5rem);
             font-weight: 500;
             top: 0;
             position: relative;
@@ -363,7 +286,7 @@
 
         @keyframes slide {
             100% {
-                top: -360px;
+                top: calc(-4 * clamp(60px, 15vw, 90px));
             }
         }
 
@@ -391,17 +314,20 @@
             display: flex;
             gap: 15px;
             margin-top: 30px;
+            flex-wrap: wrap;
         }
 
         .profile {
             flex: 1;
             display: flex;
             justify-content: center;
+            min-width: 300px;
+            margin-top: 30px;
         }
 
         .profile img {
-            width: 350px;
-            height: 350px;
+            width: clamp(200px, 40vw, 350px);
+            height: clamp(200px, 40vw, 350px);
             object-fit: cover;
             border-radius: 50%;
             border: 5px solid #fff;
@@ -410,6 +336,7 @@
                         0 0 20px #08f, inset 0 0 20px #08f, 
                         0 0 40px #08f;
             transition: var(--transition);
+            max-width: 100%;
         }
 
         @keyframes neon {
@@ -445,6 +372,7 @@
             display: flex;
             align-items: center;
             gap: 50px;
+            flex-wrap: wrap;
         }
 
         .about-img {
@@ -456,6 +384,7 @@
             border: none;
             border-image: linear-gradient(45deg, #3b82f6, #10b981, #8b5cf6, #f59e0b) 1;
             animation: gradientShift 3s ease infinite;
+            min-width: 300px;
         }
 
         @keyframes gradientShift {
@@ -468,10 +397,11 @@
 
         .about-text {
             flex: 1;
+            min-width: 300px;
         }
 
         .about-text h3 {
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 4vw, 2rem);
             margin-bottom: 20px;
             color: var(--secondary-color);
         }
@@ -479,38 +409,95 @@
         .about-text p {
             margin-bottom: 20px;
             color: var(--text-light);
+            font-size: clamp(0.9rem, 2vw, 1rem);
         }
 
-        /* Skills Section */
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        /* Skills Section - NEW STYLES */
+        .skills-categories {
+            display: flex;
             gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
         }
 
-        .skill-card {
-            background-color: white;
-            padding: 30px;
+        .skill-category {
+            flex: 1;
+            min-width: 300px;
+            background: white;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            text-align: center;
+            padding: 30px;
             transition: var(--transition);
         }
 
-        .skill-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
 
-        .skill-icon {
-            font-size: 3rem;
+        .skill-category h3 {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .skill-category h3 i {
             color: var(--primary-color);
+        }
+
+        .skills-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .skill-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            background: #f8fafc;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .skill-item:hover {
+            background: #f1f5f9;
+            transform: translateX(5px);
+        }
+
+        .skill-item i {
+            color: var(--primary-color);
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .skill-item span {
+            font-weight: 500;
+            color: var(--text-color);
+            font-size: clamp(0.85rem, 2vw, 1rem);
+        }
+
+        .technical-skills-img, .soft-skills-img {
+            width: 100%;
+            height: 200px;
+            border-radius: 8px;
+            overflow: hidden;
             margin-bottom: 20px;
         }
 
-        .skill-card h3 {
-            margin-bottom: 15px;
-            color: var(--secondary-color);
+        .technical-skills-img img, .soft-skills-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .skill-category:hover .technical-skills-img img,
+        .skill-category:hover .soft-skills-img img {
+            transform: scale(1.05);
         }
 
         /* Services Section */
@@ -556,6 +543,11 @@
         .service-content h3 {
             margin-bottom: 15px;
             color: var(--secondary-color);
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+        }
+
+        .service-content p {
+            font-size: clamp(0.9rem, 2vw, 1rem);
         }
 
         /* Products Section */
@@ -601,59 +593,11 @@
         .product-content h3 {
             margin-bottom: 10px;
             color: var(--secondary-color);
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
         }
 
-        /* Blog Section */
-        .blog-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .blog-card {
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: var(--transition);
-        }
-
-        .blog-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .blog-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .blog-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-
-        .blog-card:hover .blog-img img {
-            transform: scale(1.1);
-        }
-
-        .blog-content {
-            padding: 25px;
-        }
-
-        .blog-content h3 {
-            margin-bottom: 15px;
-            color: var(--secondary-color);
-        }
-
-        .blog-meta {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 15px;
-            font-size: 0.9rem;
-            color: var(--text-light);
+        .product-content p {
+            font-size: clamp(0.9rem, 2vw, 1rem);
         }
 
         /* Contact Section */
@@ -679,6 +623,7 @@
             font-size: 1.5rem;
             color: var(--primary-color);
             margin-top: 5px;
+            min-width: 30px;
         }
 
         .contact-form {
@@ -696,6 +641,7 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
+            font-size: clamp(0.9rem, 2vw, 1rem);
         }
 
         .form-control {
@@ -703,7 +649,7 @@
             padding: 12px 15px;
             border: 1px solid #ddd;
             border-radius: 5px;
-            font-size: 1rem;
+            font-size: clamp(0.9rem, 2vw, 1rem);
             transition: var(--transition);
         }
 
@@ -732,7 +678,7 @@
         }
 
         .footer-col h3 {
-            font-size: 1.3rem;
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
             margin-bottom: 20px;
             position: relative;
             padding-bottom: 10px;
@@ -751,6 +697,7 @@
         .footer-col p {
             margin-bottom: 20px;
             opacity: 0.8;
+            font-size: clamp(0.9rem, 2vw, 1rem);
         }
 
         .social-links {
@@ -781,6 +728,7 @@
         .footer-links a {
             opacity: 0.8;
             transition: var(--transition);
+            font-size: clamp(0.9rem, 2vw, 1rem);
         }
 
         .footer-links a:hover {
@@ -798,14 +746,9 @@
 
         /* Responsive Styles */
         @media (max-width: 1200px) {
-            .wrapper .static-text,
-            .dynamic-text li {
-                font-size: 50px;
-            }
-            
             .profile img {
-                width: 300px;
-                height: 300px;
+                width: clamp(200px, 30vw, 300px);
+                height: clamp(200px, 30vw, 300px);
             }
         }
 
@@ -822,24 +765,13 @@
                 margin-bottom: 30px;
             }
             
-            .wrapper .static-text,
-            .dynamic-text li {
-                font-size: 40px;
-            }
-            
-            .wrapper {
-                height: 70px;
-            }
-            
-            @keyframes slide {
-                100% {
-                    top: -280px;
-                }
-            }
-            
             .profile img {
-                width: 250px;
-                height: 250px;
+                width: clamp(180px, 25vw, 250px);
+                height: clamp(180px, 25vw, 250px);
+            }
+            
+            .skills-categories {
+                flex-direction: column;
             }
         }
 
@@ -850,17 +782,19 @@
            
             .nav-links {
                 position: fixed;
-                top: 70px;
+                top: 0;
                 left: -100%;
-                width: 100%;
-                height: calc(100vh - 70px);
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
                 background-color: white;
                 flex-direction: column;
-                align-items: center;
+                align-items: flex-start;
                 justify-content: flex-start;
-                padding-top: 50px;
+                padding: 80px 30px 30px;
                 transition: var(--transition);
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
             }
            
             .nav-links.active {
@@ -869,11 +803,30 @@
            
             .nav-links li {
                 margin: 15px 0;
+                width: 100%;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 10px 0;
+                font-size: 1.1rem;
+                border-bottom: 1px solid #f0f0f0;
             }
 
             .auth-buttons {
                 margin-left: 0;
-                margin-top: 20px;
+                margin-top: 30px;
+                flex-direction: column;
+                align-items: stretch;
+                width: 100%;
+                gap: 15px;
+            }
+            
+            .auth-btn {
+                width: 100%;
+                text-align: center;
+                padding: 12px;
+                font-size: 1rem;
             }
             
             .hero-content {
@@ -883,107 +836,106 @@
             
             .hero-text {
                 margin-top: 30px;
+                padding-right: 0;
             }
             
             .hero-btns {
                 justify-content: center;
             }
             
-            .wrapper .static-text,
-            .dynamic-text li {
-                font-size: 35px;
-            }
-            
-            .wrapper {
-                height: 60px;
-                justify-content: center;
-            }
-            
-            @keyframes slide {
-                100% {
-                    top: -240px;
-                }
-            }
-            
             .profile img {
-                width: 200px;
-                height: 200px;
+                width: clamp(160px, 40vw, 200px);
+                height: clamp(160px, 40vw, 200px);
+            }
+
+            .section {
+                padding: 60px 0;
             }
         }
 
         @media (max-width: 576px) {
-            .section {
-                padding: 60px 0;
-            }
-           
             .hero {
                 padding: 120px 0 80px;
-            }
-           
-            .section-title h2 {
-                font-size: 1.8rem;
-            }
-            
-            .wrapper .static-text,
-            .dynamic-text li {
-                font-size: 28px;
-            }
-            
-            .wrapper {
-                height: 50px;
-            }
-            
-            @keyframes slide {
-                100% {
-                    top: -200px;
-                }
-            }
-            
-            .profile img {
-                width: 180px;
-                height: 180px;
             }
             
             .hero-btns {
                 flex-direction: column;
                 align-items: center;
+                gap: 15px;
             }
             
             .btn {
                 width: 100%;
                 max-width: 250px;
-                margin-bottom: 10px;
+                margin-bottom: 0;
+            }
+            
+            .profile img {
+                width: clamp(140px, 35vw, 180px);
+                height: clamp(140px, 35vw, 180px);
+            }
+            
+            .skill-category {
+                min-width: 100%;
+                padding: 20px;
+            }
+
+            .contact-form {
+                padding: 20px;
             }
         }
         
         @media (max-width: 480px) {
-            .wrapper .static-text,
-            .dynamic-text li {
-                font-size: 24px;
+            .services-container,
+            .products-container {
+                grid-template-columns: 1fr;
             }
             
-            .wrapper {
-                height: 40px;
+            .contact-container {
+                gap: 30px;
             }
             
-            @keyframes slide {
-                100% {
-                    top: -160px;
-                }
+            .footer-content {
+                gap: 30px;
+            }
+
+            .navbar {
+                padding: 15px 0;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .hero-btns .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
             }
             
             .profile img {
-                width: 150px;
-                height: 150px;
+                width: clamp(120px, 30vw, 150px);
+                height: clamp(120px, 30vw, 150px);
             }
-            
-            .skills-container,
-            .services-container,
-            .products-container,
-            .blog-container {
-                grid-template-columns: 1fr;
+
+            .container {
+                width: 95%;
+                padding: 0 10px;
             }
-        } */
+        }
+
+        /* Overlay for mobile menu */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .overlay.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -992,7 +944,9 @@
         <div class="container">
             <nav class="navbar">
                 <a href="#" class="logo">ALZAIM Ali</a>
-                <div class="menu-toggle" id="menuToggle">☰</div>
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
                 <ul class="nav-links" id="navLinks">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
@@ -1002,66 +956,14 @@
                     <li><a href="blog.html">Blog</a></li>
                     <li><a href="#contact">Contact</a></li>
                     <li class="auth-buttons">
-                       <a href="login.html"> <button class="auth-btn login-btn" id="loginBtn">Login</button></a>
-                       <a href="sign-up.html"> <button class="auth-btn signup-btn" id="signupBtn">Sign Up</button></a>
-                    
+                        <a href="login.html"><button class="auth-btn login-btn">Login</button></a>
+                        <a href="sign-up.html"><button class="auth-btn signup-btn">Sign Up</button></a>
                     </li>
                 </ul>
             </nav>
         </div>
+        <div class="overlay" id="overlay"></div>
     </header>
-
-    <!-- Login Modal -->
-    <div class="modal" id="loginModal">
-        <div class="modal-content">
-            <span class="close-modal" id="closeLogin">&times;</span>
-            <h2 class="modal-title">Login to Your Account</h2>
-            <form id="loginForm">
-                <div class="form-group">
-                    <label for="loginEmail">Email</label>
-                    <input type="email" id="loginEmail" class="form-control" placeholder="Enter your email" required>
-                </div>
-                <div class="form-group">
-                    <label for="loginPassword">Password</label>
-                    <input type="password" id="loginPassword" class="form-control" placeholder="Enter your password" required>
-                </div>
-                <button type="submit" class="btn" style="width: 100%;">Login</button>
-                <div class="form-footer">
-                    <p>Don't have an account? <a id="switchToSignup">Sign up</a></p>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Sign Up Modal -->
-    <div class="modal" id="signupModal">
-        <div class="modal-content">
-            <span class="close-modal" id="closeSignup">&times;</span>
-            <h2 class="modal-title">Create an Account</h2>
-            <form id="signupForm">
-                <div class="form-group">
-                    <label for="signupName">Full Name</label>
-                    <input type="text" id="signupName" class="form-control" placeholder="Enter your full name" required>
-                </div>
-                <div class="form-group">
-                    <label for="signupEmail">Email</label>
-                    <input type="email" id="signupEmail" class="form-control" placeholder="Enter your email" required>
-                </div>
-                <div class="form-group">
-                    <label for="signupPassword">Password</label>
-                    <input type="password" id="signupPassword" class="form-control" placeholder="Create a password" required>
-                </div>
-                <div class="form-group">
-                    <label for="signupConfirmPassword">Confirm Password</label>
-                    <input type="password" id="signupConfirmPassword" class="form-control" placeholder="Confirm your password" required>
-                </div>
-                <button type="submit" class="btn" style="width: 100%;">Sign Up</button>
-                <div class="form-footer">
-                    <p>Already have an account? <a id="switchToLogin">Login</a></p>
-                </div>
-            </form>
-        </div>
-    </div>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
@@ -1106,11 +1008,9 @@
                 </div>
                 <div class="about-text">
                     <h3>My Journey in Business & Technology</h3>
-                    <p> Hi, my name is Ali Abdalla Ismail Abdalla. I am a UI/UX Designer, Frontend Developer, and business-minded problem solver. I specialize in HTML, CSS, and internet fundamentals, with a strong focus on creating user-friendly, modern, and responsive web designs.
-
-I combine my design skills with technical knowledge to turn ideas into functional, visually appealing websites. My background in business and leadership also gives me the ability to understand clients' needs and deliver solutions that balance creativity with real-world value.
-
-I'm passionate about design, technology, and innovation—constantly learning and pushing myself to create better user experiences. My goal is to design and develop products that not only look great but also provide meaningful impact.</p>
+                    <p>Hi, my name is Ali Abdalla Ismail Abdalla. I am a UI/UX Designer, Frontend Developer, and business-minded problem solver. I specialize in HTML, CSS, and internet fundamentals, with a strong focus on creating user-friendly, modern, and responsive web designs.</p>
+                    <p>I combine my design skills with technical knowledge to turn ideas into functional, visually appealing websites. My background in business and leadership also gives me the ability to understand clients' needs and deliver solutions that balance creativity with real-world value.</p>
+                    <p>I'm passionate about design, technology, and innovation—constantly learning and pushing myself to create better user experiences. My goal is to design and develop products that not only look great but also provide meaningful impact.</p>
                     <a href="#contact" class="btn">Let's Work Together</a>
                 </div>
             </div>
@@ -1124,36 +1024,66 @@ I'm passionate about design, technology, and innovation—constantly learning an
                 <h2>My Skills</h2>
                 <p>A combination of technical expertise and strategic thinking abilities</p>
             </div>
-            <div class="skills-container">
-                <div class="skill-card">
-                    <div class="skill-icon">💻</div>
-                    <h3>UI/UX Design</h3>
-                    <p>Creating intuitive and engaging user interfaces with a focus on user experience and accessibility.</p>
+            
+            <div class="skills-categories">
+                <!-- Technical Skills -->
+                <div class="skill-category">
+                    <div class="technical-skills-img">
+                        <img src="https://images.unsplash.com/photo-1534665482403-a909d0d97c67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Technical Skills">
+                    </div>
+                    <h3><i class="fas fa-laptop-code"></i> Technical Skills</h3>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <i class="fas fa-code"></i>
+                            <span><strong>Programming:</strong> HTML, CSS, JavaScript (basic), Python (beginner)</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-globe"></i>
+                            <span><strong>Web Development:</strong> UI/UX, responsive design, forms</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-tools"></i>
+                            <span><strong>Tools:</strong> GitHub, VS Code, CodePen</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-desktop"></i>
+                            <span><strong>Platforms:</strong> Windows, Ubuntu/Linux</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span><strong>Online Learning:</strong> FreeCodeCamp, YouTube, W3Schools</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon">⚙️</div>
-                    <h3>Frontend Development</h3>
-                    <p>Building responsive, performant websites and applications using modern web technologies.</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">📈</div>
-                    <h3>Business Strategy</h3>
-                    <p>Developing data-driven strategies to help businesses grow and achieve their objectives.</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">🔍</div>
-                    <h3>Problem Solving</h3>
-                    <p>Analyzing complex challenges and developing innovative solutions that address root causes.</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">🧠</div>
-                    <h3>Critical Thinking</h3>
-                    <p>Evaluating information objectively to make informed decisions and avoid cognitive biases.</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">👥</div>
-                    <h3>Team Leadership</h3>
-                    <p>Guiding and motivating teams to achieve common goals while fostering collaboration.</p>
+                
+                <!-- Soft Skills -->
+                <div class="skill-category">
+                    <div class="soft-skills-img">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Soft Skills">
+                    </div>
+                    <h3><i class="fas fa-users"></i> Soft Skills</h3>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <i class="fas fa-comments"></i>
+                            <span>Communication and teamwork</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-lightbulb"></i>
+                            <span>Problem-solving and critical thinking</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-user-tie"></i>
+                            <span>Leadership and self-management</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Time management and planning</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-palette"></i>
+                            <span>Creativity and adaptability</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1247,28 +1177,28 @@ I'm passionate about design, technology, and innovation—constantly learning an
             <div class="contact-container">
                 <div class="contact-info">
                     <div class="contact-item">
-                        <div class="contact-icon">📍</div>
+                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
                         <div>
                             <h3>Location</h3>
                             <p>Rwanda, Kigali</p>
                         </div>
                     </div>
                     <div class="contact-item">
-                        <div class="contact-icon">📧</div>
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
                         <div>
                             <h3>Email</h3>
                             <p>aliabdalla09zx@gmail.com</p>
                         </div>
                     </div>
                     <div class="contact-item">
-                        <div class="contact-icon">📱</div>
+                        <div class="contact-icon"><i class="fas fa-phone"></i></div>
                         <div>
                             <h3>Phone</h3>
-                            <p>+1 (555) 123-4567</p>
+                            <p>+250 0795679885</p>
                         </div>
                     </div>
                     <div class="contact-item">
-                        <div class="contact-icon">💼</div>
+                        <div class="contact-icon"><i class="fas fa-briefcase"></i></div>
                         <div>
                             <h3>Freelance Availability</h3>
                             <p>Available for select projects</p>
@@ -1304,10 +1234,10 @@ I'm passionate about design, technology, and innovation—constantly learning an
                     <h3>Ali Abdalla</h3>
                     <p>UI/UX Designer, Frontend Developer, and Business Strategist with a passion for creating digital solutions that drive results.</p>
                     <div class="social-links">
-                        <a href="#"><span>📘</span></a>
-                        <a href="#"><span>🐦</span></a>
-                        <a href="#"><span>📷</span></a>
-                        <a href="#"><span>💼</span></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
                 <div class="footer-col">
@@ -1320,7 +1250,7 @@ I'm passionate about design, technology, and innovation—constantly learning an
                         <li><a href="#products">Products</a></li>
                     </ul>
                 </div>
-                <div class="footer-col" id="services">
+                <div class="footer-col">
                     <h3>Services</h3>
                     <ul class="footer-links">
                         <li><a href="#">UI/UX Design</a></li>
@@ -1347,6 +1277,53 @@ I'm passionate about design, technology, and innovation—constantly learning an
         </div>
     </footer>
 
- 
+    <script>
+        // Mobile Menu Toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            const overlay = document.getElementById('overlay');
+            
+            menuToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+            });
+            
+            overlay.addEventListener('click', function() {
+                navLinks.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+            
+            // Close menu when clicking on a link
+            const navItems = document.querySelectorAll('.nav-links a');
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    navLinks.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up - ALZAIM Ali</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         /* Reset and Base Styles */
         * {
@@ -12,126 +13,204 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
-        body {
-            background-color: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
+
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --text-light: #777;
+            --transition: all 0.3s ease;
         }
-        
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
         .container {
             width: 90%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 15px;
         }
-        
-        /* Header Styles */
+
+        /* --- Header Styles --- */
         header {
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-            padding: 15px 0;
+            background-color: rgb(208, 234, 240);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
         }
-        
+
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 20px 0;
         }
-        
+
         .logo {
-            color: white;
-            font-size: 24px;
+            font-size: 1.8rem;
             font-weight: 700;
-            text-decoration: none;
+            color: var(--secondary-color);
         }
-        
+
         .nav-links {
             display: flex;
-            list-style: none;
+            transition: var(--transition);
         }
-        
+
         .nav-links li {
-            margin-left: 20px;
+            margin-left: 30px;
         }
-        
-        .btn {
-            display: inline-block;
-            background: white;
-            color: #6a11cb;
-            padding: 8px 20px;
-            border-radius: 4px;
-            text-decoration: none;
+
+        .nav-links a {
             font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-        
-        .btn:hover {
-            background: #f0f0f0;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* Signup Section */
-        .signup-section {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: calc(100vh - 80px);
-            padding: 40px 0;
-        }
-        
-        .signup-container {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            padding: 40px;
-            width: 100%;
-            max-width: 500px;
-            transition: transform 0.3s ease;
-        }
-        
-        .signup-container:hover {
-            transform: translateY(-5px);
-        }
-        
-        .signup-title {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #333;
-            font-size: 28px;
-            font-weight: 600;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
+            transition: var(--transition);
             position: relative;
         }
-        
-        label {
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* Auth Buttons */
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+            margin-left: 20px;
+        }
+
+        .auth-btn {
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .login-btn {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .login-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .signup-btn {
+            background-color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            color: white;
+        }
+
+        .signup-btn:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+
+        /* --- Signup Form Styles --- */
+        .signup-container {
+            /* Flexbox for perfect centering on all screen sizes */
+            display: flex;
+            margin-left: 30%;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 80px 15px 20px; /* Add padding to prevent content from touching the screen edges */
+        }
+
+        .signup-form {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .signup-form h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--secondary-color);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 500;
-            color: #555;
+            font-weight: 600;
+            color: var(--text-color);
         }
-        
-        .form-control {
+
+        .form-group input {
             width: 100%;
             padding: 12px 15px;
             border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-            transition: border 0.3s ease;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: var(--transition);
         }
-        
-        .form-control:focus {
-            border-color: #6a11cb;
+
+        .form-group input:focus {
+            border-color: var(--primary-color);
             outline: none;
-            box-shadow: 0 0 0 2px rgba(106, 17, 203, 0.2);
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
         }
-        
+
         .password-strength {
             height: 4px;
             background: #eee;
@@ -174,86 +253,116 @@
             margin-top: 5px;
             display: none;
         }
-        
-        .form-footer {
-            text-align: center;
-            margin-top: 20px;
-            color: #666;
-        }
-        
-        .form-footer a {
-            color: #6a11cb;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        
-        .form-footer a:hover {
-            text-decoration: underline;
-        }
-        
+
         .terms-checkbox {
             display: flex;
             align-items: flex-start;
             margin-bottom: 20px;
         }
-        
+
         .terms-checkbox input {
             margin-right: 10px;
             margin-top: 3px;
         }
-        
+
         .terms-checkbox label {
             font-size: 14px;
             margin-bottom: 0;
         }
-        
+
         .terms-checkbox a {
-            color: #6a11cb;
+            color: var(--primary-color);
             text-decoration: none;
         }
-        
+
         .terms-checkbox a:hover {
             text-decoration: underline;
         }
-        
-        /* Responsive Design */
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .submit-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        .login-link a {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- Responsive Styles (Media Queries) --- */
         @media (max-width: 768px) {
-            .signup-container {
-                padding: 30px 25px;
-                margin: 0 15px;
+            .menu-toggle {
+                display: block;
             }
-            
-            .signup-title {
-                font-size: 24px;
-            }
-            
+
             .navbar {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .logo {
-                margin-bottom: 10px;
+                padding: 15px 0;
             }
             
             .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
                 justify-content: center;
-                margin-top: 10px;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                transition: right 0.3s ease-in-out;
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .nav-links li {
+                margin: 20px 0;
+            }
+            
+            .auth-buttons {
+                margin-left: 0;
+                flex-direction: column;
+                gap: 15px;
+                margin-top: 20px;
+            }
+            
+            .auth-btn {
+                width: 150px;
+                text-align: center;
+            }
+            
+            .signup-form {
+                padding: 30px 25px;
             }
         }
-        
+
         @media (max-width: 480px) {
-            .signup-container {
+            .signup-form {
                 padding: 25px 20px;
-            }
-            
-            .btn {
-                padding: 10px 15px;
-                font-size: 14px;
-            }
-            
-            .form-control {
-                padding: 10px 12px;
             }
             
             .terms-checkbox {
@@ -267,61 +376,70 @@
     </style>
 </head>
 <body>
-    <!-- Header Section -->
     <header>
         <div class="container">
             <nav class="navbar">
-                <a href="index.html" class="logo">ALZAIM Ali</a>
-                <ul class="nav-links">
-                    <li><a href="login.html" class="btn">Login</a></li>
+                <a href="#" class="logo">ALZAIM Ali</a>
+                <div class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li class="auth-buttons">
+                        <a href="login.html" class="auth-btn login-btn">Login</a>
+                        <a href="sign-up.html" class="auth-btn signup-btn">Sign Up</a>
+                    </li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Signup Section -->
-    <section class="signup-section">
+    <section class="signup-container">
         <div class="container">
-            <div class="signup-container">
-                <h2 class="signup-title">Create an Account</h2>
-                <form id="signupForm">
-                    <div class="form-group">
-                        <label for="signupName">Full Name</label>
-                        <input type="text" id="signupName" class="form-control" placeholder="Enter your full name" required>
-                        <div class="error-message" id="nameError">Please enter a valid name (at least 2 characters)</div>
+            <form class="signup-form" id="signupForm">
+                <h2>Create an Account</h2>
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" placeholder="Enter your full name" required>
+                    <div class="error-message" id="nameError">Please enter a valid name (at least 2 characters)</div>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email Address</label>
+                    <input type="email" id="signupEmail" placeholder="Enter your email" required>
+                    <div class="error-message" id="emailError">Please enter a valid email address</div>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" placeholder="Create a password" required>
+                    <div class="password-strength">
+                        <div class="password-strength-fill"></div>
                     </div>
-                    <div class="form-group">
-                        <label for="signupEmail">Email</label>
-                        <input type="email" id="signupEmail" class="form-control" placeholder="Enter your email" required>
-                        <div class="error-message" id="emailError">Please enter a valid email address</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="signupPassword">Password</label>
-                        <input type="password" id="signupPassword" class="form-control" placeholder="Create a password" required>
-                        <div class="password-strength">
-                            <div class="password-strength-fill"></div>
-                        </div>
-                        <div class="password-hint" id="passwordHint">Password must be at least 8 characters with uppercase, lowercase, number, and special character</div>
-                        <div class="error-message" id="passwordError">Password must be at least 8 characters with uppercase, lowercase, number, and special character</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="signupConfirmPassword">Confirm Password</label>
-                        <input type="password" id="signupConfirmPassword" class="form-control" placeholder="Confirm your password" required>
-                        <div class="error-message" id="confirmPasswordError">Passwords do not match</div>
-                    </div>
-                    <div class="terms-checkbox">
-                        <input type="checkbox" id="terms" required>
-                        <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
-                    </div>
-                    <button type="submit" class="btn" style="width: 100%;">Sign Up</button>
-                    <div class="form-footer">
-                        <p>Already have an account? <a href="login.html">Login</a></p>
-                    </div>
-                </form>
-            </div>
+                    <div class="password-hint" id="passwordHint">Password must be at least 8 characters with uppercase, lowercase, number, and special character</div>
+                    <div class="error-message" id="passwordError">Password must be at least 8 characters with uppercase, lowercase, number, and special character</div>
+                </div>
+                <div class="form-group">
+                    <label for="signupConfirmPassword">Confirm Password</label>
+                    <input type="password" id="signupConfirmPassword" placeholder="Confirm your password" required>
+                    <div class="error-message" id="confirmPasswordError">Passwords do not match</div>
+                </div>
+                <div class="terms-checkbox">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                </div>
+                <button type="submit" class="submit-btn">Sign Up</button>
+                <div class="login-link">
+                    Already have an account? <a href="login.html">Login here</a>
+                </div>
+            </form>
         </div>
     </section>
 
-   
+
 </body>
 </html>
