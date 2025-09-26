@@ -971,12 +971,12 @@
             <div class="hero-content">
                 <div class="hero-text">
                     <div class="wrapper">
-                        <div class="static-text">I'm</div>
+                        <div class="static-text">I'm a</div>
                         <ul class="dynamic-text">
                             <li><span>Designer</span></li>
-                            <li><span>Developer</span></li>
-                            <li><span>Entrepreneur</span></li>
-                            <li><span>Freelancer</span></li>
+                            <li><span> Developer</span></li>
+                            <li><span> Entrepreneur</span></li>
+                            <li><span> Freelancer</span></li>
                         </ul>
                     </div>
                     
@@ -984,6 +984,7 @@
                         <a href="#contact" class="btn">Get In Touch</a>
                         <a href="#about" class="btn btn-outline">Learn More</a>
                     </div>
+
                 </div>
                 
                 <div class="profile">
@@ -1277,53 +1278,6 @@
         </div>
     </footer>
 
-    <script>
-        // Mobile Menu Toggle
-        document.addEventListener('DOMContentLoaded', function() {
-            const menuToggle = document.getElementById('menuToggle');
-            const navLinks = document.getElementById('navLinks');
-            const overlay = document.getElementById('overlay');
-            
-            menuToggle.addEventListener('click', function() {
-                navLinks.classList.toggle('active');
-                overlay.classList.toggle('active');
-                document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
-            });
-            
-            overlay.addEventListener('click', function() {
-                navLinks.classList.remove('active');
-                overlay.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-            
-            // Close menu when clicking on a link
-            const navItems = document.querySelectorAll('.nav-links a');
-            navItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    navLinks.classList.remove('active');
-                    overlay.classList.remove('active');
-                    document.body.style.overflow = '';
-                });
-            });
-            
-            // Smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    if(targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if(targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-        });
-    </script>
+
 </body>
 </html>
