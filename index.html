@@ -254,14 +254,16 @@
             display: flex;
             margin-bottom: 30px;
             align-items: center;
-            height: clamp(60px, 15vw, 90px);
             flex-wrap: wrap;
+            height: auto;
+            min-height: clamp(60px, 15vw, 90px);
         }
 
         .wrapper .static-text {
             color: white;
-            font-size: clamp(2rem, 8vw, 3.5rem);
+            font-size: clamp(1.8rem, 7vw, 3.5rem);
             font-weight: 400;
+            line-height: 1.2;
         }
 
         span {
@@ -272,26 +274,24 @@
             margin-left: 15px;
             height: clamp(60px, 15vw, 90px);
             overflow: hidden;
+            position: relative;
         }
 
         .dynamic-text li {
             list-style: none;
             color: white;
-            font-size: clamp(2rem, 8vw, 3.5rem);
+            font-size: clamp(1.8rem, 7vw, 3.5rem);
             font-weight: 500;
-            top: 0;
             position: relative;
+            top: 0;
             animation: slide 12s steps(4) infinite;
+            line-height: clamp(60px, 15vw, 90px);
         }
 
         @keyframes slide {
             100% {
                 top: calc(-4 * clamp(60px, 15vw, 90px));
             }
-        }
-
-        .dynamic-text li {
-            position: relative;
         }
 
         .dynamic-text li::after {
@@ -851,6 +851,20 @@
             .section {
                 padding: 60px 0;
             }
+            
+            .wrapper {
+                justify-content: center;
+            }
+            
+            .wrapper .dynamic-text {
+                margin-left: 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .dynamic-text li {
+                text-align: center;
+            }
         }
 
         @media (max-width: 576px) {
@@ -883,6 +897,15 @@
             .contact-form {
                 padding: 20px;
             }
+            
+            .wrapper {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .wrapper .static-text {
+                margin-bottom: 10px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -901,6 +924,21 @@
 
             .navbar {
                 padding: 15px 0;
+            }
+            
+            .wrapper .dynamic-text {
+                height: clamp(50px, 12vw, 70px);
+            }
+            
+            .dynamic-text li {
+                font-size: clamp(1.5rem, 6vw, 2.5rem);
+                line-height: clamp(50px, 12vw, 70px);
+            }
+            
+            @keyframes slide {
+                100% {
+                    top: calc(-4 * clamp(50px, 12vw, 70px));
+                }
             }
         }
         
@@ -1207,18 +1245,18 @@
                     </div>
                 </div>
                 <div class="contact-form">
-                    <form>
+                    <form action="https://formsubmit.co/aliabdalla09zx@gmail.com" method="POST">
                         <div class="form-group">
                             <label for="name">Your Name</label>
-                            <input type="text" id="name" class="form-control" placeholder="Ali" required>
+                            <input type="text" name="username" id="name" class="form-control" placeholder="Ali" required>
                         </div>
                         <div class="form-group">
                             <label for="email">Your Email</label>
-                            <input type="email" id="email" class="form-control" placeholder="john@example.com" required>
+                            <input type="email" name="Email" id="email" class="form-control" placeholder="john@example.com" required>
                         </div>
                         <div class="form-group">
                             <label for="message">Your Message</label>
-                            <textarea id="message" class="form-control" placeholder="Tell me about your project..." required></textarea>
+                            <textarea id="message" name="massege" class="form-control" placeholder="Tell me about your project..." required></textarea>
                         </div>
                         <button type="submit" class="btn">Send Message</button>
                     </form>
@@ -1278,6 +1316,47 @@
         </div>
     </footer>
 
+    <script>
+        // Navbar Toggle Functionality
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        const overlay = document.getElementById('overlay');
 
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            overlay.classList.toggle('active');
+            // Change icon based on menu state
+            if (navLinks.classList.contains('active')) {
+                menuToggle.innerHTML = '<i class="fas fa-times"></i>';
+            } else {
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+
+        overlay.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            overlay.classList.remove('active');
+            menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        });
+
+        // Close menu when clicking on a link
+        const navItems = document.querySelectorAll('.nav-links a');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                overlay.classList.remove('active');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // Close menu on window resize if it's open and window becomes larger
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                overlay.classList.remove('active');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+    </script>
 </body>
 </html>

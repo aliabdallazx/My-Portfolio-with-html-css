@@ -34,6 +34,7 @@
             color: var(--text-color);
             background-color: #f9f9f9;
             overflow-x: hidden;
+            padding-top: 80px; /* Add padding to prevent content from hiding behind fixed header */
         }
 
         a {
@@ -163,13 +164,11 @@
         
         /* --- Login Form Styles --- */
         .login-container {
-            /* Full-page centering for the login form */
             display: flex;
-            margin-left: 30%;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            padding: 80px 15px 20px; /* Add padding for different screen sizes */
+            min-height: calc(100vh - 80px); /* Subtract header height */
+            padding: 20px 15px;
         }
 
         .login-form {
@@ -272,14 +271,33 @@
 
         /* --- Responsive Styles (Media Queries) --- */
         
-        /* Mobile menu toggle behavior */
+        /* For tablets and small laptops */
+        @media (max-width: 1024px) {
+            .container {
+                width: 95%;
+            }
+            
+            .logo {
+                font-size: 1.6rem;
+            }
+            
+            .nav-links li {
+                margin-left: 25px;
+            }
+        }
+
+        /* For tablets */
         @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+            
             .menu-toggle {
                 display: block;
             }
             
             .navbar {
-                padding: 15px 0; /* Adjust padding for smaller screens */
+                padding: 15px 0;
             }
 
             .nav-links {
@@ -293,7 +311,7 @@
                 align-items: center;
                 justify-content: center;
                 box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-                transition: right 0.3s ease-in-out; /* Better transition effect */
+                transition: right 0.3s ease-in-out;
             }
             
             .nav-links.active {
@@ -301,18 +319,18 @@
             }
             
             .nav-links li {
-                margin: 20px 0; /* Increase vertical spacing */
+                margin: 20px 0;
             }
 
             .nav-links a::after {
                 width: 0;
-            } /* Hide hover effect on mobile */
+            }
             
             .auth-buttons {
                 margin-left: 0;
                 flex-direction: column;
                 gap: 15px;
-                margin-top: 20px; /* Add some space from the navigation links */
+                margin-top: 20px;
             }
             
             .auth-btn {
@@ -321,11 +339,66 @@
             }
 
             .login-container {
-                padding-top: 60px; /* Adjust for the slightly smaller header on mobile */
+                min-height: calc(100vh - 70px);
+                padding-top: 20px;
             }
             
             .login-form {
-                padding: 30px; /* Reduce padding on smaller screens for better fit */
+                padding: 30px;
+            }
+        }
+
+        /* For large phones */
+        @media (max-width: 576px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .login-form {
+                padding: 25px;
+            }
+            
+            .login-form h2 {
+                font-size: 1.5rem;
+                margin-bottom: 25px;
+            }
+            
+            .form-options {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+
+        /* For small phones */
+        @media (max-width: 400px) {
+            .container {
+                width: 98%;
+                padding: 0 10px;
+            }
+            
+            .logo {
+                font-size: 1.3rem;
+            }
+            
+            .login-form {
+                padding: 20px;
+            }
+            
+            .login-form h2 {
+                font-size: 1.3rem;
+            }
+            
+            .form-group {
+                margin-bottom: 15px;
+            }
+            
+            .form-group input {
+                padding: 10px 12px;
+            }
+            
+            .submit-btn {
+                padding: 10px;
             }
         }
     </style>
@@ -345,7 +418,7 @@
                     <li><a href="index.html#services">Services</a></li>
                     <li><a href="index.html#Products">Products</a></li>
                     <li><a href="index.html#Contact">Contact</a></li>
-                    <li><a href="index.html#blog">blog</a></li>
+                    <li><a href="index.html#blog">Blog</a></li>
                     <li class="auth-buttons">
                         <a href="login.html" class="auth-btn login-btn">Login</a>
                         <a href="sign-up.html" class="auth-btn signup-btn">Sign Up</a>
@@ -382,6 +455,23 @@
         </div>
     </section>
 
+    <script>
+        // Mobile menu toggle functionality
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Close menu when clicking on a link
+        const navItems = document.querySelectorAll('.nav-links a');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+    </script>
    
 </body>
 </html>
