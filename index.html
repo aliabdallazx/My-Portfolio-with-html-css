@@ -177,7 +177,12 @@
             width: 100%;
         }
 
+        /* CSS-only menu toggle using checkbox hack */
         .menu-toggle {
+            display: none;
+        }
+
+        .menu-toggle-label {
             display: none;
             font-size: 1.5rem;
             cursor: pointer;
@@ -776,7 +781,7 @@
         }
 
         @media (max-width: 768px) {
-            .menu-toggle {
+            .menu-toggle-label {
                 display: block;
             }
            
@@ -797,8 +802,17 @@
                 z-index: 1000;
             }
            
-            .nav-links.active {
+            /* CSS-only menu toggle functionality */
+            .menu-toggle:checked ~ .nav-links {
                 left: 0;
+            }
+           
+            .menu-toggle:checked ~ .overlay {
+                display: block;
+            }
+           
+            .menu-toggle:checked ~ .menu-toggle-label .fa-bars::before {
+                content: "\f00d"; /* FontAwesome X icon */
             }
            
             .nav-links li {
@@ -970,10 +984,6 @@
             background: rgba(0, 0, 0, 0.5);
             z-index: 999;
         }
-
-        .overlay.active {
-            display: block;
-        }
     </style>
 </head>
 <body>
@@ -982,9 +992,13 @@
         <div class="container">
             <nav class="navbar">
                 <a href="#" class="logo">ALZAIM Ali</a>
-                <button class="menu-toggle" id="menuToggle">
+                
+                <!-- CSS-only menu toggle -->
+                <input type="checkbox" id="menuToggle" class="menu-toggle">
+                <label for="menuToggle" class="menu-toggle-label">
                     <i class="fas fa-bars"></i>
-                </button>
+                </label>
+                
                 <ul class="nav-links" id="navLinks">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
@@ -1037,7 +1051,19 @@
     <!-- About Section -->
     <section id="about" class="section">
         <div class="container">
-            <div class="section-title">
+            <div class="section
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            -title">
                 <h2>About Me</h2>
                 <p>Learn more about my journey and expertise in business and technology</p>
             </div>
@@ -1315,48 +1341,5 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        // Navbar Toggle Functionality
-        const menuToggle = document.getElementById('menuToggle');
-        const navLinks = document.getElementById('navLinks');
-        const overlay = document.getElementById('overlay');
-
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            overlay.classList.toggle('active');
-            // Change icon based on menu state
-            if (navLinks.classList.contains('active')) {
-                menuToggle.innerHTML = '<i class="fas fa-times"></i>';
-            } else {
-                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-            }
-        });
-
-        overlay.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-            overlay.classList.remove('active');
-            menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-        });
-
-        // Close menu when clicking on a link
-        const navItems = document.querySelectorAll('.nav-links a');
-        navItems.forEach(item => {
-            item.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                overlay.classList.remove('active');
-                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-            });
-        });
-
-        // Close menu on window resize if it's open and window becomes larger
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-                overlay.classList.remove('active');
-                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-            }
-        });
-    </script>
 </body>
 </html>
