@@ -14,23 +14,481 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Reset and Base Styles */
+        /* ===========================================
+           CSS VARIABLES & THEME SYSTEM
+        =========================================== */
+        
+        /* Light theme (default) */
+        :root {
+            /* Base colors */
+            --bg-color: #f9f9f9;
+            --surface-color: #ffffff;
+            --text-color: #333333;
+            --text-muted: #777777;
+            --border-color: #dddddd;
+            
+            /* Accent colors - default to teal */
+            --accent-500: #14b8a6;
+            --accent-300: #6ee7d7;
+            --accent-700: #0f766e;
+            --accent-gradient: linear-gradient(90deg, #14b8a6, #06b6d4);
+            --focus-ring: rgba(20, 184, 166, 0.5);
+            
+            /* Semantic mapping for existing code */
+            --primary-color: var(--accent-500);
+            --secondary-color: #2c3e50;
+            --accent-color: var(--accent-500);
+            --light-color: var(--bg-color);
+            --dark-color: var(--text-color);
+        }
+
+        /* Dark theme */
+        [data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --surface-color: #2d2d2d;
+            --text-color: #f0f0f0;
+            --text-muted: #a0a0a0;
+            --border-color: #444444;
+            --secondary-color: #f0f0f0;
+        }
+
+        /* Accent color palettes */
+        [data-palette="teal"] {
+            --accent-500: #14b8a6;
+            --accent-300: #6ee7d7;
+            --accent-700: #0f766e;
+            --accent-gradient: linear-gradient(90deg, #14b8a6, #06b6d4);
+            --focus-ring: rgba(20, 184, 166, 0.5);
+        }
+
+        [data-palette="indigo"] {
+            --accent-500: #6366f1;
+            --accent-300: #a5b4fc;
+            --accent-700: #4338ca;
+            --accent-gradient: linear-gradient(90deg, #6366f1, #8b5cf6);
+            --focus-ring: rgba(99, 102, 241, 0.5);
+        }
+
+        [data-palette="coral"] {
+            --accent-500: #fb7185;
+            --accent-300: #fda4af;
+            --accent-700: #be185d;
+            --accent-gradient: linear-gradient(90deg, #fb7185, #fb923c);
+            --focus-ring: rgba(251, 113, 133, 0.5);
+        }
+
+        [data-palette="amber"] {
+            --accent-500: #f59e0b;
+            --accent-300: #fcd34d;
+            --accent-700: #b45309;
+            --accent-gradient: linear-gradient(90deg, #f59e0b, #f97316);
+            --focus-ring: rgba(245, 158, 11, 0.5);
+        }
+
+        /* Theme transition helper */
+        .theme-transition * {
+            transition: background-color 0.3s ease, 
+                        color 0.3s ease, 
+                        border-color 0.3s ease, 
+                        box-shadow 0.3s ease;
+        }
+
+        /* ===========================================
+           THEME CONTROLS STYLES WITH TOGGLE
+        =========================================== */
+        
+        .theme-controls-container {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            z-index: 1001;
+        }
+
+        .theme-toggle-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            margin-bottom: 10px;
+        }
+
+        .theme-toggle-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .theme-controls {
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            background: var(--surface-color);
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border: 1px solid var(--border-color);
+            min-width: 180px;
+        }
+
+        .theme-controls.active {
+            display: flex;
+        }
+
+        .theme-toggle-group {
+            display: flex;
+            gap: 5px;
+            background: var(--bg-color);
+            border-radius: 8px;
+            padding: 4px;
+        }
+
+        .theme-toggle-btn-small {
+            flex: 1;
+            background: transparent;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle-btn-small:hover {
+            background: var(--accent-300);
+        }
+
+        .theme-toggle-btn-small[aria-pressed="true"] {
+            background: var(--accent-500);
+            color: white;
+        }
+
+        .palette-selector {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .palette-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+            position: relative;
+        }
+
+        .palette-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .palette-btn[aria-pressed="true"] {
+            border-color: var(--text-color);
+        }
+
+        .palette-btn::after {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+        }
+
+        .palette-btn.teal {
+            background: #14b8a6;
+        }
+
+        .palette-btn.indigo {
+            background: #6366f1;
+        }
+
+        .palette-btn.coral {
+            background: #fb7185;
+        }
+
+        .palette-btn.amber {
+            background: #f59e0b;
+        }
+
+        .theme-controls-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-color);
+            text-align: center;
+        }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .theme-status {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* ===========================================
+           AI CHATBOT STYLES
+        =========================================== */
+        
+        .ai-chatbot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .chat-toggle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .chat-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .chat-window {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            width: 350px;
+            height: 450px;
+            background: var(--surface-color);
+            border-radius: 12px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .chat-window.active {
+            display: flex;
+        }
+
+        .chat-header {
+            padding: 15px;
+            background: var(--accent-gradient);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chat-close {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 18px;
+            line-height: 1.4;
+            font-size: 0.9rem;
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background: var(--accent-500);
+            color: white;
+            border-bottom-right-radius: 5px;
+        }
+
+        .ai-message {
+            align-self: flex-start;
+            background: var(--bg-color);
+            color: var(--text-color);
+            border-bottom-left-radius: 5px;
+        }
+
+        .chat-input {
+            padding: 15px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            outline: none;
+            font-size: 0.9rem;
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .chat-input input:focus {
+            border-color: var(--accent-500);
+        }
+
+        .chat-send {
+            background: var(--accent-500);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .chat-send:hover {
+            background: var(--accent-700);
+            transform: scale(1.05);
+        }
+
+        .typing-indicator {
+            display: none;
+            align-self: flex-start;
+            background: var(--bg-color);
+            color: var(--text-muted);
+            padding: 10px 15px;
+            border-radius: 18px;
+            font-style: italic;
+            border-bottom-left-radius: 5px;
+        }
+
+        .typing-indicator.active {
+            display: block;
+        }
+
+        /* ===========================================
+           HERO IMAGE BORDER ANIMATION
+        =========================================== */
+        
+        .profile {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-img-container {
+            position: relative;
+            display: inline-block;
+            border-radius: 50%;
+            padding: 8px;
+            background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+            background-size: 400% 400%;
+            animation: gradient-border 3s linear infinite;
+        }
+
+        @keyframes gradient-border {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .profile-img-container img {
+            display: block;
+            width: clamp(200px, 40vw, 350px);
+            height: clamp(200px, 40vw, 350px);
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid var(--surface-color);
+            transition: all 0.3s ease;
+            max-width: 100%;
+        }
+
+        .profile-img-container:hover img {
+            transform: scale(1.05);
+            cursor: pointer;
+        }
+
+        /* ===========================================
+           BASE STYLES (Updated to use CSS variables)
+        =========================================== */
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary-color: #3498db;
-            --secondary-color: #2c3e50;
-            --accent-color: #e74c3c;
-            --light-color: #ecf0f1;
-            --dark-color: #2c3e50;
-            --text-color: #333;
-            --text-light: #777;
-            --transition: all 0.3s ease;
         }
 
         html {
@@ -40,7 +498,7 @@
         body {
             line-height: 1.6;
             color: var(--text-color);
-            background-color: #f9f9f9;
+            background-color: var(--bg-color);
             overflow-x: hidden;
         }
 
@@ -83,7 +541,7 @@
         }
 
         .section-title p {
-            color: var(--text-light);
+            color: var(--text-muted);
             max-width: 600px;
             margin: 0 auto;
             font-size: clamp(0.9rem, 2vw, 1rem);
@@ -109,19 +567,27 @@
             border-radius: 5px;
             cursor: pointer;
             font-weight: 600;
-            transition: var(--transition);
+            transition: all 0.3s ease;
             text-align: center;
             min-width: 140px;
         }
 
         .btn:hover {
-            background-color: var(--secondary-color);
+            background-color: var(--accent-700);
             transform: translateY(-3px);
+        }
+
+        /* Focus styles using CSS variables */
+        button:focus-visible,
+        a:focus-visible,
+        .btn:focus-visible {
+            outline: 2px solid var(--focus-ring);
+            outline-offset: 2px;
         }
 
         /* Header Styles */
         header {
-            background-color: rgb(208, 234, 240);
+            background-color: var(--surface-color);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             position: fixed;
             width: 100%;
@@ -144,7 +610,7 @@
 
         .nav-links {
             display: flex;
-            transition: var(--transition);
+            transition: all 0.3s ease;
         }
 
         .nav-links li {
@@ -153,7 +619,7 @@
 
         .nav-links a {
             font-weight: 600;
-            transition: var(--transition);
+            transition: all 0.3s ease;
             position: relative;
             font-size: clamp(0.9rem, 2vw, 1rem);
         }
@@ -170,7 +636,7 @@
             width: 0;
             height: 2px;
             background-color: var(--primary-color);
-            transition: var(--transition);
+            transition: all 0.3s ease;
         }
 
         .nav-links a:hover::after {
@@ -204,7 +670,7 @@
             border-radius: 5px;
             font-weight: 600;
             cursor: pointer;
-            transition: var(--transition);
+            transition: all 0.3s ease;
             font-size: clamp(0.8rem, 2vw, 0.9rem);
             min-width: 80px;
         }
@@ -227,13 +693,13 @@
         }
 
         .signup-btn:hover {
-            background-color: var(--secondary-color);
-            border-color: var(--secondary-color);
+            background-color: var(--accent-700);
+            border-color: var(--accent-700);
         }
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: var(--accent-gradient);
             color: white;
             padding: 150px 0 100px;
             display: flex;
@@ -322,46 +788,6 @@
             flex-wrap: wrap;
         }
 
-        .profile {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            min-width: 300px;
-            margin-top: 30px;
-        }
-
-        .profile img {
-            width: clamp(200px, 40vw, 350px);
-            height: clamp(200px, 40vw, 350px);
-            object-fit: cover;
-            border-radius: 50%;
-            border: 5px solid #fff;
-            animation: neon 1.5s ease-in-out infinite alternate;
-            box-shadow: 0 0 5px #fff, inset 0 0 5px #fff, 
-                        0 0 20px #08f, inset 0 0 20px #08f, 
-                        0 0 40px #08f;
-            transition: var(--transition);
-            max-width: 100%;
-        }
-
-        @keyframes neon {
-            from {
-                box-shadow: 0 0 5px #fff, inset 0 0 5px #fff, 
-                            0 0 20px #08f, inset 0 0 20px #08f, 
-                            0 0 40px #08f;
-            }
-            to {
-                box-shadow: 0 0 10px #fff, inset 0 0 10px #fff, 
-                            0 0 30px #08f, inset 0 0 30px #08f, 
-                            0 0 60px #08f;
-            }
-        }
-
-        .profile img:hover {
-            transform: scale(1.05);
-            cursor: pointer;
-        }
-
         .btn-outline {
             background-color: transparent;
             border: 2px solid white;
@@ -387,17 +813,17 @@
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             border: none;
-            border-image: linear-gradient(45deg, #3b82f6, #10b981, #8b5cf6, #f59e0b) 1;
+            border-image: var(--accent-gradient) 1;
             animation: gradientShift 3s ease infinite;
             min-width: 300px;
         }
 
         @keyframes gradientShift {
-            5% { border-image-source: linear-gradient(45deg, #3b82f6, #10b981, #8b5cf6, #f59e0b); }
-            25% { border-image-source: linear-gradient(135deg, #10b981, #8b5cf6, #f59e0b, #3b82f6); }
-            50% { border-image-source: linear-gradient(225deg, #8b5cf6, #f59e0b, #3b82f6, #10b981); }
-            75% { border-image-source: linear-gradient(315deg, #f59e0b, #3b82f6, #10b981, #8b5cf6); }
-            100% { border-image-source: linear-gradient(45deg, #3b82f6, #10b981, #8b5cf6, #f59e0b); }
+            5% { border-image-source: var(--accent-gradient); }
+            25% { border-image-source: linear-gradient(135deg, var(--accent-300), var(--accent-700)); }
+            50% { border-image-source: linear-gradient(225deg, var(--accent-700), var(--accent-300)); }
+            75% { border-image-source: linear-gradient(315deg, var(--accent-300), var(--accent-500)); }
+            100% { border-image-source: var(--accent-gradient); }
         }
 
         .about-text {
@@ -413,7 +839,7 @@
 
         .about-text p {
             margin-bottom: 20px;
-            color: var(--text-light);
+            color: var(--text-muted);
             font-size: clamp(0.9rem, 2vw, 1rem);
         }
 
@@ -428,11 +854,11 @@
         .skill-category {
             flex: 1;
             min-width: 300px;
-            background: white;
+            background: var(--surface-color);
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             padding: 30px;
-            transition: var(--transition);
+            transition: all 0.3s ease;
         }
 
         .skill-category:hover {
@@ -463,13 +889,13 @@
             display: flex;
             align-items: center;
             padding: 12px 15px;
-            background: #f8fafc;
+            background: var(--bg-color);
             border-radius: 8px;
-            transition: var(--transition);
+            transition: all 0.3s ease;
         }
 
         .skill-item:hover {
-            background: #f1f5f9;
+            background: var(--accent-300);
             transform: translateX(5px);
         }
 
@@ -497,7 +923,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: var(--transition);
+            transition: all 0.3s ease;
         }
 
         .skill-category:hover .technical-skills-img img,
@@ -513,11 +939,11 @@
         }
 
         .service-card {
-            background-color: white;
+            background-color: var(--surface-color);
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: var(--transition);
+            transition: all 0.3s ease;
         }
 
         .service-card:hover {
@@ -534,7 +960,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: var(--transition);
+            transition: all 0.3s ease;
         }
 
         .service-card:hover .service-img img {
@@ -563,11 +989,11 @@
         }
 
         .product-card {
-            background-color: white;
+            background-color: var(--surface-color);
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: var(--transition);
+            transition: all 0.3s ease;
         }
 
         .product-card:hover {
@@ -584,7 +1010,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: var(--transition);
+            transition: all 0.3s ease;
         }
 
         .product-card:hover .product-img img {
@@ -632,7 +1058,7 @@
         }
 
         .contact-form {
-            background-color: white;
+            background-color: var(--surface-color);
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
@@ -652,10 +1078,12 @@
         .form-control {
             width: 100%;
             padding: 12px 15px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-color);
             border-radius: 5px;
             font-size: clamp(0.9rem, 2vw, 1rem);
-            transition: var(--transition);
+            transition: all 0.3s ease;
+            background-color: var(--bg-color);
+            color: var(--text-color);
         }
 
         .form-control:focus {
@@ -718,7 +1146,7 @@
             height: 40px;
             background-color: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
-            transition: var(--transition);
+            transition: all 0.3s ease;
         }
 
         .social-links a:hover {
@@ -732,7 +1160,7 @@
 
         .footer-links a {
             opacity: 0.8;
-            transition: var(--transition);
+            transition: all 0.3s ease;
             font-size: clamp(0.9rem, 2vw, 1rem);
         }
 
@@ -749,9 +1177,32 @@
             opacity: 0.7;
         }
 
+        /* Form Status Messages */
+        .form-status {
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 15px;
+            text-align: center;
+            display: none;
+        }
+
+        .form-status.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+
+        .form-status.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+
         /* Responsive Styles */
         @media (max-width: 1200px) {
-            .profile img {
+            .profile-img-container img {
                 width: clamp(200px, 30vw, 300px);
                 height: clamp(200px, 30vw, 300px);
             }
@@ -770,7 +1221,7 @@
                 margin-bottom: 30px;
             }
             
-            .profile img {
+            .profile-img-container img {
                 width: clamp(180px, 25vw, 250px);
                 height: clamp(180px, 25vw, 250px);
             }
@@ -792,12 +1243,12 @@
                 width: 80%;
                 max-width: 300px;
                 height: 100vh;
-                background-color: white;
+                background-color: var(--surface-color);
                 flex-direction: column;
                 align-items: flex-start;
                 justify-content: flex-start;
                 padding: 80px 30px 30px;
-                transition: var(--transition);
+                transition: all 0.3s ease;
                 box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
                 z-index: 1000;
             }
@@ -824,7 +1275,7 @@
                 display: block;
                 padding: 10px 0;
                 font-size: 1.1rem;
-                border-bottom: 1px solid #f0f0f0;
+                border-bottom: 1px solid var(--border-color);
             }
 
             .auth-buttons {
@@ -857,7 +1308,7 @@
                 justify-content: center;
             }
             
-            .profile img {
+            .profile-img-container img {
                 width: clamp(160px, 40vw, 200px);
                 height: clamp(160px, 40vw, 200px);
             }
@@ -879,6 +1330,21 @@
             .dynamic-text li {
                 text-align: center;
             }
+
+            .theme-controls-container {
+                top: 80px;
+                right: 10px;
+            }
+
+            .ai-chatbot {
+                bottom: 10px;
+                right: 10px;
+            }
+
+            .chat-window {
+                width: 300px;
+                height: 400px;
+            }
         }
 
         @media (max-width: 576px) {
@@ -898,7 +1364,7 @@
                 margin-bottom: 0;
             }
             
-            .profile img {
+            .profile-img-container img {
                 width: clamp(140px, 35vw, 180px);
                 height: clamp(140px, 35vw, 180px);
             }
@@ -919,6 +1385,11 @@
             
             .wrapper .static-text {
                 margin-bottom: 10px;
+            }
+
+            .chat-window {
+                width: 280px;
+                right: -10px;
             }
         }
         
@@ -954,6 +1425,11 @@
                     top: calc(-4 * clamp(50px, 12vw, 70px));
                 }
             }
+
+            .chat-window {
+                width: 260px;
+                height: 380px;
+            }
         }
         
         @media (max-width: 360px) {
@@ -962,7 +1438,7 @@
                 font-size: 0.9rem;
             }
             
-            .profile img {
+            .profile-img-container img {
                 width: clamp(120px, 30vw, 150px);
                 height: clamp(120px, 30vw, 150px);
             }
@@ -970,6 +1446,11 @@
             .container {
                 width: 95%;
                 padding: 0 10px;
+            }
+
+            .chat-window {
+                width: 240px;
+                height: 350px;
             }
         }
 
@@ -984,9 +1465,93 @@
             background: rgba(0, 0, 0, 0.5);
             z-index: 999;
         }
+
+        /* No-JS fallback */
+        .no-js-theme-controls {
+            display: none;
+            background: var(--surface-color);
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .no-js .no-js-theme-controls {
+            display: block;
+        }
+
+        .no-js .theme-controls {
+            display: none;
+        }
     </style>
 </head>
-<body>
+<body class="theme-transition">
+    <!-- AI Chatbot Widget -->
+    <div class="ai-chatbot">
+        <button class="chat-toggle" id="chatToggle">
+            <i class="fas fa-robot"></i>
+        </button>
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header">
+                <h3><i class="fas fa-robot"></i> Portfolio Assistant</h3>
+                <button class="chat-close" id="chatClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message ai-message">
+                    Hello! I'm your portfolio assistant. How can I help you today?
+                </div>
+            </div>
+            <div class="typing-indicator" id="typingIndicator">
+                AI is typing...
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Type your question here...">
+                <button class="chat-send" id="chatSend">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Theme controls with toggle -->
+    <div class="theme-controls-container">
+        <button class="theme-toggle-btn" id="themeToggle">
+            <i class="fas fa-palette"></i>
+        </button>
+        <div class="theme-controls" id="themeControls">
+            <div class="theme-controls-label">Theme</div>
+            <div class="theme-toggle-group" role="radiogroup" aria-label="Color theme">
+                <button class="theme-toggle-btn-small" id="lightTheme" aria-pressed="false" aria-label="Light theme">
+                    <i class="fas fa-sun"></i>
+                </button>
+                <button class="theme-toggle-btn-small" id="darkTheme" aria-pressed="false" aria-label="Dark theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="theme-toggle-btn-small" id="systemTheme" aria-pressed="true" aria-label="Use system theme">
+                    <i class="fas fa-desktop"></i>
+                </button>
+            </div>
+            
+            <div class="theme-controls-label">Accent Color</div>
+            <div class="palette-selector" role="radiogroup" aria-label="Accent color palette">
+                <button class="palette-btn teal" data-palette="teal" aria-pressed="true" aria-label="Teal accent color"></button>
+                <button class="palette-btn indigo" data-palette="indigo" aria-pressed="false" aria-label="Indigo accent color"></button>
+                <button class="palette-btn coral" data-palette="coral" aria-pressed="false" aria-label="Coral accent color"></button>
+                <button class="palette-btn amber" data-palette="amber" aria-pressed="false" aria-label="Amber accent color"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Theme status for screen readers -->
+    <div class="theme-status" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- No-JS fallback theme controls -->
+    <div class="no-js-theme-controls">
+        <p>Theme controls require JavaScript. Using your system preference.</p>
+    </div>
+
     <!-- Header Section -->
     <header>
         <div class="container">
@@ -1040,7 +1605,7 @@
                 </div>
                 
                 <div class="profile">
-                    <a href="https://aliabdallazx.github.io/HTML-Css-PROJECT/">
+                    <a href="https://aliabdallazx.github.io/HTML-Css-PROJECT/" class="profile-img-container">
                         <img src="profiles.jpg" alt="Ali ALZAIM" title="CLICK TO KNOW MORE ABOUT ME">
                     </a>
                 </div>
@@ -1051,19 +1616,7 @@
     <!-- About Section -->
     <section id="about" class="section">
         <div class="container">
-            <div class="section
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            -title">
+            <div class="section-title">
                 <h2>About Me</h2>
                 <p>Learn more about my journey and expertise in business and technology</p>
             </div>
@@ -1083,7 +1636,7 @@
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="section" style="background-color: #f5f7fa;">
+    <section id="skills" class="section" style="background-color: var(--bg-color);">
         <div class="container">
             <div class="section-title">
                 <h2>My Skills</h2>
@@ -1194,7 +1747,7 @@
     </section>
 
     <!-- Products Section -->
-    <section id="products" class="section" style="background-color: #f5f7fa;">
+    <section id="products" class="section" style="background-color: var(--bg-color);">
         <div class="container">
             <div class="section-title">
                 <h2>My Products</h2>
@@ -1233,7 +1786,7 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="section" style="background-color: #f5f7fa;">
+    <section id="contact" class="section" style="background-color: var(--bg-color);">
         <div class="container">
             <div class="section-title">
                 <h2>Get In Touch</h2>
@@ -1271,20 +1824,21 @@
                     </div>
                 </div>
                 <div class="contact-form">
-                    <form action="https://formsubmit.co/aliabdalla09zx@gmail.com" method="POST">
+                    <form id="contactForm">
                         <div class="form-group">
                             <label for="name">Your Name</label>
-                            <input type="text" name="username" id="name" class="form-control" placeholder="Ali" required>
+                            <input type="text" name="name" id="name" class="form-control" placeholder="Ali" required>
                         </div>
                         <div class="form-group">
                             <label for="email">Your Email</label>
-                            <input type="email" name="Email" id="email" class="form-control" placeholder="john@example.com" required>
+                            <input type="email" name="email" id="email" class="form-control" placeholder="john@example.com" required>
                         </div>
                         <div class="form-group">
                             <label for="message">Your Message</label>
-                            <textarea id="message" name="massege" class="form-control" placeholder="Tell me about your project..." required></textarea>
+                            <textarea id="message" name="message" class="form-control" placeholder="Tell me about your project..." required></textarea>
                         </div>
                         <button type="submit" class="btn">Send Message</button>
+                        <div class="form-status" id="formStatus"></div>
                     </form>
                 </div>
             </div>
@@ -1328,9 +1882,9 @@
                 <div class="footer-col">
                     <h3>Newsletter</h3>
                     <p>Subscribe to my newsletter for the latest updates and insights.</p>
-                    <form>
+                    <form id="newsletterForm">
                         <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Your Email">
+                            <input type="email" class="form-control" placeholder="Your Email" required>
                         </div>
                         <button type="submit" class="btn">Subscribe</button>
                     </form>
@@ -1341,5 +1895,416 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // ===========================================
+        // DEEPSEEK API CONFIGURATION
+        // ===========================================
+        const DEEPSEEK_API_KEY = "sk-d23d33043ab34df1a9258028d4f0415f";
+        // ===========================================
+
+        // AI Chatbot Functionality with DeepSeek API
+        document.addEventListener('DOMContentLoaded', function() {
+            // Chat elements
+            const chatToggle = document.getElementById('chatToggle');
+            const chatWindow = document.getElementById('chatWindow');
+            const chatClose = document.getElementById('chatClose');
+            const chatMessages = document.getElementById('chatMessages');
+            const chatInput = document.getElementById('chatInput');
+            const chatSend = document.getElementById('chatSend');
+            const typingIndicator = document.getElementById('typingIndicator');
+
+            // Toggle chat window
+            chatToggle.addEventListener('click', () => {
+                chatWindow.classList.toggle('active');
+            });
+
+            // Close chat window
+            chatClose.addEventListener('click', () => {
+                chatWindow.classList.remove('active');
+            });
+
+            // Send message function
+            function sendMessage() {
+                const message = chatInput.value.trim();
+                if (message) {
+                    // Add user message
+                    addMessage(message, 'user');
+                    chatInput.value = '';
+                    
+                    // Show typing indicator
+                    typingIndicator.classList.add('active');
+                    
+                    // Get AI response from DeepSeek API
+                    getDeepSeekResponse(message);
+                }
+            }
+
+            // Send message on button click
+            chatSend.addEventListener('click', sendMessage);
+
+            // Send message on Enter key
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+
+            // Add message to chat
+            function addMessage(text, sender) {
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('message', `${sender}-message`);
+                messageDiv.textContent = text;
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            // Get response from DeepSeek API
+            async function getDeepSeekResponse(userMessage) {
+                try {
+                    const response = await fetch('https://api.deepseek.com/chat/completions', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${DEEPSEEK_API_KEY}`
+                        },
+                        body: JSON.stringify({
+                            model: 'deepseek-chat',
+                            messages: [
+                                {
+                                    role: 'system',
+                                    content: 'You are a helpful portfolio assistant for Ali, a UI/UX designer and frontend developer. Answer questions about his skills, services, and experience. Keep responses concise and helpful.'
+                                },
+                                {
+                                    role: 'user',
+                                    content: userMessage
+                                }
+                            ],
+                            max_tokens: 500,
+                            temperature: 0.7
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`API request failed with status ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    
+                    // Hide typing indicator
+                    typingIndicator.classList.remove('active');
+                    
+                    // Add AI response
+                    if (data.choices && data.choices.length > 0) {
+                        const aiResponse = data.choices[0].message.content;
+                        addMessage(aiResponse, 'ai');
+                    } else {
+                        addMessage("I'm sorry, I couldn't process your request. Please try again.", 'ai');
+                    }
+                } catch (error) {
+                    console.error('Error calling DeepSeek API:', error);
+                    
+                    // Hide typing indicator
+                    typingIndicator.classList.remove('active');
+                    
+                    // Fallback response if API fails
+                    const fallbackResponse = getFallbackResponse(userMessage);
+                    addMessage(fallbackResponse, 'ai');
+                }
+            }
+
+            // Fallback response system
+            function getFallbackResponse(userMessage) {
+                const lowerMessage = userMessage.toLowerCase();
+                
+                // Greetings
+                if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
+                    return "Hello! I'm your portfolio assistant. How can I help you today?";
+                }
+                
+                // About Ali
+                if (lowerMessage.includes('who are you') || lowerMessage.includes('what are you')) {
+                    return "I'm an AI assistant for Ali's portfolio. I can help answer questions about his skills, services, and experience.";
+                }
+                
+                if (lowerMessage.includes('about ali') || lowerMessage.includes('who is ali')) {
+                    return "Ali is a UI/UX Designer, Frontend Developer, and Business Strategist with expertise in HTML, CSS, and creating responsive web designs.";
+                }
+                
+                // Skills
+                if (lowerMessage.includes('skill') || lowerMessage.includes('what can ali do')) {
+                    return "Ali specializes in UI/UX design, frontend development with HTML/CSS/JavaScript, and business strategy. He also has strong communication and leadership skills.";
+                }
+                
+                // Services
+                if (lowerMessage.includes('service') || lowerMessage.includes('what does ali offer')) {
+                    return "Ali offers UI/UX design, frontend development, and business strategy services. You can check the Services section for more details.";
+                }
+                
+                // Contact
+                if (lowerMessage.includes('contact') || lowerMessage.includes('email') || lowerMessage.includes('phone')) {
+                    return "You can contact Ali via email at aliabdalla09zx@gmail.com or phone at +250 0795679885. There's also a contact form on this page.";
+                }
+                
+                // Projects/Products
+                if (lowerMessage.includes('project') || lowerMessage.includes('product') || lowerMessage.includes('work')) {
+                    return "Ali has worked on various projects including business analytics dashboards, e-commerce optimization tools, and project management platforms. Check the Products section for more.";
+                }
+                
+                // Default response
+                return "I'm not sure I understand. Could you please ask about Ali's skills, services, projects, or how to contact him?";
+            }
+
+            // Contact Form Handling
+            const contactForm = document.getElementById('contactForm');
+            const formStatus = document.getElementById('formStatus');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    // Get form data
+                    const formData = new FormData(contactForm);
+                    const name = formData.get('name');
+                    const email = formData.get('email');
+                    const message = formData.get('message');
+                    
+                    // Show loading state
+                    const submitBtn = contactForm.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.textContent;
+                    submitBtn.textContent = 'Sending...';
+                    submitBtn.disabled = true;
+                    
+                    try {
+                        // Here we would normally send to a server
+                        // For demo purposes, we'll simulate sending
+                        await new Promise(resolve => setTimeout(resolve, 1500));
+                        
+                        // Show success message
+                        formStatus.textContent = `Thank you ${name}! Your message has been sent successfully. I'll get back to you at ${email} soon.`;
+                        formStatus.className = 'form-status success';
+                        
+                        // Reset form
+                        contactForm.reset();
+                    } catch (error) {
+                        console.error('Error sending message:', error);
+                        
+                        // Show error message
+                        formStatus.textContent = 'Sorry, there was an error sending your message. Please try again or contact me directly at aliabdalla09zx@gmail.com.';
+                        formStatus.className = 'form-status error';
+                    } finally {
+                        // Restore button state
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                    }
+                });
+            }
+
+            // Newsletter Form Handling
+            const newsletterForm = document.getElementById('newsletterForm');
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const emailInput = newsletterForm.querySelector('input[type="email"]');
+                    alert(`Thank you for subscribing with ${emailInput.value}!`);
+                    newsletterForm.reset();
+                });
+            }
+        });
+
+        // Theme System JavaScript with Toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            // Remove no-js class if JavaScript is enabled
+            document.body.classList.remove('no-js');
+            
+            // Theme state management
+            const themeState = {
+                currentTheme: 'system',
+                currentPalette: 'teal'
+            };
+
+            // DOM elements
+            const themeToggle = document.getElementById('themeToggle');
+            const themeControls = document.getElementById('themeControls');
+            const themeButtons = {
+                light: document.getElementById('lightTheme'),
+                dark: document.getElementById('darkTheme'),
+                system: document.getElementById('systemTheme')
+            };
+
+            const paletteButtons = document.querySelectorAll('.palette-btn');
+            const themeStatus = document.querySelector('.theme-status');
+            const htmlElement = document.documentElement;
+
+            // Toggle theme controls visibility
+            themeToggle.addEventListener('click', () => {
+                themeControls.classList.toggle('active');
+            });
+
+            // Close theme controls when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!themeControls.contains(e.target) && !themeToggle.contains(e.target)) {
+                    themeControls.classList.remove('active');
+                }
+            });
+
+            // Initialize theme from localStorage or system preference
+            function initializeTheme() {
+                // Get saved theme and palette from localStorage
+                const savedTheme = localStorage.getItem('theme');
+                const savedPalette = localStorage.getItem('palette');
+
+                // Set theme
+                if (savedTheme) {
+                    themeState.currentTheme = savedTheme;
+                    applyTheme(savedTheme);
+                } else {
+                    // Default to system preference
+                    themeState.currentTheme = 'system';
+                    applySystemTheme();
+                }
+
+                // Set palette
+                if (savedPalette) {
+                    themeState.currentPalette = savedPalette;
+                    applyPalette(savedPalette);
+                } else {
+                    // Default to teal
+                    themeState.currentPalette = 'teal';
+                    applyPalette('teal');
+                }
+
+                // Update UI to reflect current state
+                updateThemeButtons();
+                updatePaletteButtons();
+            }
+
+            // Apply theme based on selection
+            function applyTheme(theme) {
+                if (theme === 'system') {
+                    applySystemTheme();
+                } else {
+                    htmlElement.setAttribute('data-theme', theme);
+                }
+                themeState.currentTheme = theme;
+                localStorage.setItem('theme', theme);
+                announceThemeChange(theme);
+            }
+
+            // Apply system theme based on prefers-color-scheme
+            function applySystemTheme() {
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                htmlElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+                themeState.currentTheme = 'system';
+                localStorage.setItem('theme', 'system');
+                announceThemeChange('system');
+            }
+
+            // Apply palette
+            function applyPalette(palette) {
+                htmlElement.setAttribute('data-palette', palette);
+                themeState.currentPalette = palette;
+                localStorage.setItem('palette', palette);
+                announcePaletteChange(palette);
+            }
+
+            // Update theme button states
+            function updateThemeButtons() {
+                Object.keys(themeButtons).forEach(key => {
+                    themeButtons[key].setAttribute('aria-pressed', 
+                        themeState.currentTheme === key ? 'true' : 'false');
+                });
+            }
+
+            // Update palette button states
+            function updatePaletteButtons() {
+                paletteButtons.forEach(button => {
+                    const palette = button.getAttribute('data-palette');
+                    button.setAttribute('aria-pressed', 
+                        themeState.currentPalette === palette ? 'true' : 'false');
+                });
+            }
+
+            // Announce theme changes to screen readers
+            function announceThemeChange(theme) {
+                let message = '';
+                if (theme === 'system') {
+                    message = 'Using system theme preference';
+                } else {
+                    message = `Theme changed to ${theme} mode`;
+                }
+                themeStatus.textContent = message;
+                
+                // Clear after a delay
+                setTimeout(() => {
+                    themeStatus.textContent = '';
+                }, 2000);
+            }
+
+            // Announce palette changes to screen readers
+            function announcePaletteChange(palette) {
+                const paletteNames = {
+                    teal: 'Teal',
+                    indigo: 'Indigo',
+                    coral: 'Coral',
+                    amber: 'Amber'
+                };
+                themeStatus.textContent = `Accent color changed to ${paletteNames[palette]}`;
+                
+                // Clear after a delay
+                setTimeout(() => {
+                    themeStatus.textContent = '';
+                }, 2000);
+            }
+
+            // Event listeners for theme buttons
+            themeButtons.light.addEventListener('click', () => {
+                applyTheme('light');
+                updateThemeButtons();
+            });
+
+            themeButtons.dark.addEventListener('click', () => {
+                applyTheme('dark');
+                updateThemeButtons();
+            });
+
+            themeButtons.system.addEventListener('click', () => {
+                applyTheme('system');
+                updateThemeButtons();
+            });
+
+            // Event listeners for palette buttons
+            paletteButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const palette = button.getAttribute('data-palette');
+                    applyPalette(palette);
+                    updatePaletteButtons();
+                });
+            });
+
+            // Listen for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                if (themeState.currentTheme === 'system') {
+                    applySystemTheme();
+                }
+            });
+
+            // Keyboard navigation for theme controls
+            document.addEventListener('keydown', (e) => {
+                // Tab should work normally, we just need to ensure focus styles are visible
+                if (e.key === 'Enter' || e.key === ' ') {
+                    const activeElement = document.activeElement;
+                    if (activeElement.classList.contains('theme-toggle-btn-small') || 
+                        activeElement.classList.contains('palette-btn')) {
+                        e.preventDefault();
+                        activeElement.click();
+                    }
+                }
+            });
+
+            // Initialize the theme system
+            initializeTheme();
+        });
+    </script>
 </body>
 </html>
