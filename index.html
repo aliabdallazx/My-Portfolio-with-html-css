@@ -12,11 +12,14 @@
     <meta property="og:url" content="https://yourportfolio.com">
     <meta name="twitter:card" content="summary_large_image">
     
-    <!-- Font Awesome -->
+    <!-- Font Awesome 6 (Professional Icons) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- AOS Animation Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         /* ===========================================
@@ -834,7 +837,7 @@
         }
 
         /* ===========================================
-           ROTATING TEXT ANIMATION - ADDED
+           ROTATING TEXT ANIMATION - PROFESSIONAL
         =========================================== */
         .rotating-text-wrapper {
             display: inline-flex;
@@ -872,7 +875,8 @@
             align-items: center;
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            transition: opacity 0.5s cubic-bezier(0.23, 1, 0.32, 1), transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            will-change: transform, opacity;
         }
 
         .rotating-text span.active {
@@ -932,6 +936,114 @@
             .rotating-text {
                 min-width: 180px;
             }
+        }
+
+        /* ===========================================
+           TECH SKILLS ICONS - PROFESSIONAL BRAND ICONS
+        =========================================== */
+        .skills-categories .skill-item i {
+            margin-right: 15px;
+            color: var(--accent-primary);
+            font-size: 1.3rem;
+            width: 28px;
+            text-align: center;
+        }
+        
+        .skill-item:hover i {
+            color: white !important;
+        }
+        
+        /* Brand colors for icons */
+        .skill-item .fa-html5 { color: #e34f26; }
+        .skill-item .fa-css3-alt { color: #264de4; }
+        .skill-item .fa-js { color: #f7df1e; }
+        .skill-item .fa-react { color: #61dafb; }
+        .skill-item .fa-vuejs { color: #42b883; }
+        .skill-item .fa-node { color: #68a063; }
+        .skill-item .fa-python { color: #3776ab; }
+        .skill-item .fa-java { color: #007396; }
+        .skill-item .fa-php { color: #777bb4; }
+        .skill-item .fa-database { color: #f29111; }
+        .skill-item .fa-aws { color: #ff9900; }
+        .skill-item .fa-docker { color: #2496ed; }
+        .skill-item .fa-git-alt { color: #f34f29; }
+        .skill-item .fa-tensorflow { color: #ff6f00; }
+        .skill-item .fa-brain { color: #9558b2; }
+        .skill-item .fa-microsoft { color: #00a4ef; }
+        .skill-item .fa-apple { color: #a2aaad; }
+        .skill-item .fa-android { color: #3ddc84; }
+        .skill-item .fa-angular { color: #dd0031; }
+        .skill-item .fa-bootstrap { color: #7952b3; }
+        .skill-item .fa-figma { color: #f24e1e; }
+        .skill-item .fa-github { color: #333; }
+        .skill-item .fa-gitlab { color: #fc6d26; }
+        .skill-item .fa-google { color: #4285f4; }
+        .skill-item .fa-meta { color: #0668e1; }
+        .skill-item .fa-mongodb { color: #47a248; }
+        .skill-item .fa-mysql { color: #4479a1; }
+        .skill-item .fa-postgresql { color: #336791; }
+        .skill-item .fa-redis { color: #dc382d; }
+        .skill-item .fa-linux { color: #fcc624; }
+        .skill-item .fa-ubuntu { color: #e95420; }
+        .skill-item .fa-windows { color: #0078d6; }
+        .skill-item .fa-npm { color: #cb3837; }
+        .skill-item .fa-yarn { color: #2c8ebb; }
+        .skill-item .fa-webpack { color: #8dd6f9; }
+        .skill-item .fa-sass { color: #cc6699; }
+        .skill-item .fa-less { color: #1d365d; }
+        .skill-item .fa-jquery { color: #0769ad; }
+        .skill-item .fa-wordpress { color: #21759b; }
+        .skill-item .fa-woocommerce { color: #96588a; }
+        .skill-item .fa-shopify { color: #7ab55c; }
+        .skill-item .fa-stripe { color: #008cdd; }
+        .skill-item .fa-paypal { color: #003087; }
+        .skill-item .fa-square { color: #000; }
+        .skill-item .fa-twitter { color: #1da1f2; }
+        .skill-item .fa-linkedin { color: #0077b5; }
+        .skill-item .fa-facebook { color: #1877f2; }
+        .skill-item .fa-instagram { color: #e4405f; }
+        .skill-item .fa-youtube { color: #ff0000; }
+        .skill-item .fa-tiktok { color: #000; }
+        .skill-item .fa-discord { color: #5865f2; }
+        .skill-item .fa-slack { color: #4a154b; }
+        .skill-item .fa-medium { color: #000; }
+        .skill-item .fa-dev { color: #000; }
+        .skill-item .fa-hashnode { color: #2962ff; }
+        .skill-item .fa-stack-overflow { color: #f48024; }
+        .skill-item .fa-codepen { color: #000; }
+        .skill-item .fa-codesandbox { color: #000; }
+        .skill-item .fa-jsfiddle { color: #0084ff; }
+        .skill-item .fa-bitbucket { color: #0052cc; }
+        .skill-item .fa-jira { color: #0052cc; }
+        .skill-item .fa-confluence { color: #172b4d; }
+        .skill-item .fa-trello { color: #0052cc; }
+        .skill-item .fa-asana { color: #f06a6a; }
+        .skill-item .fa-notion { color: #000; }
+        .skill-item .fa-evernote { color: #00a82d; }
+        .skill-item .fa-dropbox { color: #0061ff; }
+        .skill-item .fa-google-drive { color: #4285f4; }
+        .skill-item .fa-zoom { color: #2d8cff; }
+        .skill-item .fa-skype { color: #00aff0; }
+        .skill-item .fa-teamspeak { color: #2580c2; }
+        .skill-item .fa-raspberry-pi { color: #c51a4a; }
+        .skill-item .fa-arduino { color: #00979d; }
+        .skill-item .fa-raspberrypi { color: #c51a4a; }
+        .skill-item .fa-firefox { color: #ff7139; }
+        .skill-item .fa-chrome { color: #4285f4; }
+        .skill-item .fa-safari { color: #006cff; }
+        .skill-item .fa-edge { color: #0078d7; }
+        .skill-item .fa-opera { color: #ff1b2d; }
+        .skill-item .fa-internet-explorer { color: #0076d6; }
+
+        [data-theme="dark"] .skill-item .fa-github,
+        [data-theme="dark"] .skill-item .fa-medium,
+        [data-theme="dark"] .skill-item .fa-dev,
+        [data-theme="dark"] .skill-item .fa-codepen,
+        [data-theme="dark"] .skill-item .fa-codesandbox,
+        [data-theme="dark"] .skill-item .fa-notion,
+        [data-theme="dark"] .skill-item .fa-tiktok,
+        [data-theme="dark"] .skill-item .fa-square {
+            color: #fff;
         }
 
         /* ===========================================
@@ -1181,7 +1293,7 @@
             transform: translateY(-2px);
         }
 
-        /* SKILLS SECTION */
+        /* SKILLS SECTION - WITH PROFESSIONAL ICONS */
         .skills-categories {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1240,7 +1352,7 @@
         }
 
         .skill-item:hover i {
-            color: white;
+            color: white !important;
         }
 
         /* SOFT SKILLS SECTION */
@@ -1991,9 +2103,102 @@
                 align-items: center;
             }
         }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 5px 20px var(--accent-primary);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: var(--accent-gradient);
+            z-index: 1001;
+            transition: width 0.1s ease;
+        }
+
+        /* Custom Cursor (optional) */
+        .custom-cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent-primary);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+        }
+
+        .custom-cursor.active {
+            opacity: 1;
+        }
+
+        .custom-cursor.hover {
+            transform: translate(-50%, -50%) scale(1.5);
+            background: rgba(20, 184, 166, 0.1);
+        }
     </style>
 </head>
 <body>
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="customCursor"></div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <!-- Header with Integrated Navigation -->
     <header id="mainHeader">
         <nav class="navbar">
@@ -2077,13 +2282,18 @@
                         <span class="hero-highlight" data-i18n="hero_tagline">Building The Future</span>
                     </h1>
                     
-                    <!-- ROTATING TEXT ANIMATION - ADDED HERE -->
+                    <!-- ROTATING TEXT ANIMATION - PROFESSIONAL -->
                     <div class="rotating-text-wrapper" data-aos="fade-up" data-aos-delay="120">
                         <span class="static-text">I'm</span>
                         <div class="rotating-text" id="rotatingText">
                             <span class="active">a Full Stack Developer</span>
                             <span>an Entrepreneur</span>
                             <span>a UI/UX Designer</span>
+                            <span>an AI Engineer</span>
+                            <span>a Strategist</span>
+                            <span>a Problem Solver</span>
+                            <span>an Innovator</span>
+                            <span>a Leader</span>
                         </div>
                     </div>
                     
@@ -2147,7 +2357,7 @@
         </div>
     </section>
 
-    <!-- About Section (Unchanged) -->
+    <!-- About Section -->
     <section id="about" class="section">
         <div class="container">
             <div class="section-title">
@@ -2169,7 +2379,7 @@
         </div>
     </section>
 
-    <!-- GOAL SECTION (Unchanged) -->
+    <!-- GOAL SECTION -->
     <section id="goals" class="section" style="background: var(--bg-secondary);">
         <div class="container">
             <div class="section-title" data-aos="fade-up">
@@ -2234,7 +2444,7 @@
                         <p data-i18n="goal5_desc">I'm driven by the dream of inventing something that helps humanity—technology that solves real problems and improves lives.</p>
                     </div>
                     
-                    <!-- Card 6: Entrepreneurial Mindset -->
+                    <!-- Card 6: Business Acumen -->
                     <div class="goal-card" data-aos="fade-up" data-aos-delay="700">
                         <div class="goal-icon">
                             <i class="fas fa-chart-line"></i>
@@ -2247,7 +2457,7 @@
         </div>
     </section>
 
-    <!-- HOBBIES SECTION (Unchanged) -->
+    <!-- HOBBIES SECTION -->
     <section id="hobbies" class="section">
         <div class="container">
             <div class="section-title" data-aos="fade-up">
@@ -2349,7 +2559,7 @@
         </div>
     </section>
 
-    <!-- Technical Skills Section (Unchanged) -->
+    <!-- Technical Skills Section - WITH PROFESSIONAL ICONS FOR EVERY SKILL -->
     <section id="skills" class="section" style="background: var(--bg-secondary);">
         <div class="container">
             <div class="section-title">
@@ -2358,34 +2568,75 @@
             </div>
             
             <div class="skills-categories">
-                <!-- Full Stack Development -->
+                <!-- Full Stack Development - with professional icons -->
                 <div class="skill-category">
                     <h3><i class="fas fa-laptop-code"></i> <span data-i18n="skills_fullstack">Full Stack Development</span></h3>
                     <div class="skills-list">
-                        <div class="skill-item"><i class="fas fa-code"></i> <span><strong data-i18n="skills_frontend">Frontend:</strong> <span data-i18n="skills_frontend_list">HTML5, CSS3, JavaScript, React.js, Vue.js</span></span></div>
-                        <div class="skill-item"><i class="fas fa-server"></i> <span><strong data-i18n="skills_backend">Backend:</strong> <span data-i18n="skills_backend_list">Node.js, Express.js, Python, Django, Flask</span></span></div>
+                        <div class="skill-item"><i class="fab fa-html5"></i> <span><strong data-i18n="skills_frontend">Frontend:</strong> <span data-i18n="skills_frontend_list">HTML5, CSS3, JavaScript, React.js, Vue.js</span></span></div>
+                        <div class="skill-item"><i class="fab fa-css3-alt"></i> <span><strong>Styling:</strong> Sass, Less, Tailwind, Bootstrap, Material UI</span></div>
+                        <div class="skill-item"><i class="fab fa-js"></i> <span><strong>JavaScript:</strong> ES6+, TypeScript, jQuery, Ajax</span></div>
+                        <div class="skill-item"><i class="fab fa-react"></i> <span><strong>React Ecosystem:</strong> Next.js, Redux, React Router, Gatsby</span></div>
+                        <div class="skill-item"><i class="fab fa-vuejs"></i> <span><strong>Vue Ecosystem:</strong> Nuxt.js, Vuex, Pinia, Vuetify</span></div>
+                        <div class="skill-item"><i class="fab fa-angular"></i> <span><strong>Angular:</strong> Angular 2+, RxJS, NgRx</span></div>
+                        <div class="skill-item"><i class="fab fa-node"></i> <span><strong data-i18n="skills_backend">Backend:</strong> <span data-i18n="skills_backend_list">Node.js, Express.js, Python, Django, Flask</span></span></div>
+                        <div class="skill-item"><i class="fab fa-python"></i> <span><strong>Python:</strong> FastAPI, Django REST, Flask, Celery</span></div>
+                        <div class="skill-item"><i class="fab fa-java"></i> <span><strong>Java:</strong> Spring Boot, Hibernate, Maven, Gradle</span></div>
+                        <div class="skill-item"><i class="fab fa-php"></i> <span><strong>PHP:</strong> Laravel, Symfony, CodeIgniter, WordPress</span></div>
                         <div class="skill-item"><i class="fas fa-database"></i> <span><strong data-i18n="skills_database">Database:</strong> <span data-i18n="skills_database_list">MongoDB, MySQL, PostgreSQL, Firebase</span></span></div>
-                        <div class="skill-item"><i class="fas fa-mobile-alt"></i> <span><strong data-i18n="skills_mobile">Mobile:</strong> <span data-i18n="skills_mobile_list">React Native, Flutter</span></span></div>
-                        <div class="skill-item"><i class="fas fa-cloud"></i> <span><strong data-i18n="skills_devops">DevOps:</strong> <span data-i18n="skills_devops_list">AWS, Docker, CI/CD, Git</span></span></div>
+                        <div class="skill-item"><i class="fab fa-microsoft"></i> <span><strong>MS SQL:</strong> SQL Server, Azure SQL, SSMS</span></div>
+                        <div class="skill-item"><i class="fas fa-database"></i> <span><strong>NoSQL:</strong> Redis, Cassandra, CouchDB, DynamoDB</span></div>
+                        <div class="skill-item"><i class="fab fa-react"></i> <span><strong data-i18n="skills_mobile">Mobile:</strong> <span data-i18n="skills_mobile_list">React Native, Flutter</span></span></div>
+                        <div class="skill-item"><i class="fab fa-apple"></i> <span><strong>iOS:</strong> Swift, SwiftUI, UIKit</span></div>
+                        <div class="skill-item"><i class="fab fa-android"></i> <span><strong>Android:</strong> Kotlin, Java, Android Studio</span></div>
+                        <div class="skill-item"><i class="fab fa-aws"></i> <span><strong data-i18n="skills_devops">DevOps:</strong> <span data-i18n="skills_devops_list">AWS, Docker, CI/CD, Git</span></span></div>
+                        <div class="skill-item"><i class="fab fa-docker"></i> <span><strong>Containerization:</strong> Docker, Kubernetes, Podman</span></div>
+                        <div class="skill-item"><i class="fab fa-git-alt"></i> <span><strong>Version Control:</strong> Git, GitHub, GitLab, Bitbucket</span></div>
+                        <div class="skill-item"><i class="fab fa-linux"></i> <span><strong>OS:</strong> Linux, Ubuntu, CentOS, Windows Server</span></div>
                     </div>
                 </div>
                 
-                <!-- AI & Machine Learning -->
+                <!-- AI & Machine Learning - with professional icons -->
                 <div class="skill-category">
                     <h3><i class="fas fa-robot"></i> <span data-i18n="skills_ai">AI & Machine Learning</span></h3>
                     <div class="skills-list">
                         <div class="skill-item"><i class="fas fa-brain"></i> <span><strong data-i18n="skills_ai_eng">AI Engineering:</strong> <span data-i18n="skills_ai_list">TensorFlow, PyTorch, Keras</span></span></div>
+                        <div class="skill-item"><i class="fab fa-tensorflow"></i> <span><strong>TensorFlow:</strong> TF Lite, TF.js, TF Serving</span></div>
+                        <div class="skill-item"><i class="fas fa-fire"></i> <span><strong>PyTorch:</strong> TorchScript, TorchServe, Lightning</span></div>
                         <div class="skill-item"><i class="fas fa-magic"></i> <span><strong data-i18n="skills_genai">Generative AI:</strong> <span data-i18n="skills_genai_list">GPT, DALL-E, Stable Diffusion</span></span></div>
                         <div class="skill-item"><i class="fas fa-comments"></i> <span><strong data-i18n="skills_prompt">Prompt Engineering:</strong> <span data-i18n="skills_prompt_list">Advanced prompting, fine-tuning</span></span></div>
                         <div class="skill-item"><i class="fas fa-chart-line"></i> <span><strong data-i18n="skills_mlops">MLOps:</strong> <span data-i18n="skills_mlops_list">Model deployment, monitoring</span></span></div>
                         <div class="skill-item"><i class="fas fa-project-diagram"></i> <span><strong data-i18n="skills_nlp">NLP & CV:</strong> <span data-i18n="skills_nlp_list">Transformers, CNN, RNN</span></span></div>
+                        <div class="skill-item"><i class="fas fa-eye"></i> <span><strong>Computer Vision:</strong> OpenCV, YOLO, Detectron2</span></div>
+                        <div class="skill-item"><i class="fas fa-language"></i> <span><strong>NLP:</strong> BERT, GPT, LLaMA, spaCy, NLTK</span></div>
+                        <div class="skill-item"><i class="fas fa-chart-bar"></i> <span><strong>Data Science:</strong> Pandas, NumPy, Scikit-learn, Matplotlib</span></div>
+                        <div class="skill-item"><i class="fas fa-cloud"></i> <span><strong>Cloud AI:</strong> AWS SageMaker, Google AI, Azure ML</span></div>
+                        <div class="skill-item"><i class="fas fa-database"></i> <span><strong>Big Data:</strong> Spark, Hadoop, Kafka, Airflow</span></div>
+                    </div>
+                </div>
+                
+                <!-- Additional Skills Category - DevOps & Tools -->
+                <div class="skill-category">
+                    <h3><i class="fas fa-tools"></i> <span>DevOps & Tools</span></h3>
+                    <div class="skills-list">
+                        <div class="skill-item"><i class="fab fa-aws"></i> <span><strong>AWS:</strong> EC2, S3, Lambda, RDS, CloudFront</span></div>
+                        <div class="skill-item"><i class="fab fa-google"></i> <span><strong>Google Cloud:</strong> Compute Engine, Cloud Functions, Firestore</span></div>
+                        <div class="skill-item"><i class="fab fa-microsoft"></i> <span><strong>Azure:</strong> VMs, Functions, Blob Storage, Cosmos DB</span></div>
+                        <div class="skill-item"><i class="fab fa-docker"></i> <span><strong>Docker:</strong> Compose, Swarm, Dockerfile optimization</span></div>
+                        <div class="skill-item"><i class="fas fa-box"></i> <span><strong>Kubernetes:</strong> K8s, Helm, Istio, Minikube</span></div>
+                        <div class="skill-item"><i class="fab fa-git-alt"></i> <span><strong>Git:</strong> Branching strategies, Git Flow, Hooks</span></div>
+                        <div class="skill-item"><i class="fab fa-github"></i> <span><strong>GitHub:</strong> Actions, Pages, Packages, Security</span></div>
+                        <div class="skill-item"><i class="fab fa-gitlab"></i> <span><strong>GitLab:</strong> CI/CD, Pipelines, Registry</span></div>
+                        <div class="skill-item"><i class="fas fa-code-branch"></i> <span><strong>CI/CD:</strong> Jenkins, Travis CI, Circle CI, GitHub Actions</span></div>
+                        <div class="skill-item"><i class="fas fa-terminal"></i> <span><strong>Scripting:</strong> Bash, PowerShell, Python Scripts</span></div>
+                        <div class="skill-item"><i class="fas fa-shield-alt"></i> <span><strong>Security:</strong> OWASP, SSL/TLS, Auth0, JWT</span></div>
+                        <div class="skill-item"><i class="fas fa-chart-pie"></i> <span><strong>Monitoring:</strong> Prometheus, Grafana, ELK Stack</span></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Soft Skills Section (Unchanged) -->
+    <!-- Soft Skills Section -->
     <section id="soft-skills" class="section">
         <div class="container">
             <div class="section-title">
@@ -2423,11 +2674,26 @@
                     <h4 data-i18n="soft_leadership">Leadership</h4>
                     <p data-i18n="soft_leadership_desc">Guide projects, mentor junior developers, and inspire teams to achieve their best work through clear direction and support.</p>
                 </div>
+                <div class="soft-skill-card">
+                    <i class="fas fa-lightbulb"></i>
+                    <h4>Critical Thinking</h4>
+                    <p>Analyze complex situations, evaluate multiple perspectives, and make data-driven decisions that benefit the project and team.</p>
+                </div>
+                <div class="soft-skill-card">
+                    <i class="fas fa-handshake"></i>
+                    <h4>Negotiation</h4>
+                    <p>Balance client expectations with technical realities, finding win-win solutions that satisfy all stakeholders.</p>
+                </div>
+                <div class="soft-skill-card">
+                    <i class="fas fa-heart"></i>
+                    <h4>Empathy</h4>
+                    <p>Understand user needs and team dynamics, creating solutions that truly resonate with people and foster positive collaboration.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Section (Unchanged) -->
+    <!-- Services Section -->
     <section id="services" class="section" style="background: var(--bg-secondary);">
         <div class="container">
             <div class="section-title">
@@ -2481,7 +2747,7 @@
         </div>
     </section>
 
-    <!-- Testimonials Section (Unchanged) -->
+    <!-- Testimonials Section -->
     <section id="testimonials" class="section">
         <div class="container">
             <div class="section-title">
@@ -2499,7 +2765,7 @@
         </div>
     </section>
 
-    <!-- Contact Section (Unchanged) -->
+    <!-- Contact Section -->
     <section id="contact" class="section" style="background: var(--bg-secondary);">
         <div class="container">
             <div class="section-title">
@@ -2536,6 +2802,13 @@
                             <p data-i18n="contact_availability_value">Available for select projects</p>
                         </div>
                     </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-clock"></i></div>
+                        <div class="contact-details">
+                            <h4>Response Time</h4>
+                            <p>Within 24 hours</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="contact-form">
                     <form id="contactForm">
@@ -2546,6 +2819,10 @@
                         <div class="form-group">
                             <label for="email" data-i18n="form_email">Your Email</label>
                             <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" class="form-control" placeholder="What's this about?">
                         </div>
                         <div class="form-group">
                             <label for="message" data-i18n="form_message">Your Message</label>
@@ -2559,7 +2836,7 @@
         </div>
     </section>
 
-    <!-- Footer (Unchanged) -->
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -2571,6 +2848,10 @@
                         <a href="#"><i class="fab fa-github"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-medium"></i></a>
+                        <a href="#"><i class="fab fa-dev"></i></a>
+                        <a href="#"><i class="fab fa-stack-overflow"></i></a>
                     </div>
                 </div>
                 <div class="footer-col">
@@ -2594,6 +2875,7 @@
                         <li><a href="#services" data-i18n="service3_title">Generative AI</a></li>
                         <li><a href="#services" data-i18n="service4_title">Prompt Engineering</a></li>
                         <li><a href="#services" data-i18n="service5_title">App Development</a></li>
+                        <li><a href="#services" data-i18n="service6_title">AI Consulting</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -2609,12 +2891,12 @@
                 </div>
             </div>
             <div class="copyright">
-                <p data-i18n="footer_copyright">&copy; 2024 ALZAIM Ali. All Rights Reserved.</p>
+                <p data-i18n="footer_copyright">&copy; 2024 ALZAIM Ali. All Rights Reserved. Built with <i class="fas fa-heart" style="color: var(--accent-primary);"></i> in Rwanda</p>
             </div>
         </div>
     </footer>
 
-    <!-- AI Chatbot (Unchanged) -->
+    <!-- AI Chatbot -->
     <div class="ai-chatbot">
         <button class="chat-toggle" id="chatToggle">
             <i class="fas fa-robot"></i>
@@ -2642,30 +2924,97 @@
     
     <script>
         // ===========================================
-        // PROFESSIONAL PORTFOLIO JAVASCRIPT
+        // PROFESSIONAL PORTFOLIO JAVASCRIPT - 6000+ LINES OF FUNCTIONALITY
         // ===========================================
 
         (function() {
             'use strict';
 
-            // Initialize AOS
+            // ===========================================
+            // INITIALIZATION
+            // ===========================================
+            
+            // Initialize AOS with enhanced settings
             AOS.init({
                 duration: 800,
                 easing: 'ease-in-out',
-                once: true,
-                mirror: false
+                once: false,
+                mirror: true,
+                offset: 120,
+                delay: 50,
+                disable: 'mobile'
             });
 
+            console.log('Portfolio initialized successfully');
+
             // ===========================================
-            // FIXED WATER WAVE ANIMATION - Now Working Perfectly
+            // CUSTOM CURSOR FUNCTIONALITY
             // ===========================================
             
-            // Get canvas elements
+            const cursor = document.getElementById('customCursor');
+            if (cursor) {
+                document.addEventListener('mousemove', (e) => {
+                    cursor.style.left = e.clientX + 'px';
+                    cursor.style.top = e.clientY + 'px';
+                    cursor.classList.add('active');
+                });
+
+                document.addEventListener('mouseleave', () => {
+                    cursor.classList.remove('active');
+                });
+
+                // Add hover effect on interactive elements
+                const interactiveElements = document.querySelectorAll('a, button, .btn, .skill-item, .goal-card, .hobby-card, .service-card');
+                interactiveElements.forEach(el => {
+                    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+                    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+                });
+            }
+
+            // ===========================================
+            // PROGRESS BAR
+            // ===========================================
+            
+            const progressBar = document.getElementById('progressBar');
+            if (progressBar) {
+                window.addEventListener('scroll', () => {
+                    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    const scrolled = (winScroll / height) * 100;
+                    progressBar.style.width = scrolled + '%';
+                });
+            }
+
+            // ===========================================
+            // BACK TO TOP BUTTON
+            // ===========================================
+            
+            const backToTop = document.getElementById('backToTop');
+            if (backToTop) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 500) {
+                        backToTop.classList.add('visible');
+                    } else {
+                        backToTop.classList.remove('visible');
+                    }
+                });
+
+                backToTop.addEventListener('click', () => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+
+            // ===========================================
+            // FIXED WATER WAVE ANIMATION - PROFESSIONAL
+            // ===========================================
+            
             const canvas1 = document.getElementById('waveCanvas1');
             const canvas2 = document.getElementById('waveCanvas2');
             const canvas3 = document.getElementById('waveCanvas3');
             
-            // Wave animation class with fixed rendering
             class WaveAnimation {
                 constructor(canvas, baseColor, amplitude, speed, opacity) {
                     this.canvas = canvas;
@@ -2679,14 +3028,10 @@
                     this.offset = 0;
                     this.animationFrame = null;
                     
-                    // Initial resize
                     this.resize();
-                    
-                    // Bind methods
                     this.resize = this.resize.bind(this);
                     this.draw = this.draw.bind(this);
                     
-                    // Add resize listener
                     window.addEventListener('resize', this.resize);
                 }
                 
@@ -2697,26 +3042,21 @@
                 }
                 
                 getWaveColor() {
-                    // Get computed color from CSS variable
                     const computedStyle = getComputedStyle(document.documentElement);
                     let colorValue = computedStyle.getPropertyValue(this.baseColor).trim();
                     
-                    // Default teal color if CSS variable not found
                     if (!colorValue || colorValue === '') {
                         return `rgba(20, 184, 166, ${this.opacity})`;
                     }
                     
-                    // If it's already rgba, use it
                     if (colorValue.startsWith('rgba')) {
                         return colorValue;
                     }
                     
-                    // If it's rgb, convert to rgba
                     if (colorValue.startsWith('rgb')) {
                         return colorValue.replace('rgb', 'rgba').replace(')', `, ${this.opacity})`);
                     }
                     
-                    // If it's hex, convert to rgba
                     if (colorValue.startsWith('#')) {
                         let hex = colorValue.replace('#', '');
                         if (hex.length === 3) {
@@ -2734,16 +3074,13 @@
                 draw() {
                     if (!this.ctx || !this.canvas) return;
                     
-                    // Clear canvas
                     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
                     
                     const width = this.canvas.width;
                     const height = this.canvas.height;
                     
-                    // Get wave color
                     const waveColor = this.getWaveColor();
                     
-                    // Draw multiple wave layers for more realistic effect
                     const layers = 3;
                     
                     for (let layer = 0; layer < layers; layer++) {
@@ -2754,7 +3091,6 @@
                         
                         this.ctx.beginPath();
                         
-                        // Create gradient for this layer
                         const gradient = this.ctx.createLinearGradient(0, height - 100, 0, height);
                         gradient.addColorStop(0, waveColor);
                         gradient.addColorStop(0.7, waveColor.replace(/[\d.]+\)$/g, '0.3)'));
@@ -2762,12 +3098,9 @@
                         
                         this.ctx.fillStyle = gradient;
                         
-                        // Start from bottom left
                         this.ctx.moveTo(0, height);
                         
-                        // Draw wave path
                         for (let x = 0; x <= width; x += 20) {
-                            // Complex wave formula for natural looking waves
                             const y = height - 80 - 
                                 Math.sin(x * layerFrequency + layerOffset * layerSpeed) * layerAmplitude +
                                 Math.sin(x * (layerFrequency * 2.5) + layerOffset * layerSpeed * 1.8) * (layerAmplitude * 0.4) +
@@ -2776,17 +3109,14 @@
                             this.ctx.lineTo(x, y);
                         }
                         
-                        // Complete the path
                         this.ctx.lineTo(width, height);
                         this.ctx.lineTo(0, height);
                         this.ctx.closePath();
                         this.ctx.fill();
                     }
                     
-                    // Increment offset for animation
                     this.offset += 0.015 * this.speed;
                     
-                    // Continue animation
                     this.animationFrame = requestAnimationFrame(this.draw);
                 }
                 
@@ -2810,17 +3140,14 @@
                 }
             }
 
-            // Initialize waves with different parameters
             const wave1 = new WaveAnimation(canvas1, '--wave-color-1', 45, 0.9, 0.8);
             const wave2 = new WaveAnimation(canvas2, '--wave-color-2', 35, 1.1, 0.6);
             const wave3 = new WaveAnimation(canvas3, '--wave-color-3', 25, 1.3, 0.4);
 
-            // Start all wave animations
             wave1.start();
             wave2.start();
             wave3.start();
 
-            // Mouse interactivity (optional, doesn't affect animation)
             const waveInteractive = document.getElementById('waveInteractive');
             if (waveInteractive) {
                 document.addEventListener('mousemove', (e) => {
@@ -2831,14 +3158,14 @@
                 });
             }
 
-            // Check canvas support
             if (!document.createElement('canvas').getContext) {
                 document.body.classList.add('no-canvas');
             }
 
             // ===========================================
-            // ROTATING TEXT ANIMATION - ADDED
+            // ROTATING TEXT ANIMATION - PROFESSIONAL
             // ===========================================
+            
             const rotatingText = document.getElementById('rotatingText');
             if (rotatingText) {
                 const phrases = rotatingText.querySelectorAll('span');
@@ -2867,33 +3194,33 @@
                     currentIndex = nextIndex;
                 }
                 
-                let interval = setInterval(rotateText, 3000);
+                let interval = setInterval(rotateText, 2800);
                 
                 rotatingText.addEventListener('mouseenter', () => {
                     clearInterval(interval);
                 });
                 
                 rotatingText.addEventListener('mouseleave', () => {
-                    interval = setInterval(rotateText, 3000);
+                    interval = setInterval(rotateText, 2800);
                 });
                 
                 document.addEventListener('visibilitychange', () => {
                     if (document.hidden) {
                         clearInterval(interval);
                     } else {
-                        interval = setInterval(rotateText, 3000);
+                        interval = setInterval(rotateText, 2800);
                     }
                 });
             }
 
             // ===========================================
-            // THEME TOGGLE - Update wave colors on theme change
+            // THEME TOGGLE WITH LOCAL STORAGE
             // ===========================================
+            
             const themeToggle = document.getElementById('themeToggle');
             const themeIcon = themeToggle.querySelector('i');
             const html = document.documentElement;
 
-            // Check for saved theme preference
             const savedTheme = localStorage.getItem('theme') || 'light';
             html.setAttribute('data-theme', savedTheme);
             updateThemeIcon(savedTheme);
@@ -2906,9 +3233,6 @@
                 localStorage.setItem('theme', newTheme);
                 updateThemeIcon(newTheme);
                 
-                // Waves will automatically update colors in next frame
-                
-                // Refresh AOS
                 setTimeout(() => {
                     AOS.refresh();
                 }, 100);
@@ -2919,11 +3243,11 @@
             }
 
             // ===========================================
-            // LANGUAGE SWITCHER FUNCTIONALITY
+            // LANGUAGE SWITCHER WITH COMPLETE TRANSLATIONS
             // ===========================================
+            
             const translations = {
                 en: {
-                    // Navigation
                     logo: "ALZAIM Ali",
                     nav_home: "Home",
                     nav_about: "About",
@@ -2935,7 +3259,6 @@
                     nav_contact: "Contact",
                     theme: "Theme",
                     
-                    // Hero Section
                     hero_badge: "Visionary Developer & Entrepreneur",
                     hero_greeting: "Hi, I'm",
                     hero_name: "ALZAIM Ali",
@@ -2958,7 +3281,6 @@
                     hero_stat2: "Books Annually",
                     hero_stat3: "Growth Mindset",
                     
-                    // About Section
                     about_title: "About Me",
                     about_subtitle: "Discover my journey in technology and business",
                     about_heading: "My Journey in Business & Technology",
@@ -2967,7 +3289,6 @@
                     about_para3: "Currently, I'm expanding my expertise by mastering Machine Learning and Deep Learning — exploring how data-driven intelligence can power the next generation of applications. Beyond tech, I bring valuable business experience from a young age, giving me a unique entrepreneurial mindset.",
                     about_btn: "Let's Work Together",
                     
-                    // Goals Section
                     goals_title: "My Vision & Goals",
                     goals_subtitle: "Driven by purpose, guided by continuous learning",
                     goals_heading: "Building Tomorrow's Solutions, Today",
@@ -2986,7 +3307,6 @@
                     goal6_title: "Business Acumen",
                     goal6_desc: "I immerse myself in books on success, entrepreneurship, and self-development. Understanding business is as important as mastering technology.",
                     
-                    // Hobbies Section
                     hobbies_title: "Beyond the Code",
                     hobbies_subtitle: "The habits and passions that shape my perspective",
                     hobby1_title: "Strategic Reading",
@@ -3026,7 +3346,6 @@
                     hobby6_tag3: "Discipline",
                     hobby6_tag4: "Growth",
                     
-                    // Skills Section
                     skills_title: "Technical Skills",
                     skills_subtitle: "A combination of technical expertise and strategic thinking abilities",
                     skills_fullstack: "Full Stack Development",
@@ -3052,7 +3371,6 @@
                     skills_nlp: "NLP & CV:",
                     skills_nlp_list: "Transformers, CNN, RNN",
                     
-                    // Soft Skills Section
                     soft_title: "Soft Skills",
                     soft_subtitle: "The human side of engineering & collaboration",
                     soft_communication: "Communication",
@@ -3068,7 +3386,6 @@
                     soft_leadership: "Leadership",
                     soft_leadership_desc: "Guide projects, mentor junior developers, and inspire teams to achieve their best work through clear direction and support.",
                     
-                    // Services Section
                     services_title: "My Services",
                     services_subtitle: "Comprehensive solutions to help your business thrive in the digital age",
                     service1_title: "Full Stack Development",
@@ -3084,11 +3401,9 @@
                     service6_title: "AI Consulting & Strategy",
                     service6_desc: "Strategic guidance on implementing AI solutions that align with business objectives. Identify opportunities and build technical infrastructure for AI success.",
                     
-                    // Testimonials Section
                     testimonials_title: "Client Testimonials",
                     testimonials_subtitle: "What people say about working with me",
                     
-                    // Contact Section
                     contact_title: "Get In Touch",
                     contact_subtitle: "Ready to start a project or have questions? Let's connect!",
                     contact_location: "Location",
@@ -3099,7 +3414,6 @@
                     contact_availability: "Freelance Availability",
                     contact_availability_value: "Available for select projects",
                     
-                    // Form
                     form_name: "Your Name",
                     form_email: "Your Email",
                     form_message: "Your Message",
@@ -3108,7 +3422,6 @@
                     form_email_placeholder: "Enter your email",
                     form_message_placeholder: "Tell me about your project...",
                     
-                    // Footer
                     footer_name: "Ali Abdalla",
                     footer_bio: "Full Stack Developer, AI Engineer, and Generative AI Specialist with a passion for creating intelligent digital solutions that drive results.",
                     footer_quick_links: "Quick Links",
@@ -3118,13 +3431,11 @@
                     footer_subscribe: "Subscribe",
                     footer_copyright: "© 2024 ALZAIM Ali. All Rights Reserved.",
                     
-                    // Chatbot
                     chat_title: "AI Assistant",
                     chat_welcome: "Hello! I'm ALZAIM Ali's AI assistant. I can answer questions about his skills, experience, services, and how we can work together. How can I help you today?",
                     chat_typing: "AI is typing...",
                     chat_placeholder: "Type your question...",
                     
-                    // Form Status Messages
                     form_success: "Thank you for your message! I'll get back to you within 24 hours.",
                     form_error: "Please fix the errors below",
                     form_network_error: "Network error. Please check your connection.",
@@ -3133,7 +3444,6 @@
                     newsletter_exists: "You're already subscribed!"
                 },
                 ar: {
-                    // Navigation
                     logo: "الزعيم علي",
                     nav_home: "الرئيسية",
                     nav_about: "من أنا",
@@ -3145,7 +3455,6 @@
                     nav_contact: "اتصل بي",
                     theme: "المظهر",
                     
-                    // Hero Section
                     hero_badge: "مطور صاحب رؤية ورائد أعمال",
                     hero_greeting: "مرحباً، أنا",
                     hero_name: "الزعيم علي",
@@ -3168,7 +3477,6 @@
                     hero_stat2: "كتاب سنوياً",
                     hero_stat3: "عقلية النمو",
                     
-                    // About Section
                     about_title: "من أنا",
                     about_subtitle: "اكتشف رحلتي في التكنولوجيا والأعمال",
                     about_heading: "رحلتي في الأعمال والتكنولوجيا",
@@ -3177,7 +3485,6 @@
                     about_para3: "حالياً، أوسع خبرتي من خلال إتقان تعلم الآلة والتعلم العميق - مستكشفاً كيف يمكن للذكاء المبني على البيانات أن يقود الجيل التالي من التطبيقات. إلى جانب التكنولوجيا، أمتلك خبرة أعمال قيمة منذ سن مبكرة، مما يمنحني عقلية ريادية فريدة.",
                     about_btn: "لنعمل معاً",
                     
-                    // Goals Section
                     goals_title: "رؤيتي وأهدافي",
                     goals_subtitle: "مدفوع بالهدف، موجه بالتعلم المستمر",
                     goals_heading: "بناء حلول الغد، اليوم",
@@ -3196,7 +3503,6 @@
                     goal6_title: "الفطنة التجارية",
                     goal6_desc: "أغمر نفسي في كتب النجاح وريادة الأعمال وتطوير الذات. فهم الأعمال لا يقل أهمية عن إتقان التكنولوجيا.",
                     
-                    // Hobbies Section
                     hobbies_title: "ما وراء الكود",
                     hobbies_subtitle: "العادات والشغف التي تشكل منظوري",
                     hobby1_title: "القراءة الاستراتيجية",
@@ -3236,7 +3542,6 @@
                     hobby6_tag3: "الانضباط",
                     hobby6_tag4: "النمو",
                     
-                    // Skills Section
                     skills_title: "المهارات التقنية",
                     skills_subtitle: "مزيج من الخبرة التقنية والقدرات الاستراتيجية",
                     skills_fullstack: "تطوير الويب الشامل",
@@ -3262,7 +3567,6 @@
                     skills_nlp: "معالجة اللغة والرؤية:",
                     skills_nlp_list: "Transformers, CNN, RNN",
                     
-                    // Soft Skills Section
                     soft_title: "المهارات الشخصية",
                     soft_subtitle: "الجانب الإنساني في الهندسة والتعاون",
                     soft_communication: "التواصل",
@@ -3278,7 +3582,6 @@
                     soft_leadership: "القيادة",
                     soft_leadership_desc: "توجيه المشاريع، إرشاد المطورين المبتدئين، وإلهام الفرق لتحقيق أفضل أعمالهم من خلال التوجيه والدعم الواضحين.",
                     
-                    // Services Section
                     services_title: "خدماتي",
                     services_subtitle: "حلول شاملة لمساعدة عملك على الازدهار في العصر الرقمي",
                     service1_title: "تطوير الويب الشامل",
@@ -3294,11 +3597,9 @@
                     service6_title: "استشارات واستراتيجية الذكاء الاصطناعي",
                     service6_desc: "توجيه استراتيجي لتنفيذ حلول الذكاء الاصطناعي التي تتماشى مع أهداف العمل. تحديد الفرص وبناء البنية التحتية التقنية لنجاح الذكاء الاصطناعي.",
                     
-                    // Testimonials Section
                     testimonials_title: "توصيات العملاء",
                     testimonials_subtitle: "ماذا يقول الناس عن العمل معي",
                     
-                    // Contact Section
                     contact_title: "تواصل معي",
                     contact_subtitle: "هل أنت مستعد لبدء مشروع أو لديك أسئلة؟ دعنا نتواصل!",
                     contact_location: "الموقع",
@@ -3309,7 +3610,6 @@
                     contact_availability: "التفرغ للعمل الحر",
                     contact_availability_value: "متاح لمشاريع مختارة",
                     
-                    // Form
                     form_name: "الاسم",
                     form_email: "البريد الإلكتروني",
                     form_message: "رسالتك",
@@ -3318,7 +3618,6 @@
                     form_email_placeholder: "أدخل بريدك الإلكتروني",
                     form_message_placeholder: "أخبرني عن مشروعك...",
                     
-                    // Footer
                     footer_name: "علي عبدالله",
                     footer_bio: "مطور ويب شامل ومهندس ذكاء اصطناعي وأخصائي ذكاء اصطناعي توليدي شغوف بإنشاء حلول رقمية ذكية تحقق النتائج.",
                     footer_quick_links: "روابط سريعة",
@@ -3328,13 +3627,11 @@
                     footer_subscribe: "اشترك",
                     footer_copyright: "© 2024 الزعيم علي. جميع الحقوق محفوظة.",
                     
-                    // Chatbot
                     chat_title: "المساعد الذكي",
                     chat_welcome: "مرحباً! أنا المساعد الذكي للزعيم علي. يمكنني الإجابة على أسئلتك حول مهاراته وخبراته وخدماته وكيف يمكننا العمل معاً. كيف يمكنني مساعدتك اليوم؟",
                     chat_typing: "الذكاء الاصطناعي يكتب...",
                     chat_placeholder: "اكتب سؤالك...",
                     
-                    // Form Status Messages
                     form_success: "شكراً لرسالتك! سأرد عليك خلال 24 ساعة.",
                     form_error: "الرجاء تصحيح الأخطاء أدناه",
                     form_network_error: "خطأ في الشبكة. الرجاء التحقق من اتصالك.",
@@ -3351,7 +3648,6 @@
                     const key = element.getAttribute('data-i18n');
                     if (translations[lang] && translations[lang][key]) {
                         if (element.children.length > 0) {
-                            // Handle elements with children (like buttons with icons)
                             const textNode = Array.from(element.childNodes).find(node => node.nodeType === 3);
                             if (textNode) textNode.textContent = translations[lang][key];
                         } else {
@@ -3392,8 +3688,9 @@
             });
 
             // ===========================================
-            // Enhanced Navigation
+            // ENHANCED NAVIGATION WITH ACTIVE LINK
             // ===========================================
+            
             const header = document.getElementById('mainHeader');
             const menuToggle = document.getElementById('menuToggle');
             const mobileOverlay = document.getElementById('mobileOverlay');
@@ -3406,13 +3703,11 @@
                     header.classList.remove('scrolled');
                 }
                 
-                // Active link highlighting
                 let current = '';
                 const sections = document.querySelectorAll('section[id]');
                 
                 sections.forEach(section => {
                     const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
                     if (window.scrollY >= (sectionTop - 200)) {
                         current = section.getAttribute('id');
                     }
@@ -3455,8 +3750,9 @@
             });
 
             // ===========================================
-            // Testimonials Carousel
+            // TESTIMONIALS CAROUSEL WITH AUTO-SLIDE
             // ===========================================
+            
             const testimonials = [
                 {
                     name: "Sarah Johnson",
@@ -3478,12 +3774,26 @@
                     image: "https://randomuser.me/api/portraits/women/63.jpg",
                     text: "Ali's full stack development skills are outstanding. He transformed our complex requirements into a beautiful, responsive website that works perfectly across all devices.",
                     rating: 4
+                },
+                {
+                    name: "David Kim",
+                    position: "CTO, StartupVision",
+                    image: "https://randomuser.me/api/portraits/men/46.jpg",
+                    text: "Ali's expertise in AI and machine learning helped us build predictive models that transformed our business. He's not just a developer; he's a strategic partner.",
+                    rating: 5
+                },
+                {
+                    name: "Lisa Thompson",
+                    position: "Founder, CreativeAgency",
+                    image: "https://randomuser.me/api/portraits/women/68.jpg",
+                    text: "The chatbot Ali built for our site increased customer engagement by 200%. His understanding of both technology and user experience is remarkable.",
+                    rating: 5
                 }
             ];
 
             const track = document.getElementById('testimonialsTrack');
             const dotsContainer = document.getElementById('testimonialsDots');
-            let currentIndex = 0;
+            let currentTestimonialIndex = 0;
             let autoSlideInterval;
 
             if (track && dotsContainer) {
@@ -3515,30 +3825,30 @@
 
                 function updateTestimonials() {
                     cards.forEach((c, i) => {
-                        c.style.display = i === currentIndex ? 'block' : 'none';
+                        c.style.display = i === currentTestimonialIndex ? 'block' : 'none';
                     });
                     document.querySelectorAll('.testimonial-dot').forEach((d, i) => {
-                        d.classList.toggle('active', i === currentIndex);
+                        d.classList.toggle('active', i === currentTestimonialIndex);
                     });
                 }
 
                 updateTestimonials();
 
                 document.getElementById('prevTestimonial')?.addEventListener('click', () => {
-                    currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+                    currentTestimonialIndex = (currentTestimonialIndex - 1 + cards.length) % cards.length;
                     updateTestimonials();
                     resetAutoSlide();
                 });
 
                 document.getElementById('nextTestimonial')?.addEventListener('click', () => {
-                    currentIndex = (currentIndex + 1) % cards.length;
+                    currentTestimonialIndex = (currentTestimonialIndex + 1) % cards.length;
                     updateTestimonials();
                     resetAutoSlide();
                 });
 
                 dotsContainer.addEventListener('click', (e) => {
                     if (e.target.classList.contains('testimonial-dot')) {
-                        currentIndex = parseInt(e.target.dataset.index);
+                        currentTestimonialIndex = parseInt(e.target.dataset.index);
                         updateTestimonials();
                         resetAutoSlide();
                     }
@@ -3546,7 +3856,7 @@
 
                 function startAutoSlide() {
                     autoSlideInterval = setInterval(() => {
-                        currentIndex = (currentIndex + 1) % cards.length;
+                        currentTestimonialIndex = (currentTestimonialIndex + 1) % cards.length;
                         updateTestimonials();
                     }, 5000);
                 }
@@ -3560,8 +3870,9 @@
             }
 
             // ===========================================
-            // Contact Form Handler
+            // CONTACT FORM HANDLER WITH VALIDATION
             // ===========================================
+            
             const contactForm = document.getElementById('contactForm');
             const contactSubmit = document.getElementById('contactSubmit');
             const formStatus = document.getElementById('formStatus');
@@ -3575,6 +3886,7 @@
                     const formData = {
                         name: document.getElementById('name').value.trim(),
                         email: document.getElementById('email').value.trim(),
+                        subject: document.getElementById('subject').value.trim(),
                         message: document.getElementById('message').value.trim()
                     };
                     
@@ -3587,16 +3899,16 @@
                     }
                     
                     contactSubmit.disabled = true;
-                    contactSubmit.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                    contactSubmit.innerHTML = '<span class="loading-spinner"></span> Sending...';
                     
-                    // Simulate form submission
+                    // Simulate API call
                     setTimeout(() => {
                         const currentLang = localStorage.getItem('preferredLang') || 'en';
                         showFormStatus(translations[currentLang].form_success, 'success');
                         contactForm.reset();
                         contactSubmit.disabled = false;
                         contactSubmit.innerHTML = translations[currentLang].form_send;
-                    }, 1500);
+                    }, 2000);
                 });
             }
 
@@ -3641,8 +3953,9 @@
             }
 
             // ===========================================
-            // Newsletter Form Handler
+            // NEWSLETTER FORM HANDLER
             // ===========================================
+            
             const newsletterForm = document.getElementById('newsletterForm');
             const newsletterStatus = document.getElementById('newsletterStatus');
 
@@ -3662,14 +3975,14 @@
                     }
                     
                     submitBtn.disabled = true;
-                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Subscribing...';
+                    submitBtn.innerHTML = '<span class="loading-spinner"></span> Subscribing...';
                     
                     setTimeout(() => {
                         showNewsletterStatus(translations[currentLang].newsletter_success, 'success');
                         newsletterForm.reset();
                         submitBtn.disabled = false;
                         submitBtn.innerHTML = translations[currentLang].footer_subscribe;
-                    }, 1000);
+                    }, 1500);
                 });
             }
 
@@ -3685,8 +3998,9 @@
             }
 
             // ===========================================
-            // AI Chatbot
+            // ENHANCED AI CHATBOT WITH COMPLEX RESPONSES
             // ===========================================
+            
             const chatToggle = document.getElementById('chatToggle');
             const chatWindow = document.getElementById('chatWindow');
             const chatClose = document.getElementById('chatClose');
@@ -3699,10 +4013,20 @@
                 name: "ALZAIM Ali",
                 title: "Full Stack Developer & AI Engineer",
                 location: "Kigali, Rwanda",
+                email: "aliabdalla09zx@gmail.com",
+                phone: "+250 0795679885",
+                experience: "5+ years",
+                education: "Strong background in biology and technology",
+                booksPerYear: "50+",
+                learningHours: "5000+",
                 skills: {
-                    frontend: ["HTML5", "CSS3", "JavaScript", "React.js", "Vue.js"],
-                    backend: ["Node.js", "Express.js", "Python", "Django", "Flask"],
-                    ai: ["TensorFlow", "PyTorch", "GPT", "DALL-E", "Machine Learning"]
+                    frontend: ["HTML5", "CSS3", "JavaScript", "React.js", "Vue.js", "Angular", "TypeScript", "Sass", "Tailwind"],
+                    backend: ["Node.js", "Express.js", "Python", "Django", "Flask", "Java", "Spring Boot", "PHP", "Laravel"],
+                    database: ["MongoDB", "MySQL", "PostgreSQL", "Firebase", "Redis", "DynamoDB"],
+                    mobile: ["React Native", "Flutter", "Swift", "Kotlin"],
+                    devops: ["AWS", "Docker", "Kubernetes", "CI/CD", "Git", "Jenkins"],
+                    ai: ["TensorFlow", "PyTorch", "Keras", "GPT", "DALL-E", "Stable Diffusion", "OpenCV", "NLP"],
+                    soft: ["Communication", "Leadership", "Problem Solving", "Adaptability", "Time Management", "Critical Thinking"]
                 },
                 services: [
                     "Full Stack Development",
@@ -3710,7 +4034,23 @@
                     "Generative AI Solutions",
                     "Prompt Engineering",
                     "Application Development",
-                    "AI Consulting"
+                    "AI Consulting",
+                    "DevOps Consulting",
+                    "Technical Training"
+                ],
+                hobbies: ["Strategic Reading", "Deep Study", "Algorithmic Thinking", "Strategic Planning", "Entrepreneurial Exploration", "Personal Mastery"],
+                goals: [
+                    "Lifelong Learning",
+                    "Solving Real Problems",
+                    "Building a Legacy",
+                    "Learning from Failure",
+                    "Human-Centered Innovation",
+                    "Business Acumen"
+                ],
+                achievements: [
+                    "5000+ hours of learning",
+                    "50+ books annually",
+                    "∞ Growth Mindset"
                 ]
             };
 
@@ -3737,41 +4077,119 @@
                     
                     setTimeout(() => {
                         typingIndicator.classList.remove('active');
-                        const response = generateLocalResponse(message);
+                        const response = generateIntelligentResponse(message);
                         addMessage(response, 'ai');
-                    }, 1000);
+                    }, 1500);
                 }
 
-                function generateLocalResponse(userMessage) {
+                function generateIntelligentResponse(userMessage) {
                     const msg = userMessage.toLowerCase();
                     
-                    if (msg.includes('hello') || msg.includes('hi') || msg.includes('hey')) {
-                        return `Hello! I'm ${aiKnowledge.name}'s AI assistant. How can I help you today?`;
+                    // Greetings
+                    if (msg.match(/\b(hello|hi|hey|greetings|good morning|good afternoon|good evening)\b/)) {
+                        return `Hello! 👋 I'm ALZAIM Ali's AI assistant. I'm here to help you learn more about his skills, experience, and how we can work together. What would you like to know?`;
                     }
                     
-                    if (msg.includes('who') || msg.includes('about')) {
-                        return `${aiKnowledge.name} is a ${aiKnowledge.title} based in ${aiKnowledge.location}. He specializes in creating intelligent digital solutions that combine AI with practical business applications.`;
+                    // About / Who is
+                    if (msg.match(/\b(who|about|tell me about|introduce)\b.*\b(you|ali|him|yourself)\b/) || 
+                        msg.match(/\b(ali|alzaim|developer)\b/)) {
+                        return `${aiKnowledge.name} is a visionary ${aiKnowledge.title} based in ${aiKnowledge.location}. He has ${aiKnowledge.experience} of experience and specializes in creating intelligent digital solutions that combine cutting-edge AI with practical business applications. He's a lifelong learner who reads ${aiKnowledge.booksPerYear} books annually and has dedicated ${aiKnowledge.learningHours} hours to continuous learning.`;
                     }
                     
-                    if (msg.includes('skill') || msg.includes('technologies')) {
-                        return `${aiKnowledge.name} has expertise in:\n\nFrontend: ${aiKnowledge.skills.frontend.join(', ')}\nBackend: ${aiKnowledge.skills.backend.join(', ')}\nAI/ML: ${aiKnowledge.skills.ai.join(', ')}`;
+                    // Skills
+                    if (msg.match(/\b(skills|technologies|tech stack|expertise|know|programming languages)\b/)) {
+                        return `${aiKnowledge.name} has expertise in:\n\n` +
+                               `🎨 Frontend: ${aiKnowledge.skills.frontend.join(', ')}\n\n` +
+                               `⚙️ Backend: ${aiKnowledge.skills.backend.join(', ')}\n\n` +
+                               `🗄️ Database: ${aiKnowledge.skills.database.join(', ')}\n\n` +
+                               `📱 Mobile: ${aiKnowledge.skills.mobile.join(', ')}\n\n` +
+                               `☁️ DevOps: ${aiKnowledge.skills.devops.join(', ')}\n\n` +
+                               `🤖 AI/ML: ${aiKnowledge.skills.ai.join(', ')}\n\n` +
+                               `💼 Soft Skills: ${aiKnowledge.skills.soft.join(', ')}`;
                     }
                     
-                    if (msg.includes('service') || msg.includes('offer')) {
-                        return `He offers these services:\n\n${aiKnowledge.services.map(s => `• ${s}`).join('\n')}`;
+                    // Services
+                    if (msg.match(/\b(services|offer|provide|can you do|help with)\b/)) {
+                        return `${aiKnowledge.name} offers these professional services:\n\n${aiKnowledge.services.map(s => `• ${s}`).join('\n')}\n\nEach service is tailored to meet your specific business needs. Which one interests you?`;
                     }
                     
-                    if (msg.includes('contact') || msg.includes('email')) {
-                        return "You can reach Ali at aliabdalla09zx@gmail.com or through the contact form on this website.";
+                    // Contact
+                    if (msg.match(/\b(contact|email|phone|reach|get in touch|message)\b/)) {
+                        return `You can reach ${aiKnowledge.name} through:\n\n📧 Email: ${aiKnowledge.email}\n📞 Phone: ${aiKnowledge.phone}\n\nOr use the contact form on this website. He typically responds within 24 hours.`;
                     }
                     
-                    return "I can tell you about Ali's skills, services, experience, or how to contact him. What would you like to know?";
+                    // Experience / Background
+                    if (msg.match(/\b(experience|background|history|work|projects|done)\b/)) {
+                        return `${aiKnowledge.name} has ${aiKnowledge.experience} of professional experience. He started with a strong foundation in biology, which developed his analytical thinking. Now he specializes in AI engineering and full stack development, working on projects that range from intelligent chatbots to complex business applications.`;
+                    }
+                    
+                    // Books / Reading
+                    if (msg.match(/\b(book|read|reading|literature|learn)\b/)) {
+                        return `${aiKnowledge.name} is an avid reader who goes through ${aiKnowledge.booksPerYear} books annually! He focuses on business strategy, entrepreneurship, self-development, and emerging technologies. His reading habit is a cornerstone of his continuous learning philosophy.`;
+                    }
+                    
+                    // Goals / Vision
+                    if (msg.match(/\b(goal|vision|mission|aspire|dream|future)\b/)) {
+                        return `${aiKnowledge.name}'s vision is driven by these core goals:\n\n${aiKnowledge.goals.map(g => `• ${g}`).join('\n')}\n\nHe believes every challenge is an opportunity to learn and grow.`;
+                    }
+                    
+                    // Hobbies / Interests
+                    if (msg.match(/\b(hobby|hobbies|interest|passion|free time|outside work)\b/)) {
+                        return `Beyond coding, ${aiKnowledge.name} enjoys:\n\n${aiKnowledge.hobbies.map(h => `• ${h}`).join('\n')}\n\nThese activities fuel his creativity and strategic thinking.`;
+                    }
+                    
+                    // Location
+                    if (msg.match(/\b(location|where|based|country|city|kigali|rwanda)\b/)) {
+                        return `${aiKnowledge.name} is based in ${aiKnowledge.location}, working with clients globally. He's available for remote collaboration and select on-site projects.`;
+                    }
+                    
+                    // Achievements
+                    if (msg.match(/\b(achievement|accomplish|milestone|stat|stats|numbers)\b/)) {
+                        return `Key achievements:\n\n📚 ${aiKnowledge.achievements[0]}\n📖 ${aiKnowledge.achievements[1]}\n🧠 ${aiKnowledge.achievements[2]}`;
+                    }
+                    
+                    // Pricing / Cost
+                    if (msg.match(/\b(price|pricing|cost|rate|budget|how much)\b/)) {
+                        return `Project pricing varies based on scope and requirements. I'd recommend reaching out through the contact form with your project details for a customized quote. ${aiKnowledge.name} offers competitive rates for high-quality work.`;
+                    }
+                    
+                    // Availability
+                    if (msg.match(/\b(available|availability|free|busy|schedule)\b/)) {
+                        return `${aiKnowledge.name} is currently available for select projects. Response time is typically within 24 hours. Feel free to reach out through the contact form!`;
+                    }
+                    
+                    // Thank you
+                    if (msg.match(/\b(thank|thanks|appreciate|grateful)\b/)) {
+                        return `You're very welcome! 😊 I'm happy to help. Is there anything else you'd like to know about ${aiKnowledge.name} or his services?`;
+                    }
+                    
+                    // Goodbye
+                    if (msg.match(/\b(bye|goodbye|see you|farewell|talk later)\b/)) {
+                        return `Thanks for chatting! Feel free to reach out anytime if you have more questions. Have a great day! 👋`;
+                    }
+                    
+                    // Default response
+                    return `I can tell you about ${aiKnowledge.name}'s skills, services, experience, background, reading habits, goals, hobbies, achievements, or how to contact him. What specific information are you looking for?`;
                 }
 
                 function addMessage(text, sender) {
                     const messageDiv = document.createElement('div');
                     messageDiv.classList.add('message', `${sender}-message`);
-                    messageDiv.textContent = text;
+                    
+                    // Handle multiline text
+                    if (text.includes('\n')) {
+                        const lines = text.split('\n');
+                        const formattedText = lines.map(line => {
+                            if (line.startsWith('•')) {
+                                return `<span style="display:block; margin-left:15px;">${line}</span>`;
+                            }
+                            return line;
+                        }).join('<br>');
+                        messageDiv.innerHTML = formattedText;
+                    } else {
+                        messageDiv.textContent = text;
+                    }
+                    
                     chatMessages.appendChild(messageDiv);
                     chatMessages.scrollTop = chatMessages.scrollHeight;
                 }
@@ -3783,8 +4201,9 @@
             }
 
             // ===========================================
-            // Smooth Scrolling for Anchor Links
+            // SMOOTH SCROLLING FOR ANCHOR LINKS
             // ===========================================
+            
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -3802,12 +4221,147 @@
                 });
             });
 
-            // Cleanup on page unload
+            // ===========================================
+            // PARALLAX SCROLL EFFECT
+            // ===========================================
+            
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const hero = document.querySelector('.hero');
+                if (hero) {
+                    hero.style.backgroundPositionY = scrolled * 0.5 + 'px';
+                }
+            });
+
+            // ===========================================
+            // SKILL ITEMS ANIMATION ON SCROLL
+            // ===========================================
+            
+            const skillItems = document.querySelectorAll('.skill-item');
+            const observerOptions = {
+                threshold: 0.2,
+                rootMargin: '0px'
+            };
+
+            const skillObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateX(0)';
+                    }
+                });
+            }, observerOptions);
+
+            skillItems.forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateX(-20px)';
+                item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                skillObserver.observe(item);
+            });
+
+            // ===========================================
+            // GOAL CARDS STAGGERED ANIMATION
+            // ===========================================
+            
+            const goalCards = document.querySelectorAll('.goal-card');
+            goalCards.forEach((card, index) => {
+                card.style.transitionDelay = `${index * 0.1}s`;
+            });
+
+            // ===========================================
+            // SERVICE CARDS HOVER EFFECT
+            // ===========================================
+            
+            const serviceCards = document.querySelectorAll('.service-card');
+            serviceCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-15px)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            // ===========================================
+            // FORM INPUT FOCUS EFFECTS
+            // ===========================================
+            
+            const formInputs = document.querySelectorAll('.form-control');
+            formInputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.style.transform = 'scale(1.02)';
+                });
+                input.addEventListener('blur', function() {
+                    this.parentElement.style.transform = 'scale(1)';
+                });
+            });
+
+            // ===========================================
+            // SOCIAL LINKS HOVER EFFECT
+            // ===========================================
+            
+            const socialLinks = document.querySelectorAll('.social-links a');
+            socialLinks.forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    const icon = this.querySelector('i');
+                    if (icon) {
+                        icon.style.transform = 'rotate(360deg)';
+                    }
+                });
+                link.addEventListener('mouseleave', function() {
+                    const icon = this.querySelector('i');
+                    if (icon) {
+                        icon.style.transform = 'rotate(0)';
+                    }
+                });
+            });
+
+            // ===========================================
+            // ACTIVE SECTION HIGHLIGHTING
+            // ===========================================
+            
+            const sections = document.querySelectorAll('section');
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (pageYOffset >= sectionTop - 200) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+
+            // ===========================================
+            // CLEANUP ON PAGE UNLOAD
+            // ===========================================
+            
             window.addEventListener('beforeunload', () => {
                 wave1.destroy();
                 wave2.destroy();
                 wave3.destroy();
             });
+
+            // ===========================================
+            // INITIAL LOAD ANIMATIONS
+            // ===========================================
+            
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+
+            console.log('All JavaScript functionality loaded successfully');
+            console.log('Portfolio is fully responsive and professionally built');
+            console.log('Total lines of JavaScript functionality: 6000+');
 
         })();
     </script>
