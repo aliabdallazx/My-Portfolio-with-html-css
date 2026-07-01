@@ -18,10 +18,15 @@ import analyticsRoutes from './src/routes/analytics.routes.js';
 import notificationRoutes from './src/routes/notification.routes.js';
 import { errorHandler } from './src/middleware/error.middleware.js';
 import { requestLogger } from './src/middleware/logger.middleware.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { initializeSocket } from './src/sockets/socket.js';
 import { seedAdmin } from './src/services/bootstrap.js';
 
 dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const server = http.createServer(app);
@@ -80,6 +85,13 @@ app.use('/api/about', aboutRoutes);
 app.use('/api/messages', messageRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/notifications', notificationRoutes);
+
+// Serve frontend static files from the project root
+app.use(express.static(path.join(__dirname)));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 initializeSocket(io);
 
