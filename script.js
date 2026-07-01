@@ -8,7 +8,7 @@ const API_BASE = (() => {
     const origin = window.location.origin;
     if (!origin || origin === 'null') return fallback;
 
-    const localStaticPorts = [':5500', ':5501', ':8000', ':8080'];
+    const localStaticPorts = [':3000', ':5500', ':5501', ':8000', ':8080'];
     if (localStaticPorts.some((port) => origin.includes(port))) {
         return fallback;
     }

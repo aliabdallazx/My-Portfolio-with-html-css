@@ -89,6 +89,10 @@ app.use('/api/notifications', notificationRoutes);
 // Serve frontend static files from the project root
 app.use(express.static(path.join(__dirname)));
 
+app.post(/^\/(?!api\/).*/, (_req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
