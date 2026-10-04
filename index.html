@@ -12,9 +12,23 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="glass-orb" aria-hidden="true"></div>
+    <div class="glass-orb-2" aria-hidden="true"></div>
     <header class="header">
         <div class="container nav-container">
-            <a href="#home" class="brand">ALI ABDALLA</a>
+            <a href="#home" class="brand" aria-label="Ali Abdalla">
+                <span class="brand-letter brand-a">A</span>
+                <span class="brand-letter brand-l">L</span>
+                <span class="brand-letter brand-i">I</span>
+                <span class="brand-letter brand-space"> </span>
+                <span class="brand-letter brand-a2">A</span>
+                <span class="brand-letter brand-b">B</span>
+                <span class="brand-letter brand-d">D</span>
+                <span class="brand-letter brand-a3">A</span>
+                <span class="brand-letter brand-l2">L</span>
+                <span class="brand-letter brand-l3">L</span>
+                <span class="brand-letter brand-a4">A</span>
+            </a>
             <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
             </button>
@@ -57,15 +71,15 @@
                     <div class="hero-stats">
                         <div>
                             <strong class="counter" data-target="6">0</strong>
-                            <span>Core Expertise Areas</span>
+                            <span data-i18n="hero_stat_1">Core Expertise Areas</span>
                         </div>
                         <div>
                             <strong class="counter" data-target="100">0</strong>
-                            <span>Growth Mindset</span>
+                            <span data-i18n="hero_stat_2">Growth Mindset</span>
                         </div>
                         <div>
                             <strong class="counter" data-target="24">0</strong>
-                            <span>Hours of Focus Daily</span>
+                            <span data-i18n="hero_stat_3">Hours of Focus Daily</span>
                         </div>
                     </div>
                 </div>
@@ -84,10 +98,10 @@
                     <p data-i18n="about_p1">Motivated and results-driven Full-Stack Software Developer with strong knowledge of modern web development, backend systems, databases, and Generative AI. I am passionate about building scalable, user-friendly applications while applying solid problem-solving and analytical thinking.</p>
                     <p data-i18n="about_p2">Combining technical expertise with business management and leadership insight, I bring both creativity and strategic thinking to every digital product I build.</p>
                     <div class="tag-list">
-                        <span>Full-Stack Development</span>
-                        <span>Generative AI</span>
-                        <span>Leadership</span>
-                        <span>Business Strategy</span>
+                        <span data-i18n="tag_fullstack">Full-Stack Development</span>
+                        <span data-i18n="tag_ai">Generative AI</span>
+                        <span data-i18n="tag_leadership">Leadership</span>
+                        <span data-i18n="tag_strategy">Business Strategy</span>
                     </div>
                 </div>
                 <div class="about-card reveal">
@@ -108,30 +122,30 @@
         <section id="services" class="section services-section">
             <div class="container">
                 <div class="section-heading reveal">
-                    <p class="eyebrow">What I Offer</p>
-                    <h2>Professional Services Built for Modern Business Needs</h2>
-                    <p>I combine technical execution with strategic insight to deliver solutions that are elegant, efficient, and built to last.</p>
+                    <p class="eyebrow" data-i18n="services_eyebrow">What I Offer</p>
+                    <h2 data-i18n="services_title">Professional Services Built for Modern Business Needs</h2>
+                    <p data-i18n="services_desc">I combine technical execution with strategic insight to deliver solutions that are elegant, efficient, and built to last.</p>
                 </div>
                 <div class="services-grid">
                     <article class="service-card reveal">
                         <div class="icon-wrap"><i class="fas fa-laptop-code"></i></div>
-                        <h3>Custom Web Development</h3>
-                        <p>Responsive websites and web applications tailored to business goals, performance, and long-term scalability.</p>
+                        <h3 data-i18n="service_1_title">Custom Web Development</h3>
+                        <p data-i18n="service_1_desc">Responsive websites and web applications tailored to business goals, performance, and long-term scalability.</p>
                     </article>
                     <article class="service-card reveal">
                         <div class="icon-wrap"><i class="fas fa-server"></i></div>
-                        <h3>API & Backend Systems</h3>
-                        <p>Secure REST APIs, authentication, databases, and robust server-side architecture for reliable platforms.</p>
+                        <h3 data-i18n="service_2_title">API & Backend Systems</h3>
+                        <p data-i18n="service_2_desc">Secure REST APIs, authentication, databases, and robust server-side architecture for reliable platforms.</p>
                     </article>
                     <article class="service-card reveal">
                         <div class="icon-wrap"><i class="fas fa-robot"></i></div>
-                        <h3>AI Solution Integration</h3>
-                        <p>Generative AI workflows, automation, prompt design, and intelligent features that elevate user experiences.</p>
+                        <h3 data-i18n="service_3_title">AI Solution Integration</h3>
+                        <p data-i18n="service_3_desc">Generative AI workflows, automation, prompt design, and intelligent features that elevate user experiences.</p>
                     </article>
                     <article class="service-card reveal">
                         <div class="icon-wrap"><i class="fas fa-chart-pie"></i></div>
-                        <h3>Business & Strategy Support</h3>
-                        <p>Technical thinking aligned with leadership, planning, and project execution for smarter digital growth.</p>
+                        <h3 data-i18n="service_4_title">Business & Strategy Support</h3>
+                        <p data-i18n="service_4_desc">Technical thinking aligned with leadership, planning, and project execution for smarter digital growth.</p>
                     </article>
                 </div>
             </div>
@@ -140,34 +154,34 @@
         <section id="skills" class="section skills-section">
             <div class="container">
                 <div class="section-heading reveal">
-                    <p class="eyebrow">Core Expertise</p>
-                    <h2>Skills Organized by Professional Focus Area</h2>
-                    <p>Each skill category is presented as a dedicated section with modern styling and clear professional relevance.</p>
+                    <p class="eyebrow" data-i18n="skills_eyebrow">Core Expertise</p>
+                    <h2 data-i18n="skills_title">Skills Organized by Professional Focus Area</h2>
+                    <p data-i18n="skills_desc">Each skill category is presented as a dedicated section with modern styling and clear professional relevance.</p>
                 </div>
 
                 <div class="skill-tabs reveal" role="tablist" aria-label="Skill categories">
-                    <button class="skill-tab active" data-target="frontend">Frontend</button>
-                    <button class="skill-tab" data-target="backend">Backend</button>
-                    <button class="skill-tab" data-target="ai">AI</button>
-                    <button class="skill-tab" data-target="business">Business</button>
-                    <button class="skill-tab" data-target="office">Office</button>
-                    <button class="skill-tab" data-target="languages">Languages</button>
+                    <button class="skill-tab active" data-target="frontend" data-i18n="skill_frontend_tab">Frontend</button>
+                    <button class="skill-tab" data-target="backend" data-i18n="skill_backend_tab">Backend</button>
+                    <button class="skill-tab" data-target="ai" data-i18n="skill_ai_tab">AI</button>
+                    <button class="skill-tab" data-target="business" data-i18n="skill_business_tab">Business</button>
+                    <button class="skill-tab" data-target="office" data-i18n="skill_office_tab">Office</button>
+                    <button class="skill-tab" data-target="languages" data-i18n="skill_languages_tab">Languages</button>
                 </div>
 
                 <div class="skill-panels">
                     <div class="skill-panel active" id="frontend">
                         <div class="skill-card reveal">
-                            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80" alt="Frontend development workspace">
+                            <div class="skill-visual skill-visual-frontend" aria-hidden="true"></div>
                             <div>
-                                <h3>Frontend Development</h3>
-                                <p>Crafting polished user interfaces with HTML5, CSS3, JavaScript, React, and Tailwind CSS for responsive and modern experiences.</p>
+                                <h3 data-i18n="skill_frontend_title">Frontend Development</h3>
+                                <p data-i18n="skill_frontend_desc">Crafting polished user interfaces with HTML5, CSS3, JavaScript, React, and Tailwind CSS for responsive and modern experiences.</p>
                                 <ul>
                                     <li>HTML5</li>
                                     <li>CSS3</li>
                                     <li>JavaScript ES6+</li>
                                     <li>React</li>
                                     <li>Tailwind CSS</li>
-                                    <li>Responsive Design</li>
+                                    <li data-i18n="skill_frontend_item">Responsive Design</li>
                                 </ul>
                             </div>
                         </div>
@@ -175,10 +189,10 @@
 
                     <div class="skill-panel" id="backend">
                         <div class="skill-card reveal">
-                            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=900&q=80" alt="Backend systems and APIs">
+                            <div class="skill-visual skill-visual-backend" aria-hidden="true"></div>
                             <div>
-                                <h3>Backend Development</h3>
-                                <p>Building secure and scalable server-side logic with Node.js, Express, REST APIs, and authentication.</p>
+                                <h3 data-i18n="skill_backend_title">Backend Development</h3>
+                                <p data-i18n="skill_backend_desc">Building secure and scalable server-side logic with Node.js, Express, REST APIs, and authentication.</p>
                                 <ul>
                                     <li>Node.js</li>
                                     <li>Express.js</li>
@@ -193,16 +207,16 @@
 
                     <div class="skill-panel" id="ai">
                         <div class="skill-card reveal">
-                            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=900&q=80" alt="Artificial intelligence and automation">
+                            <div class="skill-visual skill-visual-ai" aria-hidden="true"></div>
                             <div>
-                                <h3>Artificial Intelligence</h3>
-                                <p>Integrating Generative AI workflows into products with prompt engineering, automation, and intelligent features.</p>
+                                <h3 data-i18n="skill_ai_title">Artificial Intelligence</h3>
+                                <p data-i18n="skill_ai_desc">Integrating Generative AI workflows into products with prompt engineering, automation, and intelligent features.</p>
                                 <ul>
-                                    <li>Generative AI</li>
-                                    <li>Prompt Engineering</li>
-                                    <li>AI Workflow Integration</li>
-                                    <li>AI-Assisted Development</li>
-                                    <li>Automation</li>
+                                    <li data-i18n="skill_ai_item_1">Generative AI</li>
+                                    <li data-i18n="skill_ai_item_2">Prompt Engineering</li>
+                                    <li data-i18n="skill_ai_item_3">AI Workflow Integration</li>
+                                    <li data-i18n="skill_ai_item_4">AI-Assisted Development</li>
+                                    <li data-i18n="skill_ai_item_5">Automation</li>
                                 </ul>
                             </div>
                         </div>
@@ -210,17 +224,17 @@
 
                     <div class="skill-panel" id="business">
                         <div class="skill-card reveal">
-                            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80" alt="Business leadership teamwork">
+                            <div class="skill-visual skill-visual-business" aria-hidden="true"></div>
                             <div>
-                                <h3>Business & Leadership</h3>
-                                <p>Combining technical execution with management insight, strategy, teamwork, and decision-making.</p>
+                                <h3 data-i18n="skill_business_title">Business & Leadership</h3>
+                                <p data-i18n="skill_business_desc">Combining technical execution with management insight, strategy, teamwork, and decision-making.</p>
                                 <ul>
-                                    <li>Business Management</li>
-                                    <li>Leadership</li>
-                                    <li>Strategic Planning</li>
-                                    <li>Project Management</li>
-                                    <li>Team Collaboration</li>
-                                    <li>Communication</li>
+                                    <li data-i18n="skill_business_item_1">Business Management</li>
+                                    <li data-i18n="skill_business_item_2">Leadership</li>
+                                    <li data-i18n="skill_business_item_3">Strategic Planning</li>
+                                    <li data-i18n="skill_business_item_4">Project Management</li>
+                                    <li data-i18n="skill_business_item_5">Team Collaboration</li>
+                                    <li data-i18n="skill_business_item_6">Communication</li>
                                 </ul>
                             </div>
                         </div>
@@ -228,15 +242,15 @@
 
                     <div class="skill-panel" id="office">
                         <div class="skill-card reveal">
-                            <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=900&q=80" alt="Office productivity tools">
+                            <div class="skill-visual skill-visual-office" aria-hidden="true"></div>
                             <div>
-                                <h3>Microsoft Office</h3>
-                                <p>Professional productivity and documentation support through Microsoft Excel and Microsoft Word.</p>
+                                <h3 data-i18n="skill_office_title">Microsoft Office</h3>
+                                <p data-i18n="skill_office_desc">Professional productivity and documentation support through Microsoft Excel and Microsoft Word.</p>
                                 <ul>
-                                    <li>Microsoft Excel</li>
-                                    <li>Microsoft Word</li>
-                                    <li>Data Organization</li>
-                                    <li>Reporting</li>
+                                    <li data-i18n="skill_office_item_1">Microsoft Excel</li>
+                                    <li data-i18n="skill_office_item_2">Microsoft Word</li>
+                                    <li data-i18n="skill_office_item_3">Data Organization</li>
+                                    <li data-i18n="skill_office_item_4">Reporting</li>
                                 </ul>
                             </div>
                         </div>
@@ -244,14 +258,14 @@
 
                     <div class="skill-panel" id="languages">
                         <div class="skill-card reveal">
-                            <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=900&q=80" alt="Languages and communication">
+                            <div class="skill-visual skill-visual-languages" aria-hidden="true"></div>
                             <div>
-                                <h3>Languages</h3>
-                                <p>Effective communication across languages for global collaboration and professional interaction.</p>
+                                <h3 data-i18n="skill_languages_title">Languages</h3>
+                                <p data-i18n="skill_languages_desc">Effective communication across languages for global collaboration and professional interaction.</p>
                                 <ul>
-                                    <li>Arabic — Native</li>
-                                    <li>English — Fluent</li>
-                                    <li>French — Intermediate</li>
+                                    <li data-i18n="skill_languages_item_1">Arabic — Native</li>
+                                    <li data-i18n="skill_languages_item_2">English — Fluent</li>
+                                    <li data-i18n="skill_languages_item_3">French — Intermediate</li>
                                 </ul>
                             </div>
                         </div>
@@ -264,62 +278,62 @@
             <div class="container experience-layout">
                 <div class="experience-visual reveal">
                     <div class="experience-visual-card">
-                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1100&q=80" alt="Professional growth and teamwork scene">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80" alt="Team mentoring and professional growth in business and technology">
                         <div class="experience-overlay">
-                            <span class="experience-badge">Growth Journey</span>
-                            <h3>Learning by building, leading, and adapting</h3>
-                            <p>Every milestone shaped a stronger foundation in technology, communication, and business impact.</p>
+                            <span class="experience-badge" data-i18n="experience_badge">Growth Journey</span>
+                            <h3 data-i18n="experience_title">Learning by building, leading, and adapting</h3>
+                            <p data-i18n="experience_text">Every milestone shaped a stronger foundation in technology, communication, and business impact.</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="experience-content reveal">
                     <div class="section-heading">
-                        <p class="eyebrow">Experience & Growth</p>
-                        <h2>A Strong Foundation in Development, Leadership, and Continuous Learning</h2>
-                        <p class="section-intro">My journey combines technical depth, leadership growth, and practical problem-solving to create meaningful digital experiences.</p>
+                        <p class="eyebrow" data-i18n="experience_eyebrow">Experience & Growth</p>
+                        <h2 data-i18n="experience_h2">A Strong Foundation in Development, Leadership, and Continuous Learning</h2>
+                        <p class="section-intro" data-i18n="experience_intro">My journey combines technical depth, leadership growth, and practical problem-solving to create meaningful digital experiences.</p>
                     </div>
 
                     <div class="experience-panel">
                         <div class="timeline" role="list">
-                            <button class="timeline-item active" type="button" data-year="2018" data-title="Academic Foundation" data-description="Built a disciplined and analytical base through education, communication, and strong study habits that shaped my professional mindset." data-tags="Communication, Discipline, Analytical Thinking">
+                            <button class="timeline-item active" type="button" data-year="2025" data-title="Leadership & Business Growth" data-description="Strengthened leadership, teamwork, planning, and strategic thinking to connect technology with measurable business value." data-tags="Leadership, Planning, Strategy">
                                 <span class="timeline-item-text">
-                                    <strong>Academic Foundation</strong>
-                                    <small>School years and early growth</small>
+                                    <strong data-i18n="timeline_2025_title">Leadership & Business Growth</strong>
+                                    <small data-i18n="timeline_2025_small">Turning ideas into impact</small>
                                 </span>
-                                <span class="timeline-year">2018</span>
-                            </button>
-                            <button class="timeline-item" type="button" data-year="2022" data-title="Generative AI Exploration" data-description="Explored modern AI workflows, prompt design, automation, and creative problem-solving to expand my technical toolbox." data-tags="AI Tools, Automation, Innovation">
-                                <span class="timeline-item-text">
-                                    <strong>Generative AI Exploration</strong>
-                                    <small>Practical learning and experimentation</small>
-                                </span>
-                                <span class="timeline-year">2022</span>
+                                <span class="timeline-year">2025</span>
                             </button>
                             <button class="timeline-item" type="button" data-year="2024" data-title="Full-Stack Development" data-description="Developed hands-on expertise in front-end, back-end, databases, deployment, and building polished digital products end to end." data-tags="Frontend, Backend, Deployment">
                                 <span class="timeline-item-text">
-                                    <strong>Full-Stack Development</strong>
-                                    <small>Building modern web experiences</small>
+                                    <strong data-i18n="timeline_2024_title">Full-Stack Development</strong>
+                                    <small data-i18n="timeline_2024_small">Building modern web experiences</small>
                                 </span>
                                 <span class="timeline-year">2024</span>
                             </button>
-                            <button class="timeline-item" type="button" data-year="2025" data-title="Leadership & Business Growth" data-description="Strengthened leadership, teamwork, planning, and strategic thinking to connect technology with measurable business value." data-tags="Leadership, Planning, Strategy">
+                            <button class="timeline-item" type="button" data-year="2022" data-title="Generative AI Exploration" data-description="Explored modern AI workflows, prompt design, automation, and creative problem-solving to expand my technical toolbox." data-tags="AI Tools, Automation, Innovation">
                                 <span class="timeline-item-text">
-                                    <strong>Leadership & Business Growth</strong>
-                                    <small>Turning ideas into impact</small>
+                                    <strong data-i18n="timeline_2022_title">Generative AI Exploration</strong>
+                                    <small data-i18n="timeline_2022_small">Practical learning and experimentation</small>
                                 </span>
-                                <span class="timeline-year">2025</span>
+                                <span class="timeline-year">2022</span>
+                            </button>
+                            <button class="timeline-item" type="button" data-year="2018" data-title="Academic Foundation" data-description="Built a disciplined and analytical base through education, communication, and strong study habits that shaped my professional mindset." data-tags="Communication, Discipline, Analytical Thinking">
+                                <span class="timeline-item-text">
+                                    <strong data-i18n="timeline_2018_title">Academic Foundation</strong>
+                                    <small data-i18n="timeline_2018_small">School years and early growth</small>
+                                </span>
+                                <span class="timeline-year">2018</span>
                             </button>
                         </div>
 
                         <div class="timeline-detail" id="timelineDetail">
-                            <p class="detail-label">Current Highlight</p>
-                            <h3 id="detailTitle">Academic Foundation</h3>
-                            <p id="detailText">Built a disciplined and analytical base through education, communication, and strong study habits that shaped my professional mindset.</p>
+                            <p class="detail-label" data-i18n="timeline_label">Current Highlight</p>
+                            <h3 id="detailTitle" data-i18n="timeline_default_title">Academic Foundation</h3>
+                            <p id="detailText" data-i18n="timeline_default_text">Built a disciplined and analytical base through education, communication, and strong study habits that shaped my professional mindset.</p>
                             <div class="detail-tags" id="detailTags">
-                                <span>Communication</span>
-                                <span>Discipline</span>
-                                <span>Analytical Thinking</span>
+                                <span data-i18n="timeline_tag_1">Communication</span>
+                                <span data-i18n="timeline_tag_2">Discipline</span>
+                                <span data-i18n="timeline_tag_3">Analytical Thinking</span>
                             </div>
                         </div>
                     </div>
@@ -330,32 +344,32 @@
         <section id="projects" class="section projects-section">
             <div class="container">
                 <div class="section-heading reveal">
-                    <p class="eyebrow">Selected Work</p>
-                    <h2>Projects That Blend Technology, Design, and Strategy</h2>
+                    <p class="eyebrow" data-i18n="projects_eyebrow">Selected Work</p>
+                    <h2 data-i18n="projects_title">Projects That Blend Technology, Design, and Strategy</h2>
                 </div>
                 <div class="projects-grid">
                     <article class="project-card reveal">
-                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80" alt="Prayer timings React app project">
+                        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" alt="Time and clock concept for the Prayer Timings App">
                         <div class="project-content">
-                            <h3>Prayer Timings App</h3>
-                            <p>A modern React-based prayer timing application with a clean interface and practical user experience.</p>
-                            <a href="https://prayers-timings-react-bay.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary project-link">View Demo</a>
+                            <h3 data-i18n="project_1_title">Prayer Timings App</h3>
+                            <p data-i18n="project_1_desc">A modern React-based prayer timing application with a clean interface and practical user experience.</p>
+                            <a href="https://prayers-timings-react-bay.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary project-link" data-i18n="project_view_demo">View Demo</a>
                         </div>
                     </article>
                     <article class="project-card reveal">
-                        <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=900&q=80" alt="E-commerce website project">
+                        <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1200&q=80" alt="Modern e-commerce storefront and shopping platform">
                         <div class="project-content">
-                            <h3>E-Commerce Website</h3>
-                            <p>A polished ecommerce experience designed for product presentation, user interaction, and modern online shopping flow.</p>
-                            <a href="https://ecommerce-website-xqci.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary project-link">View Demo</a>
+                            <h3 data-i18n="project_2_title">E-Commerce Website</h3>
+                            <p data-i18n="project_2_desc">A polished ecommerce experience designed for product presentation, user interaction, and modern online shopping flow.</p>
+                            <a href="https://ecommerce-website-xqci.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary project-link" data-i18n="project_view_demo">View Demo</a>
                         </div>
                     </article>
                     <article class="project-card reveal">
-                        <img src="https://images.unsplash.com/photo-1677786217970-3e4f2bfef6a5?auto=format&fit=crop&w=900&q=80" alt="Admin dashboard project">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" alt="Real admin dashboard analytics interface">
                         <div class="project-content">
-                            <h3>React Admin Dashboard</h3>
-                            <p>A professional dashboard project featuring organized sections, modern UI patterns, and a strong administrative experience.</p>
-                            <a href="https://react-admin-dashboard-tau-flax.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary project-link">View Demo</a>
+                            <h3 data-i18n="project_3_title">React Admin Dashboard</h3>
+                            <p data-i18n="project_3_desc">A professional dashboard project featuring organized sections, modern UI patterns, and a strong administrative experience.</p>
+                            <a href="https://react-admin-dashboard-tau-flax.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary project-link" data-i18n="project_view_demo">View Demo</a>
                         </div>
                     </article>
                 </div>
@@ -365,7 +379,7 @@
         <section class="section quote-section">
             <div class="container reveal">
                 <div class="quote-card">
-                    <p>“I believe every digital product should be powerful, purposeful, and prepared for growth.”</p>
+                    <p data-i18n="quote_text">“I believe every digital product should be powerful, purposeful, and prepared for growth.”</p>
                 </div>
             </div>
         </section>
@@ -373,29 +387,29 @@
         <section id="contact" class="section contact-section">
             <div class="container contact-grid">
                 <div class="contact-card reveal">
-                    <p class="eyebrow">Let’s Build Something Meaningful</p>
-                    <h2>Open to opportunities in software development, AI integration, and digital product innovation.</h2>
-                    <p>I am seeking opportunities as a Full-Stack Developer where I can contribute technical strength, business understanding, and AI expertise while continuing to grow as an engineer.</p>
+                    <p class="eyebrow" data-i18n="contact_eyebrow">Let’s Build Something Meaningful</p>
+                    <h2 data-i18n="contact_h2">Open to opportunities in software development, AI integration, and digital product innovation.</h2>
+                    <p data-i18n="contact_p">I am seeking opportunities as a Full-Stack Developer where I can contribute technical strength, business understanding, and AI expertise while continuing to grow as an engineer.</p>
                     <div class="hero-actions">
-                        <a href="mailto:aliabdalla09zx@gmail.com" class="btn btn-primary">Email Me</a>
-                        <a href="tel:+250737615279" class="btn btn-secondary">Call Now</a>
+                        <a href="mailto:aliabdalla09zx@gmail.com" class="btn btn-primary" data-i18n="contact_email_btn">Email Me</a>
+                        <a href="tel:+250737615279" class="btn btn-secondary" data-i18n="contact_call_btn">Call Now</a>
                     </div>
                 </div>
                 <form class="contact-form reveal" id="contactForm" action="/api/messages" method="post">
-                    <h3>Send a Message</h3>
+                    <h3 data-i18n="contact_form_title">Send a Message</h3>
                     <label>
-                        <span>Name</span>
+                        <span data-i18n="contact_name">Name</span>
                         <input type="text" name="name" required>
                     </label>
                     <label>
-                        <span>Email</span>
+                        <span data-i18n="contact_email">Email</span>
                         <input type="email" name="email" required>
                     </label>
                     <label>
-                        <span>Message</span>
+                        <span data-i18n="contact_message">Message</span>
                         <textarea name="message" rows="5" required></textarea>
                     </label>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary" data-i18n="contact_submit">Submit</button>
                     <p class="form-message" id="formMessage"></p>
                 </form>
             </div>
@@ -404,7 +418,7 @@
 
     <footer class="footer">
         <div class="container footer-inner">
-            <p>© <span id="year"></span> Ali Abdalla Ismail Abdalla. Crafted with precision and purpose.</p>
+            <p data-i18n="footer_text">© <span id="year"></span> Ali Abdalla Ismail Abdalla. Crafted with precision and purpose.</p>
         </div>
     </footer>
 

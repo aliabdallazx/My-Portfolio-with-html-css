@@ -1,4 +1,17 @@
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = (() => {
+  const origin = window.location.origin;
+  if (origin && origin !== 'null') {
+    const localStaticPorts = [':3000', ':5500', ':5501', ':8000', ':8080'];
+    if (origin.includes('localhost') || origin.includes('127.0.0.1') || origin.includes('0.0.0.0')) {
+      return 'http://localhost:5000/api';
+    }
+    if (localStaticPorts.some((port) => origin.includes(port))) {
+      return 'http://localhost:5000/api';
+    }
+    return `${origin}/api`;
+  }
+  return 'http://localhost:5000/api';
+})();
 
 const state = {
   auth: null,
@@ -84,10 +97,39 @@ async function api(path, options = {}) {
     headers['Content-Type'] = 'application/json';
   }
   if (token) headers.Authorization = `Bearer ${token}`;
-  const response = await fetch(`${API_BASE}${path}`, { ...options, headers, credentials: 'include' });
-  const result = await response.json().catch(() => ({}));
-  if (!response.ok) throw new Error(result.message || 'Request failed');
-  return result;
+
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 20000);
+    const response = await fetch(`${API_BASE}${path}`, {
+      ...options,
+      headers,
+      credentials: 'include',
+      signal: controller.signal
+    });
+    clearTimeout(timeout);
+
+    let result = {};
+    try {
+      result = await response.json();
+    } catch {
+      result = {};
+    }
+
+    if (!response.ok) {
+      throw new Error(result.message || `Request failed (${response.status})`);
+    }
+
+    return result;
+  } catch (error) {
+    if (error.name === 'AbortError') {
+      throw new Error('The backend is not responding. Please start the server and try again.');
+    }
+    if (error instanceof TypeError) {
+      throw new Error('Unable to connect to the backend. Start the Node server and try again.');
+    }
+    throw error;
+  }
 }
 
 function addActivity(title, description) {
@@ -145,15 +187,24 @@ function connectRealtime() {
 
 async function login(e) {
   e.preventDefault();
-  const email = document.getElementById('email').value;
+  const email = document.getElementById('email').value.trim();
   const password = document.getElementById('password').value;
+
+  if (!email || !password) {
+    setStatus('Please enter both email and password.', true);
+    return;
+  }
+
   try {
-    const result = await fetch(`${API_BASE}/auth/login`, {
+    const result = await api('/auth/login', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password })
-    }).then((r) => r.json());
-    if (!result.success) throw new Error(result.message || 'Login failed');
+    });
+
+    if (!result.success) {
+      throw new Error(result.message || 'Login failed');
+    }
+
     localStorage.setItem('portfolio_admin_token', result.data.accessToken);
     state.auth = result.data.user;
     els.loginScreen.classList.add('hidden');
@@ -161,7 +212,8 @@ async function login(e) {
     setStatus('Signed in successfully');
     await loadDashboard();
   } catch (error) {
-    setStatus(error.message, true);
+    const message = error.message || 'Login failed';
+    setStatus(message, true);
   }
 }
 
@@ -457,6 +509,41 @@ function ensureAuthenticated() {
   }
 }
 
+function bindExternalSync() {
+  try {
+    if ('BroadcastChannel' in window) {
+      const channel = new BroadcastChannel('portfolio_dashboard_sync');
+      channel.onmessage = (event) => {
+        if (event.data?.type === 'message:new') {
+          loadMessages(true);
+          loadNotifications(true);
+          loadAnalytics(true);
+          addActivity('Portfolio submission', 'A new contact message was received from the portfolio site.');
+        }
+      };
+      window.addEventListener('beforeunload', () => channel.close());
+    }
+
+    window.addEventListener('storage', (event) => {
+      if (event.key === 'portfolio_dashboard_sync' && event.newValue) {
+        try {
+          const payload = JSON.parse(event.newValue);
+          if (payload?.type === 'message:new') {
+            loadMessages(true);
+            loadNotifications(true);
+            loadAnalytics(true);
+            addActivity('Portfolio submission', 'A new contact message was received from the portfolio site.');
+          }
+        } catch (error) {
+          console.warn('Dashboard sync payload invalid', error);
+        }
+      }
+    });
+  } catch (error) {
+    console.warn('External sync initialization failed', error);
+  }
+}
+
 function bindEvents() {
   if (els.loginForm) els.loginForm.addEventListener('submit', login);
   if (els.logoutBtn) els.logoutBtn.addEventListener('click', logout);
@@ -498,6 +585,7 @@ function bindEvents() {
 
 ensureAuthenticated();
 bindEvents();
+bindExternalSync();
 
 if (localStorage.getItem('portfolio_admin_token')) {
   els.loginScreen.classList.add('hidden');
