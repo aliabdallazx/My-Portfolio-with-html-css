@@ -38,8 +38,13 @@ const io = new Server(server, {
 });
 
 app.use(helmet());
+const parsedAllowedOrigins = (process.env.CORS_ORIGIN || '')
+  .split(',')
+  .map((value) => value.trim())
+  .filter(Boolean);
+
 const allowedOrigins = [
-  process.env.CORS_ORIGIN,
+  ...parsedAllowedOrigins,
   'http://localhost:3000',
   'http://localhost:8000',
   'http://127.0.0.1:8000',

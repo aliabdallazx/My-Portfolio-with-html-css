@@ -5,6 +5,11 @@ const skillTabs = document.querySelectorAll('.skill-tab');
 const skillPanels = document.querySelectorAll('.skill-panel');
 const API_BASE = (() => {
     const fallback = 'http://localhost:5000/api';
+    const configured = window.PORTFOLIO_API_URL || window.__API_BASE__ || '';
+    if (configured) {
+        return configured.replace(/\/$/, '');
+    }
+
     const origin = window.location.origin;
     if (!origin || origin === 'null') return fallback;
 
@@ -13,7 +18,7 @@ const API_BASE = (() => {
         return fallback;
     }
 
-    return `${origin}/api`;
+    return `${origin.replace(/\/$/, '')}/api`;
 })();
 const contactForm = document.getElementById('contactForm');
 const formMessage = document.getElementById('formMessage');
