@@ -68,9 +68,13 @@ app.use(requestLogger);
 
 const limiter = rateLimit({
   windowMs: Number(process.env.RATE_LIMIT_WINDOW_MS || 900000),
-  max: Number(process.env.RATE_LIMIT_MAX_REQUESTS || 100),
+  max: Number(process.env.RATE_LIMIT_MAX_REQUESTS || (process.env.NODE_ENV === 'development' ? 1000 : 100)),
   standardHeaders: true,
-  legacyHeaders: false
+  legacyHeaders: false,
+  message: {
+    success: false,
+    message: 'Too many requests. Please wait a moment and try again.'
+  }
 });
 app.use(limiter);
 

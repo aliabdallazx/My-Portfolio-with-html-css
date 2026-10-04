@@ -564,9 +564,6 @@ if (contactForm) {
         }
 
         try {
-            formMessage.textContent = 'Sending your message...';
-            formMessage.style.color = '#cbd5e1';
-
             const response = await fetch(`${API_BASE}/messages`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
