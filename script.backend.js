@@ -1,4 +1,22 @@
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = (() => {
+  const configured = typeof window !== 'undefined' && (window.PORTFOLIO_API_URL || window.__API_BASE__ || '');
+  if (configured) return configured.replace(/\/$/, '');
+
+  const environmentUrl = typeof process !== 'undefined' && process.env && process.env.PORTFOLIO_API_URL
+    ? process.env.PORTFOLIO_API_URL
+    : '';
+
+  if (environmentUrl) return environmentUrl.replace(/\/$/, '');
+
+  if (typeof window !== 'undefined' && window.location && window.location.origin) {
+    const origin = window.location.origin.replace(/\/$/, '');
+    const isLocal = /localhost|127\.0\.0\.1|0\.0\.0\.0/.test(origin);
+    if (isLocal) return 'http://localhost:5000/api';
+    return `${origin}/api`;
+  }
+
+  return 'http://localhost:5000/api';
+})();
 
 async function postContactMessage(formData) {
   const payload = {
